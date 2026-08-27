@@ -4,7 +4,7 @@ export function Logo({ className }: { className?: string }) {
   return (
     <Image
       src="/logo.svg"
-      alt="Dhanvi logo"
+      alt="Logo"
       width={32}
       height={32}
       className={className}

@@ -45,9 +45,8 @@ export function Navbar() {
         aria-label="Primary"
       >
         <Link href="/" className="flex items-center gap-2.5" aria-label="Dhanvi home">
-          <Logo className="h-7 w-7" />
-          <span className="text-lg font-semibold tracking-tight text-foreground">Dhanvi</span>
-        </Link>
+        <Logo className="h-16 w-25" />
+               </Link>
 
         <ul className="hidden items-center gap-1 lg:flex">
           {NAV_LINKS.map((link) => (
