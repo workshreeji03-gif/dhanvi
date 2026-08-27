@@ -82,7 +82,7 @@ const QA: Record<string, Answer> = {
 
 const CHIPS = Object.keys(QA)
 
-export function AskDhanvi() {
+export function AskDhantra() {
   const [active, setActive] = useState<string>(CHIPS[0])
   const [typed, setTyped] = useState('')
   const [showDetail, setShowDetail] = useState(false)

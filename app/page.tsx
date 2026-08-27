@@ -6,7 +6,7 @@ import { InteractiveDashboard } from '@/components/landing/interactive-dashboard
 import { BeforeAfter } from '@/components/landing/before-after'
 import { NewWay } from '@/components/landing/new-way'
 import { HowItWorks } from '@/components/landing/how-it-works'
-import { AskDhanvi } from '@/components/landing/ask-dhanvi'
+import { AskDhantra } from '@/components/landing/ask-dhantra'
 import { AiAssistant } from '@/components/landing/ai-assistant'
 import { AiMonitoring } from '@/components/landing/ai-monitoring'
 import { Proactive } from '@/components/landing/proactive'
@@ -42,7 +42,7 @@ export default function Page() {
             <BeforeAfter />
             <NewWay />
             <HowItWorks />
-            <AskDhanvi />
+            <AskDhantra />
             <AiAssistant />
             <AiMonitoring />
             <Proactive />

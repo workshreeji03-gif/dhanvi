@@ -16,7 +16,7 @@ const CANNED: Record<string, string> = {
 
 const QUESTIONS = Object.keys(CANNED)
 
-export function AskDhanviFab() {
+export function AskDhantraFab() {
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState<string | null>(null)
   const [typed, setTyped] = useState('')
