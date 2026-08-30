@@ -15,7 +15,60 @@ export default function SettingsPage() {
   const [bizName, setBizName] = useState(state?.business?.name || 'My Business');
   const [gstin, setGstin] = useState(state?.business?.gstin || '');
 
+  // Invitation state
+  const [showInviteModal, setShowInviteModal] = useState(false);
+  const [inviteEmail, setInviteEmail] = useState('');
+  const [inviteName, setInviteName] = useState('');
+  const [inviteRole, setInviteRole] = useState<'ACCOUNTANT' | 'STAFF'>('ACCOUNTANT');
+  const [isInviting, setIsInviting] = useState(false);
+
   if (!state) return <div className="p-8 text-center text-xs font-mono text-neutral-400">Loading settings...</div>;
+
+  const handleInviteMember = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!inviteEmail.trim()) return;
+
+    setIsInviting(true);
+    try {
+      const res = await fetch('/api/business/invite', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: inviteEmail.trim(),
+          memberName: inviteName.trim() || undefined,
+          role: inviteRole,
+          businessId: state.business.id,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to send invite.');
+      }
+
+      // Add to local state
+      const updatedMembers = [
+        ...state.members,
+        {
+          id: `member-${Date.now()}`,
+          businessId: state.business.id,
+          name: inviteName.trim() || inviteEmail.split('@')[0],
+          email: inviteEmail.trim(),
+          role: inviteRole,
+        },
+      ];
+      saveAppState({ ...state, members: updatedMembers });
+
+      showToast('Invitation Sent', data.message || `Invitation sent to ${inviteEmail}.`);
+      setShowInviteModal(false);
+      setInviteEmail('');
+      setInviteName('');
+    } catch (err: any) {
+      showToast('Error', err.message || 'Failed to send invite.');
+    } finally {
+      setIsInviting(false);
+    }
+  };
 
   const handleSaveBusiness = (e: React.FormEvent) => {
     e.preventDefault();
@@ -107,11 +160,19 @@ export default function SettingsPage() {
 
       {/* Workspace Team & Roles */}
       <Card>
-        <CardHeader className="border-b border-neutral-100 pb-3">
+        <CardHeader className="border-b border-neutral-100 pb-3 flex flex-row items-center justify-between">
           <div className="flex items-center gap-2">
             <Users className="w-4 h-4 text-emerald-600" />
             <CardTitle className="text-base">Workspace Members & Access Roles</CardTitle>
           </div>
+          <Button
+            size="sm"
+            variant="primary"
+            onClick={() => setShowInviteModal(true)}
+            className="text-xs"
+          >
+            + Invite Member
+          </Button>
         </CardHeader>
         <CardContent className="p-0">
           <div className="divide-y divide-neutral-100 text-xs">
@@ -129,6 +190,80 @@ export default function SettingsPage() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Invite Member Modal */}
+      {showInviteModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4 animate-fade-in">
+          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-neutral-200 space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="font-bold text-base text-neutral-900">Invite Team Member / Accountant</h3>
+              <button
+                type="button"
+                onClick={() => setShowInviteModal(false)}
+                className="text-neutral-400 hover:text-neutral-600 text-lg leading-none cursor-pointer"
+              >
+                &times;
+              </button>
+            </div>
+            <p className="text-xs text-neutral-500">
+              Send an email invitation to grant access to this workspace.
+            </p>
+            <form onSubmit={handleInviteMember} className="space-y-3.5 text-xs">
+              <div>
+                <label className="block font-semibold mb-1 text-neutral-700">Member Email Address *</label>
+                <input
+                  type="email"
+                  required
+                  value={inviteEmail}
+                  onChange={(e) => setInviteEmail(e.target.value)}
+                  placeholder="accountant@firm.com"
+                  className="w-full px-3.5 py-2.5 bg-white border border-neutral-200 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 focus:outline-none"
+                />
+              </div>
+              <div>
+                <label className="block font-semibold mb-1 text-neutral-700">Member Name</label>
+                <input
+                  type="text"
+                  value={inviteName}
+                  onChange={(e) => setInviteName(e.target.value)}
+                  placeholder="e.g. CA Ankit Gupta"
+                  className="w-full px-3.5 py-2.5 bg-white border border-neutral-200 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 focus:outline-none"
+                />
+              </div>
+              <div>
+                <label className="block font-semibold mb-1 text-neutral-700">Access Role</label>
+                <select
+                  value={inviteRole}
+                  onChange={(e) => setInviteRole(e.target.value as any)}
+                  className="w-full px-3.5 py-2.5 bg-white border border-neutral-200 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 focus:outline-none text-xs"
+                >
+                  <option value="ACCOUNTANT">Accountant (Full Ledger, Review, Reports & Tax Access)</option>
+                  <option value="STAFF">Staff / Worker (Invoicing & Operational Data Entry Only)</option>
+                </select>
+              </div>
+
+              <div className="pt-3 flex items-center justify-end gap-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowInviteModal(false)}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="submit"
+                  variant="primary"
+                  size="sm"
+                  disabled={isInviting}
+                >
+                  {isInviting ? 'Sending Invite...' : 'Send Invitation'}
+                </Button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* Workspace Management & Dev Tools */}
       <Card className="border-rose-100">
