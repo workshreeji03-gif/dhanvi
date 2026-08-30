@@ -14,13 +14,17 @@ export function AuthHashListener() {
     const supabase = createClient();
     if (!supabase) return;
 
-    // 1. Process URL hash fragments (#access_token=...&refresh_token=...)
     const hash = window.location.hash.substring(1);
+    const search = new URLSearchParams(window.location.search);
+    const hashParams = new URLSearchParams(hash);
+
+    const type = hashParams.get("type") || search.get("type");
+    const isRecovery = type === "recovery" || pathname === "/reset-password";
+
+    // 1. Process URL hash fragments (#access_token=...&refresh_token=...)
     if (hash && hash.includes("access_token=")) {
-      const params = new URLSearchParams(hash);
-      const accessToken = params.get("access_token");
-      const refreshToken = params.get("refresh_token");
-      const type = params.get("type");
+      const accessToken = hashParams.get("access_token");
+      const refreshToken = hashParams.get("refresh_token");
 
       if (accessToken && refreshToken) {
         supabase.auth.setSession({
@@ -32,9 +36,9 @@ export function AuthHashListener() {
             if (window.history.replaceState) {
               window.history.replaceState(null, "", window.location.pathname + window.location.search);
             }
-            if (type === "recovery") {
+            if (isRecovery) {
               router.push("/reset-password");
-            } else {
+            } else if (pathname === "/") {
               router.push("/dashboard");
             }
           }
@@ -46,12 +50,15 @@ export function AuthHashListener() {
     }
 
     // 2. Process query code (?code=...) on non-callback routes
-    const search = new URLSearchParams(window.location.search);
     const codeParam = search.get("code");
     if (codeParam && pathname !== "/auth/callback") {
       supabase.auth.exchangeCodeForSession(codeParam).then(({ data, error }) => {
         if (!error && data?.session) {
-          router.push("/dashboard");
+          if (isRecovery) {
+            router.push("/reset-password");
+          } else if (pathname === "/") {
+            router.push("/dashboard");
+          }
         }
       }).catch((err) => {
         console.warn("Auth code exchange error:", err);
@@ -61,16 +68,16 @@ export function AuthHashListener() {
 
     // 3. Process token_hash (?token_hash=...&type=...) on non-callback routes
     const tokenHash = search.get("token_hash");
-    const otpType = search.get("type");
+    const otpType = search.get("type") || hashParams.get("type");
     if (tokenHash && otpType && pathname !== "/auth/callback") {
       supabase.auth.verifyOtp({
         token_hash: tokenHash,
         type: otpType as any,
       }).then(({ data, error }) => {
         if (!error && data?.session) {
-          if (otpType === "recovery") {
+          if (otpType === "recovery" || isRecovery) {
             router.push("/reset-password");
-          } else {
+          } else if (pathname === "/") {
             router.push("/dashboard");
           }
         }
