@@ -44,6 +44,9 @@ export const viewport: Viewport = {
   themeColor: '#ffffff',
 }
 
+import { Suspense } from 'react'
+import { AuthHashListener } from '@/components/auth/auth-hash-listener'
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -55,6 +58,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} bg-background`}
     >
       <body className="font-sans antialiased">
+        <Suspense fallback={null}>
+          <AuthHashListener />
+        </Suspense>
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
