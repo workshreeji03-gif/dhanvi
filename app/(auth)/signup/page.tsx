@@ -28,6 +28,7 @@ import { Badge } from '../../../components/ui/badge';
 import { createClient } from '../../../lib/supabase/client';
 import { showToast } from '../../../components/ui/toast';
 import { createCleanAppState, saveAppState, markUserRegistered } from '../../../lib/supabase/demo-store';
+import { Logo } from '../../../components/landing/logo';
 
 export default function SignupPage() {
   const router = useRouter();
@@ -140,18 +141,8 @@ export default function SignupPage() {
     <div className="min-h-screen bg-[#F8FAF9] flex flex-col justify-center py-12 px-6 selection:bg-emerald-100 selection:text-emerald-950 font-sans">
       {/* Brand Header */}
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
-        <Link href="/" className="inline-flex items-center gap-2.5 mb-5 group">
-          <Image
-            src="/dhanvi-logo.svg"
-            alt="Dhanvi"
-            width={34}
-            height={34}
-            className="w-8.5 h-8.5 object-contain"
-            priority
-          />
-          <span className="font-bold text-2xl tracking-tight text-neutral-900">
-            Dhanvi
-          </span>
+        <Link href="/" className="inline-flex items-center justify-center mb-5 group transition-transform hover:scale-105" aria-label="Dhanvi home">
+          <Logo className="h-9 w-auto" />
         </Link>
         <h1 className="text-2xl font-bold tracking-tight text-neutral-900">
           {activeStep === 1 ? 'Create Your Founder Account' : 'Register Your Business Entity'}
