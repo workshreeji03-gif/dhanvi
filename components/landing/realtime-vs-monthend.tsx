@@ -23,6 +23,13 @@ import {
 } from 'lucide-react'
 import { Reveal } from './reveal'
 
+export interface DecisionOption {
+  key: 'A' | 'B' | 'C'
+  label: string
+  feedback: string
+  isCorrect?: boolean
+}
+
 // 3 Rich Interactive Business Scenarios
 export interface SimulationScenario {
   id: 'margin-leak' | 'cost-spike' | 'cash-flow'
@@ -58,8 +65,7 @@ export interface SimulationScenario {
   }
   decisionQuestion: {
     prompt: string
-    options: { key: string; label: string; isCorrect?: boolean }[]
-    feedback: string
+    options: DecisionOption[]
   }
 }
 
@@ -213,11 +219,23 @@ const SCENARIOS: Record<string, SimulationScenario> = {
     decisionQuestion: {
       prompt: 'Supplier packaging unit cost just surged +31%. What would you do?',
       options: [
-        { key: 'A', label: 'Do nothing' },
-        { key: 'B', label: 'Check next month' },
-        { key: 'C', label: 'Investigate now', isCorrect: true },
+        {
+          key: 'A',
+          label: 'Do nothing',
+          feedback: 'Doing nothing allows packaging margin erosion to compound to ₹1,80,000 by month-end close. Dhanvi flags anomalies proactively on Day 5.',
+        },
+        {
+          key: 'B',
+          label: 'Check next month',
+          feedback: 'Waiting for next month means discovering the price spike 30 days too late to renegotiate past shipments. Dhanvi eliminates decision lag.',
+        },
+        {
+          key: 'C',
+          label: 'Investigate now',
+          feedback: 'Exactly. Dhanvi already analyzed the variance and formulated a supplier renegotiation brief on Day 5 before the loss compounded.',
+          isCorrect: true,
+        },
       ],
-      feedback: 'Exactly. Dhanvi already did — on Day 5 before the loss grew.',
     },
   },
   'cost-spike': {
@@ -305,11 +323,23 @@ const SCENARIOS: Record<string, SimulationScenario> = {
     decisionQuestion: {
       prompt: 'Logistics bills surged +28% above rate card. What would you do?',
       options: [
-        { key: 'A', label: 'Pay the bill' },
-        { key: 'B', label: 'Wait for accountant' },
-        { key: 'C', label: 'Investigate now', isCorrect: true },
+        {
+          key: 'A',
+          label: 'Do nothing',
+          feedback: 'Doing nothing allows ₹85,000 in unauthorized surge fees to be debited from your operating account without dispute.',
+        },
+        {
+          key: 'B',
+          label: 'Check next month',
+          feedback: 'Waiting until month-end close means past carrier invoices are settled and disputing overcharges becomes significantly harder.',
+        },
+        {
+          key: 'C',
+          label: 'Investigate now',
+          feedback: 'Exactly. Dhanvi audited the SLA rate card and flagged the overcharge in minutes.',
+          isCorrect: true,
+        },
       ],
-      feedback: 'Exactly. Dhanvi audited the SLA rate card and flagged the overcharge in minutes.',
     },
   },
   'cash-flow': {
@@ -381,11 +411,23 @@ const SCENARIOS: Record<string, SimulationScenario> = {
     decisionQuestion: {
       prompt: 'A ₹10L inventory PO will tighten your 30-day cash buffer. What would you do?',
       options: [
-        { key: 'A', label: 'Hope sales cover it' },
-        { key: 'B', label: 'Take bank loan' },
-        { key: 'C', label: 'Investigate now', isCorrect: true },
+        {
+          key: 'A',
+          label: 'Do nothing',
+          feedback: 'Ignoring the 30-day projection leaves your buffer depleted, risking emergency credit overdrafts for payroll.',
+        },
+        {
+          key: 'B',
+          label: 'Check next month',
+          feedback: 'By next month the upfront cash is already committed and liquidity cannot be retroactively recovered.',
+        },
+        {
+          key: 'C',
+          label: 'Investigate now',
+          feedback: 'Exactly. Dhanvi modeled 30-day cash flow and proposed phased 50/50 supplier terms.',
+          isCorrect: true,
+        },
       ],
-      feedback: 'Exactly. Dhanvi modeled 30-day cash flow and proposed phased 50/50 supplier terms.',
     },
   },
 }
@@ -393,15 +435,15 @@ const SCENARIOS: Record<string, SimulationScenario> = {
 export function RealtimeVsMonthend() {
   const [selectedScenarioKey, setSelectedScenarioKey] = useState<string>('margin-leak')
   const [stepIndex, setStepIndex] = useState<number>(0)
-  const [isPlaying, setIsPlaying] = useState<boolean>(true)
-  const [userChoice, setUserChoice] = useState<string | null>(null)
+  const [isPlaying, setIsPlaying] = useState<boolean>(false)
+  const [userChoice, setUserChoice] = useState<'A' | 'B' | 'C' | null>(null)
   const [magicReviewOpen, setMagicReviewOpen] = useState<boolean>(false)
 
   const scenario = SCENARIOS[selectedScenarioKey] || SCENARIOS['margin-leak']
   const totalSteps = scenario.steps.length
   const currentStep = scenario.steps[stepIndex] || scenario.steps[0]
 
-  // Auto-play timer loop
+  // Auto-play timer loop (cleans up properly on unmount/state changes)
   useEffect(() => {
     if (!isPlaying) return
 
@@ -410,44 +452,61 @@ export function RealtimeVsMonthend() {
         if (prev < totalSteps - 1) {
           return prev + 1
         } else {
-          // Pause briefly at end, then loop back
-          return 0
+          // Stop playback at final step automatically
+          setIsPlaying(false)
+          return prev
         }
       })
-    }, 3800)
+    }, 3200)
 
     return () => clearInterval(timer)
   }, [isPlaying, totalSteps, selectedScenarioKey])
 
-  // Reset steps when switching scenarios
+  // Reset state when switching scenario tabs
   const handleSelectScenario = (key: string) => {
     setSelectedScenarioKey(key)
     setStepIndex(0)
     setUserChoice(null)
     setMagicReviewOpen(false)
-    setIsPlaying(true)
+    setIsPlaying(false)
   }
 
+  // Step backward exactly one step
   const handlePrev = () => {
     setIsPlaying(false)
-    setStepIndex((prev) => (prev > 0 ? prev - 1 : totalSteps - 1))
+    setStepIndex((prev) => Math.max(0, prev - 1))
   }
 
+  // Step forward exactly one step
   const handleNext = () => {
     setIsPlaying(false)
-    setStepIndex((prev) => (prev < totalSteps - 1 ? prev + 1 : 0))
+    setStepIndex((prev) => Math.min(totalSteps - 1, prev + 1))
   }
 
+  // Play / Pause toggle
+  const handleTogglePlay = () => {
+    if (!isPlaying && stepIndex >= totalSteps - 1) {
+      // If at the end, restart from step 0 and start playing
+      setStepIndex(0)
+      setIsPlaying(true)
+    } else {
+      setIsPlaying((p) => !p)
+    }
+  }
+
+  // Replay simulation from step 1
   const handleReplay = () => {
+    setIsPlaying(false)
     setStepIndex(0)
     setUserChoice(null)
     setMagicReviewOpen(false)
-    setIsPlaying(true)
   }
 
-  // Derived progress and money display
+  // Progress metrics & derived state
+  const isFirstStep = stepIndex === 0
+  const isLastStep = stepIndex === totalSteps - 1
   const progressRatio = totalSteps > 1 ? (stepIndex / (totalSteps - 1)) * 100 : 0
-  const isEnd = stepIndex === totalSteps - 1
+  const selectedOption = scenario.decisionQuestion.options.find((o) => o.key === userChoice)
 
   return (
     <section id="see-dhanvi-think" className="relative py-24 sm:py-32 bg-background border-b border-border font-sans overflow-hidden">
@@ -572,12 +631,12 @@ export function RealtimeVsMonthend() {
                 </span>
                 <div className="flex items-baseline gap-3">
                   <span className={`font-mono text-3xl sm:text-4xl font-extrabold transition-all duration-300 ${
-                    isEnd ? 'text-emerald-700' : currentStep.riskAmount > 0 ? 'text-rose-700' : 'text-neutral-950'
+                    isLastStep ? 'text-emerald-700' : currentStep.riskAmount > 0 ? 'text-rose-700' : 'text-neutral-950'
                   }`}>
                     ₹{currentStep.riskAmount.toLocaleString('en-IN')}
                   </span>
                   <span className="text-xs font-semibold text-neutral-600">
-                    {isEnd ? scenario.protectedLabel : `${scenario.riskLabel} on Day ${currentStep.day}`}
+                    {isLastStep ? scenario.protectedLabel : `${scenario.riskLabel} on Day ${currentStep.day}`}
                   </span>
                 </div>
               </div>
@@ -648,7 +707,7 @@ export function RealtimeVsMonthend() {
                 <div className="mt-5 pt-3 border-t border-emerald-200 text-xs text-emerald-900 font-semibold flex items-center justify-between">
                   <span>Actionable from Day {currentStep.day}</span>
                   <span className="text-emerald-700 font-bold">
-                    {isEnd ? '₹1.8L Protected' : 'Zero Decision Lag'}
+                    {isLastStep ? '₹1.8L Protected' : 'Zero Decision Lag'}
                   </span>
                 </div>
               </div>
@@ -686,7 +745,7 @@ export function RealtimeVsMonthend() {
                         Impact on Business
                       </p>
                       <p className="font-medium leading-relaxed">
-                        {isEnd
+                        {isLastStep
                           ? 'Loss discovered 30 days too late to renegotiate past supplier invoices.'
                           : 'Daily margin leak compounding undetected across every fulfilled customer order.'}
                       </p>
@@ -697,7 +756,7 @@ export function RealtimeVsMonthend() {
                 <div className="mt-5 pt-3 border-t border-rose-200 text-xs text-muted-foreground flex items-center justify-between">
                   <span>Traditional accounting</span>
                   <span className="font-semibold text-rose-800">
-                    {isEnd ? '₹1.8L Lost' : `${31 - currentStep.day} days until books close`}
+                    {isLastStep ? '₹1.8L Lost' : `${31 - currentStep.day} days until books close`}
                   </span>
                 </div>
               </div>
@@ -785,26 +844,39 @@ export function RealtimeVsMonthend() {
                 <span>Interactive Decision Check: {scenario.decisionQuestion.prompt}</span>
               </div>
 
+              {/* 3 Interactive Decision Buttons */}
               <div className="flex flex-wrap gap-2.5">
-                {scenario.decisionQuestion.options.map((opt) => (
-                  <button
-                    key={opt.key}
-                    type="button"
-                    onClick={() => setUserChoice(opt.key)}
-                    className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer border ${
-                      userChoice === opt.key
-                        ? 'border-emerald-600 bg-emerald-50 text-emerald-950 font-bold ring-2 ring-emerald-500/30'
-                        : 'border-border bg-card text-neutral-700 hover:bg-neutral-50'
-                    }`}
-                  >
-                    {opt.key} — {opt.label}
-                  </button>
-                ))}
+                {scenario.decisionQuestion.options.map((opt) => {
+                  const isSelected = userChoice === opt.key
+                  return (
+                    <button
+                      key={opt.key}
+                      type="button"
+                      onClick={() => setUserChoice(opt.key)}
+                      className={`px-4 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer border ${
+                        isSelected
+                          ? 'border-emerald-600 bg-emerald-50 text-emerald-950 font-bold ring-2 ring-emerald-500/30 shadow-xs'
+                          : 'border-border bg-card text-neutral-700 hover:bg-neutral-50 hover:text-neutral-950'
+                      }`}
+                    >
+                      {opt.key} — {opt.label}
+                    </button>
+                  )
+                })}
               </div>
 
-              {userChoice && (
-                <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-950 font-medium animate-fade-up">
-                  <span className="font-bold">{scenario.decisionQuestion.feedback}</span>
+              {/* Dynamic Feedback Box */}
+              {selectedOption && (
+                <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-950 font-medium animate-fade-up flex items-start gap-2.5">
+                  {selectedOption.isCorrect ? (
+                    <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
+                  ) : (
+                    <AlertTriangle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+                  )}
+                  <p className="leading-relaxed">
+                    <strong className="font-bold">{selectedOption.key} Selected: </strong>
+                    {selectedOption.feedback}
+                  </p>
                 </div>
               )}
             </div>
@@ -812,22 +884,25 @@ export function RealtimeVsMonthend() {
             {/* Simulation Playback Controls Bar */}
             <div className="flex flex-wrap items-center justify-between border-t border-border pt-5 gap-4">
               <div className="flex items-center gap-2">
+                {/* Previous Button */}
                 <button
                   type="button"
                   onClick={handlePrev}
-                  className="inline-flex items-center gap-1 px-3.5 py-2 rounded-xl border border-border bg-card text-xs font-semibold text-neutral-800 hover:bg-neutral-50 cursor-pointer"
+                  disabled={isFirstStep}
+                  className="inline-flex items-center gap-1 px-3.5 py-2 rounded-xl border border-border bg-card text-xs font-semibold text-neutral-800 hover:bg-neutral-50 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-all"
                 >
                   <ChevronLeft className="w-4 h-4" /> Previous
                 </button>
 
+                {/* Play / Pause Simulation Button */}
                 <button
                   type="button"
-                  onClick={() => setIsPlaying((p) => !p)}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-neutral-950 text-xs font-bold text-white hover:bg-neutral-850 cursor-pointer shadow-xs"
+                  onClick={handleTogglePlay}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-neutral-950 text-xs font-bold text-white hover:bg-neutral-850 cursor-pointer shadow-xs transition-all"
                 >
                   {isPlaying ? (
                     <>
-                      <Pause className="w-3.5 h-3.5" /> Pause
+                      <Pause className="w-3.5 h-3.5" /> Pause Simulation
                     </>
                   ) : (
                     <>
@@ -836,19 +911,22 @@ export function RealtimeVsMonthend() {
                   )}
                 </button>
 
+                {/* Next Button */}
                 <button
                   type="button"
                   onClick={handleNext}
-                  className="inline-flex items-center gap-1 px-3.5 py-2 rounded-xl border border-border bg-card text-xs font-semibold text-neutral-800 hover:bg-neutral-50 cursor-pointer"
+                  disabled={isLastStep}
+                  className="inline-flex items-center gap-1 px-3.5 py-2 rounded-xl border border-border bg-card text-xs font-semibold text-neutral-800 hover:bg-neutral-50 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer transition-all"
                 >
                   Next <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
 
+              {/* Replay Simulation Button */}
               <button
                 type="button"
                 onClick={handleReplay}
-                className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-neutral-600 hover:text-neutral-950 cursor-pointer"
+                className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-neutral-600 hover:text-neutral-950 cursor-pointer transition-colors"
               >
                 <RotateCcw className="w-3.5 h-3.5" /> Replay Simulation
               </button>
