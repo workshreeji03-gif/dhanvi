@@ -6,7 +6,7 @@ import { ProductTour } from './product-tour'
 import { AskDhanviFab } from './ask-dhanvi-fab'
 
 type UiContextValue = {
-  openEarlyAccess: () => void
+  openEarlyAccess: (source?: string) => void
   openTour: () => void
 }
 
@@ -20,17 +20,27 @@ export function useUi() {
 
 export function LandingProviders({ children }: { children: ReactNode }) {
   const [earlyAccessOpen, setEarlyAccessOpen] = useState(false)
+  const [leadSource, setLeadSource] = useState<string>('modal')
   const [tourOpen, setTourOpen] = useState(false)
+
+  const handleOpenEarlyAccess = (src?: string) => {
+    if (src) setLeadSource(src)
+    setEarlyAccessOpen(true)
+  }
 
   return (
     <UiContext.Provider
       value={{
-        openEarlyAccess: () => setEarlyAccessOpen(true),
+        openEarlyAccess: handleOpenEarlyAccess,
         openTour: () => setTourOpen(true),
       }}
     >
       {children}
-      <EarlyAccessModal open={earlyAccessOpen} onClose={() => setEarlyAccessOpen(false)} />
+      <EarlyAccessModal
+        open={earlyAccessOpen}
+        defaultSource={leadSource}
+        onClose={() => setEarlyAccessOpen(false)}
+      />
       <ProductTour open={tourOpen} onClose={() => setTourOpen(false)} />
       <AskDhanviFab />
     </UiContext.Provider>
@@ -40,14 +50,16 @@ export function LandingProviders({ children }: { children: ReactNode }) {
 /** Reusable CTA that opens the early-access modal from anywhere. */
 export function EarlyAccessButton({
   className,
+  source = 'landing_cta',
   children,
 }: {
   className?: string
+  source?: string
   children: ReactNode
 }) {
   const { openEarlyAccess } = useUi()
   return (
-    <button type="button" onClick={openEarlyAccess} className={className}>
+    <button type="button" onClick={() => openEarlyAccess(source)} className={className}>
       {children}
     </button>
   )

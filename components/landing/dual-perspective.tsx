@@ -1,108 +1,151 @@
 'use client'
 
-import { useState } from 'react'
-import { Calculator, Briefcase, Check } from 'lucide-react'
+import React, { useState } from 'react'
+import Link from 'next/link'
+import { Briefcase, Calculator, Check, ArrowRight, ShieldCheck, Zap } from 'lucide-react'
 import { Reveal } from './reveal'
 import { SectionHeading } from './section-heading'
-
-const MODES = {
-  owner: {
-    icon: Briefcase,
-    label: 'Business Owner',
-    tagline: 'Understand your business without an accounting degree.',
-    points: [
-      'Plain-English answers, not ledgers and journals',
-      'Know your cash, profit and problems at a glance',
-      'Proactive alerts before small issues become big ones',
-      'Ask questions in your own words, any time',
-    ],
-    quote:
-      '“I finally understand my own numbers — without calling my accountant first.”',
-    author: 'Retail business owner',
-  },
-  accountant: {
-    icon: Calculator,
-    label: 'Accountant',
-    tagline: 'Skip the data entry. Spend your time on judgment.',
-    points: [
-      'Clean, categorized, always-current books',
-      'Automated reconciliation and anomaly flags',
-      'Audit-ready trails for every transaction',
-      'Handle more clients without more grunt work',
-    ],
-    quote:
-      '“Dhanvi does the data entry. I do the advising — which is what clients actually pay for.”',
-    author: 'Practicing CA',
-  },
-} as const
-
-type ModeKey = keyof typeof MODES
+import { EarlyAccessButton } from './ui-context'
 
 export function DualPerspective() {
-  const [mode, setMode] = useState<ModeKey>('owner')
-  const m = MODES[mode]
-  const Icon = m.icon
-
   return (
-    <section id="who" className="relative py-20 sm:py-28">
-      <div className="mx-auto max-w-4xl px-5 sm:px-8">
+    <section id="dual-perspective" className="relative py-24 sm:py-32 bg-muted/20 border-y border-border">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeading
-          eyebrow="Built For Both Sides"
-          title="One platform. Two very different jobs, both easier."
-          description="Dhanvi speaks plainly to owners and works precisely for accountants. Switch the view."
+          eyebrow="Two Perspectives, One Ledger"
+          title="Built for the two minds behind every successful business."
+          description="Dhanvi delivers immediate plain-English cash clarity for business owners while maintaining mathematically rigorous, audit-ready double-entry journals for Chartered Accountants."
         />
 
-        <div className="mt-8 flex justify-center">
-          <div className="inline-flex rounded-full border border-border bg-card p-1">
-            {(Object.keys(MODES) as ModeKey[]).map((k) => {
-              const MIcon = MODES[k].icon
-              return (
-                <button
-                  key={k}
-                  onClick={() => setMode(k)}
-                  className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
-                    mode === k
-                      ? 'bg-primary text-primary-foreground shadow-sm'
-                      : 'text-muted-foreground hover:text-foreground'
-                  }`}
-                >
-                  <MIcon className="h-4 w-4" />
-                  {MODES[k].label}
-                </button>
-              )
-            })}
-          </div>
-        </div>
-
-        <Reveal key={mode} className="mt-8">
-          <div className="animate-fade-up overflow-hidden rounded-2xl border border-border bg-card shadow-xl shadow-foreground/[0.05]">
-            <div className="flex items-center gap-3 border-b border-border bg-muted/30 p-5">
-              <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                <Icon className="h-5 w-5" />
-              </span>
+        <div className="mt-14 grid gap-8 lg:grid-cols-2 items-stretch">
+          {/* For Business Owners */}
+          <Reveal>
+            <div id="for-businesses" className="h-full rounded-3xl border border-border bg-card p-7 sm:p-9 shadow-xl shadow-foreground/[0.03] flex flex-col justify-between hover:border-neutral-300 transition-all">
               <div>
-                <h3 className="text-base font-semibold text-foreground">{m.label}</h3>
-                <p className="text-sm text-muted-foreground">{m.tagline}</p>
+                <div className="flex items-center gap-3.5 mb-6">
+                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-neutral-100 text-neutral-900 font-bold">
+                    <Briefcase className="h-6 w-6" />
+                  </span>
+                  <div>
+                    <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-emerald-700">
+                      Operational Co-Pilot
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-neutral-950">
+                      For Business Owners
+                    </h3>
+                  </div>
+                </div>
+
+                <p className="text-sm sm:text-base text-neutral-700 font-medium leading-relaxed mb-6">
+                  Know what is happening in your business every single day without waiting for month-end close or deciphering confusing accounting journals.
+                </p>
+
+                <ul className="space-y-3.5 text-xs sm:text-sm text-neutral-800">
+                  <li className="flex items-start gap-3">
+                    <span className="h-5 w-5 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">
+                      ✓
+                    </span>
+                    <span><strong>Live Cash & Runway Visibility:</strong> Liquid bank balances and projected cash flow updated with every transaction.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="h-5 w-5 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">
+                      ✓
+                    </span>
+                    <span><strong>Continuous Margin Protection:</strong> Real-time alerts when supplier price hikes or freight surcharges erode gross margins.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="h-5 w-5 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">
+                      ✓
+                    </span>
+                    <span><strong>Conversational AI Assistant:</strong> Ask questions like <em>“Who owes us money?”</em> or <em>“Can we afford this PO?”</em> and get instant numbers.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="h-5 w-5 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">
+                      ✓
+                    </span>
+                    <span><strong>1-Click WhatsApp Reminders:</strong> Collect receivables faster with automated polite reminders and direct UPI QR links.</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-border flex items-center justify-between">
+                <Link
+                  href="/dashboard"
+                  className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-neutral-950 hover:text-emerald-700 transition-colors"
+                >
+                  Explore Founder Experience <ArrowRight className="w-4 h-4" />
+                </Link>
+                <EarlyAccessButton className="px-4 py-2 rounded-full bg-neutral-950 text-white text-xs font-semibold hover:bg-neutral-850 cursor-pointer">
+                  Join Early Access
+                </EarlyAccessButton>
               </div>
             </div>
-            <div className="grid gap-6 p-6 sm:grid-cols-2">
-              <ul className="space-y-2.5">
-                {m.points.map((p) => (
-                  <li key={p} className="flex items-start gap-2.5 text-sm text-foreground">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-positive" />
-                    {p}
+          </Reveal>
+
+          {/* For Accountants & CAs */}
+          <Reveal delay={100}>
+            <div id="for-accountants" className="h-full rounded-3xl border border-emerald-500/40 bg-emerald-50/[0.15] p-7 sm:p-9 shadow-xl shadow-foreground/[0.03] flex flex-col justify-between hover:border-emerald-500/60 transition-all">
+              <div>
+                <div className="flex items-center gap-3.5 mb-6">
+                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-800 font-bold">
+                    <Calculator className="h-6 w-6" />
+                  </span>
+                  <div>
+                    <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-emerald-800">
+                      Advisory Command Center
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-neutral-950">
+                      For Accountants & CAs
+                    </h3>
+                  </div>
+                </div>
+
+                <p className="text-sm sm:text-base text-neutral-700 font-medium leading-relaxed mb-6">
+                  Spend less time chasing missing receipts, entering vouchers, and manually reconciling bank feeds. Spend more time providing high-value strategic advisory.
+                </p>
+
+                <ul className="space-y-3.5 text-xs sm:text-sm text-neutral-800">
+                  <li className="flex items-start gap-3">
+                    <span className="h-5 w-5 rounded-full bg-emerald-200 text-emerald-900 flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">
+                      ✓
+                    </span>
+                    <span><strong>Strict Double-Entry Invariants:</strong> Real-time validation ensures debits equal credits for every posted journal entry.</span>
                   </li>
-                ))}
-              </ul>
-              <figure className="flex flex-col justify-center rounded-xl bg-primary/[0.04] p-5">
-                <blockquote className="text-pretty text-base font-medium leading-relaxed text-foreground">
-                  {m.quote}
-                </blockquote>
-                <figcaption className="mt-3 text-sm text-muted-foreground">— {m.author}</figcaption>
-              </figure>
+                  <li className="flex items-start gap-3">
+                    <span className="h-5 w-5 rounded-full bg-emerald-200 text-emerald-900 flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">
+                      ✓
+                    </span>
+                    <span><strong>Automated Bank Reconciliation:</strong> AI matches bank feeds with open invoices and identifies unreconciled discrepancies.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="h-5 w-5 rounded-full bg-emerald-200 text-emerald-900 flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">
+                      ✓
+                    </span>
+                    <span><strong>Instant Audit-Ready Statements:</strong> Generate GAAP-compliant Balance Sheets, Trial Balances, P&L, and Cash Flow in one click.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="h-5 w-5 rounded-full bg-emerald-200 text-emerald-900 flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">
+                      ✓
+                    </span>
+                    <span><strong>Accountant Review Queue:</strong> Flag and inspect unverified transactions with full audit trails before final tax closing.</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-emerald-200/80 flex items-center justify-between">
+                <Link
+                  href="/accountant"
+                  className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-emerald-800 hover:text-emerald-950 transition-colors"
+                >
+                  View Accountant Portal <ArrowRight className="w-4 h-4" />
+                </Link>
+                <EarlyAccessButton className="px-4 py-2 rounded-full bg-emerald-700 text-white text-xs font-semibold hover:bg-emerald-800 cursor-pointer">
+                  Join CA Network
+                </EarlyAccessButton>
+              </div>
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </div>
     </section>
   )
