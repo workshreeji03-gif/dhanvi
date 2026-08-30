@@ -11,17 +11,27 @@ export function AuthHashListener() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
+    const hash = window.location.hash;
+    const search = window.location.search;
+
+    // 1. Instant Hard-Redirect for Password Recovery
+    if (hash.includes("type=recovery") || search.includes("type=recovery")) {
+      if (window.location.pathname !== "/reset-password") {
+        window.location.replace("/reset-password" + search + hash);
+        return;
+      }
+    }
+
     const supabase = createClient();
     if (!supabase) return;
 
-    const hash = window.location.hash.substring(1);
-    const search = new URLSearchParams(window.location.search);
-    const hashParams = new URLSearchParams(hash);
+    const hashParams = new URLSearchParams(hash.startsWith("#") ? hash.substring(1) : hash);
+    const searchParams = new URLSearchParams(search);
 
-    const type = hashParams.get("type") || search.get("type");
+    const type = hashParams.get("type") || searchParams.get("type");
     const isRecovery = type === "recovery" || pathname === "/reset-password";
 
-    // 1. Process URL hash fragments (#access_token=...&refresh_token=...)
+    // 2. Process URL hash fragments (#access_token=...&refresh_token=...)
     if (hash && hash.includes("access_token=")) {
       const accessToken = hashParams.get("access_token");
       const refreshToken = hashParams.get("refresh_token");
@@ -32,14 +42,12 @@ export function AuthHashListener() {
           refresh_token: refreshToken,
         }).then(({ data, error }) => {
           if (!error && data?.session) {
-            // Clean up the hash from the browser URL bar
-            if (window.history.replaceState) {
-              window.history.replaceState(null, "", window.location.pathname + window.location.search);
-            }
             if (isRecovery) {
-              router.push("/reset-password");
-            } else if (pathname === "/") {
-              router.push("/dashboard");
+              if (window.location.pathname !== "/reset-password") {
+                window.location.replace("/reset-password");
+              }
+            } else if (window.location.pathname === "/" || window.location.pathname === "/auth/callback") {
+              window.location.replace("/dashboard");
             }
           }
         }).catch((err) => {
@@ -49,15 +57,15 @@ export function AuthHashListener() {
       }
     }
 
-    // 2. Process query code (?code=...) on non-callback routes
-    const codeParam = search.get("code");
+    // 3. Process query code (?code=...) on root or non-callback routes
+    const codeParam = searchParams.get("code");
     if (codeParam && pathname !== "/auth/callback") {
       supabase.auth.exchangeCodeForSession(codeParam).then(({ data, error }) => {
         if (!error && data?.session) {
           if (isRecovery) {
-            router.push("/reset-password");
+            window.location.replace("/reset-password");
           } else if (pathname === "/") {
-            router.push("/dashboard");
+            window.location.replace("/dashboard");
           }
         }
       }).catch((err) => {
@@ -66,9 +74,9 @@ export function AuthHashListener() {
       return;
     }
 
-    // 3. Process token_hash (?token_hash=...&type=...) on non-callback routes
-    const tokenHash = search.get("token_hash");
-    const otpType = search.get("type") || hashParams.get("type");
+    // 4. Process token_hash (?token_hash=...&type=...) on non-callback routes
+    const tokenHash = searchParams.get("token_hash");
+    const otpType = searchParams.get("type") || hashParams.get("type");
     if (tokenHash && otpType && pathname !== "/auth/callback") {
       supabase.auth.verifyOtp({
         token_hash: tokenHash,
@@ -76,9 +84,9 @@ export function AuthHashListener() {
       }).then(({ data, error }) => {
         if (!error && data?.session) {
           if (otpType === "recovery" || isRecovery) {
-            router.push("/reset-password");
+            window.location.replace("/reset-password");
           } else if (pathname === "/") {
-            router.push("/dashboard");
+            window.location.replace("/dashboard");
           }
         }
       }).catch((err) => {

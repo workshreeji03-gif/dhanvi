@@ -47,12 +47,15 @@ function ResetPasswordForm() {
           const accessToken = params.get("access_token");
           const refreshToken = params.get("refresh_token");
           if (accessToken && refreshToken) {
-            await supabase.auth.setSession({
+            const { data, error } = await supabase.auth.setSession({
               access_token: accessToken,
               refresh_token: refreshToken,
             });
-            if (window.history.replaceState) {
-              window.history.replaceState(null, "", window.location.pathname);
+            if (!error && data?.session) {
+              setIsSessionReady(true);
+              if (window.history.replaceState) {
+                window.history.replaceState(null, "", window.location.pathname);
+              }
             }
           }
         }
