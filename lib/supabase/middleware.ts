@@ -1,17 +1,14 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from "./config";
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
     request,
   });
 
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-
-  if (!supabaseUrl || !supabaseKey) {
-    return supabaseResponse;
-  }
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || SUPABASE_ANON_KEY;
 
   const supabase = createServerClient(supabaseUrl, supabaseKey, {
     cookies: {
@@ -61,8 +58,7 @@ export async function updateSession(request: NextRequest) {
     pathname === "/register";
 
   // Redirect unauthenticated user from protected routes
-  // Note: Only redirect if Supabase is connected in production
-  if (!user && isProtectedRoute && supabaseUrl && !supabaseUrl.includes("your-project")) {
+  if (!user && isProtectedRoute) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     url.searchParams.set("next", pathname);

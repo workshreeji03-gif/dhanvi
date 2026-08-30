@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import type { EmailOtpType } from "@supabase/supabase-js";
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from "@/lib/supabase/config";
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
@@ -14,12 +15,8 @@ export async function GET(request: Request) {
   const safeNext = next.startsWith("/") ? next : "/dashboard";
 
   const cookieStore = await cookies();
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-
-  if (!supabaseUrl || !supabaseKey) {
-    return NextResponse.redirect(new URL("/login?error=Configuration%20missing", origin));
-  }
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || SUPABASE_ANON_KEY;
 
   const supabase = createServerClient(supabaseUrl, supabaseKey, {
     cookies: {
