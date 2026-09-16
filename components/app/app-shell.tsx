@@ -12,7 +12,6 @@ import { Card } from '../ui/card';
 import { useDhanviState, isUserRegistered } from '../../lib/supabase/demo-store';
 import { canAccessRoute } from '../../lib/security/permissions';
 import { AuthProvider } from '../../lib/auth/user-context';
-import { AppAskDhanviFab } from './app-ask-dhanvi-fab';
 
 const AppShellContent: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const pathname = usePathname();
@@ -86,7 +85,6 @@ const AppShellContent: React.FC<{ children: React.ReactNode }> = ({ children }) 
           )}
         </main>
       </div>
-      <AppAskDhanviFab />
       <ToastContainer />
     </div>
   );

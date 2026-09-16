@@ -3,7 +3,6 @@
 import { createContext, useContext, useState, type ReactNode } from 'react'
 import { EarlyAccessModal } from './early-access-modal'
 import { ProductTour } from './product-tour'
-import { AskDhanviFab } from './ask-dhanvi-fab'
 
 type UiContextValue = {
   openEarlyAccess: (source?: string) => void
@@ -42,7 +41,6 @@ export function LandingProviders({ children }: { children: ReactNode }) {
         onClose={() => setEarlyAccessOpen(false)}
       />
       <ProductTour open={tourOpen} onClose={() => setTourOpen(false)} />
-      <AskDhanviFab />
     </UiContext.Provider>
   )
 }
