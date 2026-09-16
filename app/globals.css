@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: 'Geist', 'Geist Fallback', system-ui, sans-serif;
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
+  --font-sans: var(--font-sans), 'Manrope', system-ui, sans-serif;
+  --font-mono: var(--font-mono), 'Geist Mono', monospace;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -27,6 +27,14 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
+  --color-text-primary: #111411;
+  --color-text-secondary: #5F665F;
+  --color-text-muted: #8B928C;
+  --color-text-very-muted: #A5ABA6;
+  --color-surface-secondary: #F7F9F7;
+  --color-hairline: #E4E8E4;
+  --color-brand-green: #10B981;
+
   --color-positive: var(--positive);
   --color-positive-foreground: var(--positive-foreground);
   --color-info: var(--info);
@@ -46,29 +54,29 @@
   --radius: 0.5rem;
 
   --background: #FFFFFF;
-  --foreground: #101310;
+  --foreground: #111411;
 
   --card: #FFFFFF;
-  --card-foreground: #101310;
+  --card-foreground: #111411;
   --popover: #FFFFFF;
-  --popover-foreground: #101310;
+  --popover-foreground: #111411;
 
   --primary: #10B981;
   --primary-foreground: #FFFFFF;
 
-  --secondary: #F7F8F6;
-  --secondary-foreground: #101310;
+  --secondary: #F7F9F7;
+  --secondary-foreground: #111411;
 
-  --muted: #F7F8F6;
-  --muted-foreground: #606660;
+  --muted: #F7F9F7;
+  --muted-foreground: #5F665F;
 
-  --accent: #F7F8F6;
+  --accent: #F7F9F7;
   --accent-foreground: #10B981;
 
   --destructive: #ef4444;
 
-  --border: #E5E8E5;
-  --input: #E5E8E5;
+  --border: #E4E8E4;
+  --input: #E4E8E4;
   --ring: #10B981;
 
   --positive: #10B981;
@@ -76,7 +84,7 @@
   --info: #0ea5e9;
   --info-foreground: #FFFFFF;
   --warning: #f59e0b;
-  --warning-foreground: #101310;
+  --warning-foreground: #111411;
 }
 
 @layer base {

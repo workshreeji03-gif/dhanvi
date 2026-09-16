@@ -301,42 +301,42 @@ export function NetworkVisualization() {
   }
 
   return (
-    <section id="architecture" className="py-24 sm:py-32 border-t border-[#E5E8E5] bg-white scroll-mt-20">
+    <section id="architecture" className="py-24 sm:py-32 border-t border-[#E4E8E4] bg-white scroll-mt-20">
       <div className="mx-auto max-w-7xl px-6 sm:px-10">
         {/* Editorial Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="max-w-2xl">
-            <div className="text-xs font-normal text-[#606660] mb-3">
+            <div className="text-xs sm:text-[13px] font-medium tracking-[-0.01em] text-[#5F665F] mb-3">
               Dhanvi Intelligence Architecture
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#101310] leading-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-bold tracking-[-0.035em] text-[#111411] leading-[1.12]">
               Specialized intelligence.
               <br />
-              One shared understanding.
+              One shared <span className="text-[#10B981]">understanding.</span>
             </h2>
-            <p className="mt-4 text-base text-[#606660] leading-relaxed">
+            <p className="mt-4 text-base sm:text-[18px] text-[#5F665F] leading-[1.62] tracking-[-0.01em]">
               Dhanvi approaches markets through specialized research agents, each focused on a
               different dimension of the investment environment.
             </p>
           </div>
 
           {/* Restrained Controls */}
-          <div className="flex items-center gap-4 text-xs text-[#606660]">
+          <div className="flex items-center gap-4 text-xs text-[#5F665F]">
             <button
               type="button"
               onClick={() => setIsPaused(!isPaused)}
-              className="py-1 px-3 rounded-lg border border-[#E5E8E5] hover:border-[#D8DDD8] hover:text-[#101310] transition-colors cursor-pointer text-xs font-medium"
+              className="py-1.5 px-3 rounded-lg border border-[#E4E8E4] hover:border-[#111411] hover:text-[#111411] transition-colors cursor-pointer text-xs font-semibold tracking-[-0.01em] bg-white shadow-xs"
             >
               {isPaused ? 'Resume cycle' : 'Pause'}
             </button>
-            <span className="font-mono text-[#929892]">
+            <span className="font-mono tabular-nums text-[#8B928C]">
               {String(currentAgent.loopIndex).padStart(2, '0')} / 06
             </span>
           </div>
         </div>
 
-        {/* Elegant Horizontal Agent Selector (No green boxes) */}
-        <div className="border-b border-[#E5E8E5] mb-8 overflow-x-auto">
+        {/* Elegant Horizontal Agent Selector */}
+        <div className="border-b border-[#E4E8E4] mb-8 overflow-x-auto">
           <div className="flex items-center gap-8 min-w-max pb-3">
             {RESEARCH_AGENTS.map((agent) => {
               const isSelected = currentAgent.id === agent.id
@@ -345,10 +345,10 @@ export function NetworkVisualization() {
                   key={agent.id}
                   type="button"
                   onClick={() => handleSelectAgent(agent)}
-                  className={`relative text-sm font-medium transition-colors cursor-pointer pb-2 outline-none ${
+                  className={`relative text-sm font-semibold tracking-[-0.01em] transition-colors cursor-pointer pb-2 outline-none ${
                     isSelected
-                      ? 'text-[#101310]'
-                      : 'text-[#606660] hover:text-[#101310]'
+                      ? 'text-[#111411]'
+                      : 'text-[#5F665F] hover:text-[#111411]'
                   }`}
                 >
                   <span>{agent.label}</span>
@@ -362,32 +362,32 @@ export function NetworkVisualization() {
         </div>
 
         {/* Selected Agent Detail Area */}
-        <div className="border border-[#E5E8E5] rounded-xl bg-[#F7F8F6] p-6 sm:p-8 lg:p-10 mb-8">
+        <div className="border border-[#E4E8E4] rounded-xl bg-[#F7F9F7] p-6 sm:p-8 lg:p-10 mb-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             {/* LEFT 40%: Agent Overview */}
             <div className="lg:col-span-5 space-y-4">
-              <div className="text-xs font-mono text-[#10B981]">
+              <div className="text-xs font-mono font-semibold tracking-wider text-[#10B981]">
                 AGENT {String(currentAgent.loopIndex).padStart(2, '0')}
               </div>
-              <h3 className="text-2xl sm:text-3xl font-medium text-[#101310]">
+              <h3 className="text-2xl sm:text-3xl font-bold tracking-[-0.025em] text-[#111411]">
                 {currentAgent.label} Intelligence
               </h3>
-              <p className="text-sm text-[#606660] leading-relaxed">
+              <p className="text-sm sm:text-[15px] text-[#5F665F] leading-relaxed tracking-[-0.005em]">
                 {currentAgent.description}
               </p>
-              <div className="pt-2 text-xs text-[#929892]">
-                Telemetry benchmark: <span className="text-[#101310] font-medium">{currentAgent.metric}</span>
+              <div className="pt-2 text-xs text-[#8B928C]">
+                Telemetry benchmark: <span className="text-[#111411] font-semibold font-mono tabular-nums">{currentAgent.metric}</span>
               </div>
             </div>
 
             {/* RIGHT 60%: 3 Columns (Observes, Analyzes, Contributes) */}
-            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4 sm:divide-x sm:divide-[#E5E8E5]">
+            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4 sm:divide-x sm:divide-[#E4E8E4]">
               {/* Observes */}
               <div className="sm:pr-4">
-                <div className="text-xs font-medium text-[#101310] mb-3">
+                <div className="text-xs font-semibold uppercase tracking-wider text-[#111411] mb-3 font-mono">
                   Observes
                 </div>
-                <ul className="space-y-2 text-xs text-[#606660]">
+                <ul className="space-y-2 text-xs sm:text-[13px] text-[#5F665F]">
                   {currentAgent.observes.map((item) => (
                     <li key={item} className="leading-snug">
                       • {item}
@@ -398,10 +398,10 @@ export function NetworkVisualization() {
 
               {/* Analyzes */}
               <div className="sm:px-4">
-                <div className="text-xs font-medium text-[#101310] mb-3">
+                <div className="text-xs font-semibold uppercase tracking-wider text-[#111411] mb-3 font-mono">
                   Analyzes
                 </div>
-                <ul className="space-y-2 text-xs text-[#606660]">
+                <ul className="space-y-2 text-xs sm:text-[13px] text-[#5F665F]">
                   {currentAgent.analyzes.map((item) => (
                     <li key={item} className="leading-snug">
                       • {item}
@@ -412,10 +412,10 @@ export function NetworkVisualization() {
 
               {/* Contributes */}
               <div className="sm:pl-4">
-                <div className="text-xs font-medium text-[#101310] mb-3">
+                <div className="text-xs font-semibold uppercase tracking-wider text-[#111411] mb-3 font-mono">
                   Contributes
                 </div>
-                <ul className="space-y-2 text-xs text-[#606660]">
+                <ul className="space-y-2 text-xs sm:text-[13px] text-[#5F665F]">
                   {currentAgent.contributes.map((item) => (
                     <li key={item} className="leading-snug">
                       • {item}
@@ -428,16 +428,16 @@ export function NetworkVisualization() {
         </div>
 
         {/* Downstream Architecture Flow Path */}
-        <div className="p-6 rounded-xl border border-[#E5E8E5] bg-white">
-          <div className="text-xs text-[#929892] mb-3 font-normal">
+        <div className="p-6 rounded-xl border border-[#E4E8E4] bg-white">
+          <div className="text-xs text-[#8B928C] mb-3 font-medium">
             Information path from {currentAgent.label} Intelligence:
           </div>
 
           <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs">
-            <span className="px-3 py-1 rounded border border-[#10B981] bg-[#10B981]/5 text-[#101310] font-medium">
+            <span className="px-3 py-1 rounded border border-[#10B981] bg-emerald-50 text-[#111411] font-semibold">
               {currentAgent.label} Intelligence
             </span>
-            <span className="text-[#929892] font-mono">→</span>
+            <span className="text-[#8B928C] font-mono">→</span>
 
             {PIPELINE_STEPS.map((step, idx) => (
               <React.Fragment key={step}>

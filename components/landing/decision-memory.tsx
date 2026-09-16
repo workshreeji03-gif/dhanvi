@@ -46,19 +46,19 @@ export function DecisionMemory() {
   const [activeStep, setActiveStep] = useState(0)
 
   return (
-    <section id="memory" className="py-24 sm:py-32 border-t border-[#E5E8E5] bg-white scroll-mt-20">
+    <section id="memory" className="py-24 sm:py-32 border-t border-[#E4E8E4] bg-white scroll-mt-20">
       <div className="mx-auto max-w-7xl px-6 sm:px-10">
         {/* Editorial Section Header */}
         <div className="max-w-3xl mb-16">
-          <div className="text-xs font-normal text-[#606660] mb-3">
+          <div className="text-xs font-medium text-[#5F665F] mb-3 tracking-wide uppercase">
             Institutional Memory Engine
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#101310] leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-bold tracking-[-0.035em] text-[#111411] leading-[1.08]">
             A system that remembers
             <br />
             why decisions were made.
           </h2>
-          <p className="mt-5 text-base sm:text-lg text-[#606660] leading-relaxed">
+          <p className="mt-5 text-base sm:text-lg text-[#5F665F] leading-relaxed font-normal tracking-[-0.01em]">
             In human organizations, institutional memory dissolves when key people leave. Dhanvi
             preserves the complete forensic context behind every hypothesis, risk calculation, and
             trade — creating a permanent record of what was believed, why it happened, and what was learned.
@@ -69,12 +69,12 @@ export function DecisionMemory() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           {/* LEFT 7 cols: Clean Vertical Timeline */}
           <div className="lg:col-span-7 space-y-4">
-            <div className="text-xs font-normal text-[#929892] mb-2 flex items-center justify-between">
+            <div className="text-xs font-medium text-[#8B928C] mb-2 flex items-center justify-between">
               <span>Decision journey — Forensic Case #MEM-4892</span>
-              <span className="font-mono text-[11px]">Click a step to inspect context</span>
+              <span className="font-mono tabular-nums text-[11px]">Click a step to inspect context</span>
             </div>
 
-            <div className="border border-[#E5E8E5] rounded-xl bg-white divide-y divide-[#E5E8E5] overflow-hidden">
+            <div className="border border-[#E4E8E4] rounded-xl bg-white divide-y divide-[#E4E8E4] overflow-hidden shadow-xs">
               {TIMELINE_STEPS.map((step, idx) => {
                 const isActive = activeStep === idx
                 return (
@@ -83,14 +83,14 @@ export function DecisionMemory() {
                     type="button"
                     onClick={() => setActiveStep(idx)}
                     className={`w-full p-4 sm:p-5 text-left transition-colors flex items-start gap-4 cursor-pointer ${
-                      isActive ? 'bg-[#F7F8F6]' : 'hover:bg-[#FAFAFA]'
+                      isActive ? 'bg-[#F7F9F7]' : 'hover:bg-[#FAFCFA]'
                     }`}
                   >
                     {/* Timestamp Pill */}
                     <div className="w-16 shrink-0 pt-0.5">
                       <span
-                        className={`text-xs font-mono font-medium ${
-                          isActive ? 'text-[#10B981]' : 'text-[#606660]'
+                        className={`text-xs font-mono tabular-nums font-semibold ${
+                          isActive ? 'text-[#10B981]' : 'text-[#5F665F]'
                         }`}
                       >
                         {step.time}
@@ -101,8 +101,8 @@ export function DecisionMemory() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between gap-2">
                         <div
-                          className={`text-sm font-medium ${
-                            isActive ? 'text-[#101310]' : 'text-[#606660]'
+                          className={`text-sm font-semibold tracking-[-0.01em] ${
+                            isActive ? 'text-[#111411]' : 'text-[#5F665F]'
                           }`}
                         >
                           {step.title}
@@ -111,7 +111,7 @@ export function DecisionMemory() {
                           <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] shrink-0" />
                         )}
                       </div>
-                      <p className="mt-1 text-xs text-[#606660] leading-relaxed">
+                      <p className="mt-1 text-xs text-[#5F665F] leading-relaxed font-normal">
                         {step.description}
                       </p>
                     </div>
@@ -124,51 +124,51 @@ export function DecisionMemory() {
           {/* RIGHT 5 cols: Telemetry Context & Retrieved When Similar Conditions Appear */}
           <div className="lg:col-span-5 space-y-6">
             {/* Step Diagnostic Snapshot */}
-            <div className="border border-[#E5E8E5] rounded-xl bg-[#F7F8F6] p-6 space-y-4">
-              <div className="flex items-center justify-between border-b border-[#E5E8E5] pb-3 text-xs">
-                <span className="text-[#101310] font-medium">Captured Step Context</span>
-                <span className="font-mono text-[#10B981] text-[11px]">{TIMELINE_STEPS[activeStep].time}</span>
+            <div className="border border-[#E4E8E4] rounded-xl bg-[#F7F9F7] p-6 space-y-4 shadow-xs">
+              <div className="flex items-center justify-between border-b border-[#E4E8E4] pb-3 text-xs">
+                <span className="text-[#111411] font-semibold tracking-[-0.01em]">Captured Step Context</span>
+                <span className="font-mono tabular-nums text-[#10B981] text-[11px] font-semibold">{TIMELINE_STEPS[activeStep].time}</span>
               </div>
 
               <div>
-                <div className="text-xs text-[#929892]">Selected milestone</div>
-                <div className="text-sm font-medium text-[#101310] mt-0.5">
+                <div className="text-xs text-[#8B928C] font-medium">Selected milestone</div>
+                <div className="text-sm font-semibold text-[#111411] tracking-[-0.01em] mt-0.5">
                   {TIMELINE_STEPS[activeStep].title}
                 </div>
               </div>
 
               <div>
-                <div className="text-xs text-[#929892]">Forensic telemetry detail</div>
-                <div className="text-xs text-[#606660] mt-1 p-3 rounded-lg bg-white border border-[#E5E8E5] leading-relaxed">
+                <div className="text-xs text-[#8B928C] font-medium">Forensic telemetry detail</div>
+                <div className="text-xs text-[#5F665F] mt-1 p-3 rounded-lg bg-white border border-[#E4E8E4] leading-relaxed font-normal">
                   {TIMELINE_STEPS[activeStep].detail}
                 </div>
               </div>
             </div>
 
             {/* Visual Link: Retrieved when similar conditions appear again */}
-            <div className="border border-[#E5E8E5] rounded-xl bg-white p-6 relative">
-              <div className="flex items-center gap-2 text-xs font-mono text-[#10B981] mb-2 font-medium">
+            <div className="border border-[#E4E8E4] rounded-xl bg-white p-6 relative shadow-xs">
+              <div className="flex items-center gap-2 text-xs font-mono tabular-nums text-[#10B981] mb-2 font-semibold">
                 <Clock className="w-3.5 h-3.5" />
                 <span>RETRIEVED 184 DAYS LATER</span>
               </div>
 
-              <div className="text-sm font-medium text-[#101310]">
+              <div className="text-sm font-semibold text-[#111411] tracking-[-0.01em]">
                 Retrieved when similar conditions appear again
               </div>
 
-              <p className="mt-2 text-xs text-[#606660] leading-relaxed">
+              <p className="mt-2 text-xs text-[#5F665F] leading-relaxed font-normal">
                 When semiconductor supply-chain bottleneck constraints and rate sensitivity re-emerged
                 6 months later, Dhanvi’s vector retrieval surfaced this exact decision trace with 92%
                 semantic alignment — preventing recency bias and accelerating parameter calibration.
               </p>
 
-              <div className="mt-4 pt-3 border-t border-[#E5E8E5] flex items-center justify-between text-[11px] text-[#929892]">
-                <span>Retrieved: #MEM-4892</span>
-                <span className="font-mono text-[#10B981] font-semibold">92% Semantic Match</span>
+              <div className="mt-4 pt-3 border-t border-[#E4E8E4] flex items-center justify-between text-[11px] text-[#8B928C]">
+                <span className="font-mono tabular-nums">Retrieved: #MEM-4892</span>
+                <span className="font-mono tabular-nums text-[#10B981] font-semibold">92% Semantic Match</span>
               </div>
             </div>
 
-            <div className="text-[11px] text-[#929892]">
+            <div className="text-[11px] text-[#8B928C] font-mono">
               * Illustrative decision journey and retrospective trace.
             </div>
           </div>

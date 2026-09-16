@@ -59,24 +59,24 @@ const PRODUCTS = [
 
 export function ProductDirections() {
   return (
-    <section id="products" className="py-24 sm:py-32 border-t border-[#E5E8E5] bg-white scroll-mt-20">
+    <section id="products" className="py-24 sm:py-32 border-t border-[#E4E8E4] bg-white scroll-mt-20">
       <div className="mx-auto max-w-7xl px-6 sm:px-10">
         {/* Editorial Section Header */}
         <div className="max-w-3xl mb-16 sm:mb-20">
-          <div className="text-xs font-normal text-[#606660] mb-3">
+          <div className="text-xs font-medium text-[#5F665F] mb-3 tracking-wide uppercase">
             Product directions
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#101310] leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-bold tracking-[-0.035em] text-[#111411] leading-[1.08]">
             Three product directions.
           </h2>
-          <p className="mt-5 text-base sm:text-lg text-[#606660] leading-relaxed">
+          <p className="mt-5 text-base sm:text-lg text-[#5F665F] leading-relaxed font-normal tracking-[-0.01em]">
             Dhanvi is designing software-native financial intelligence for different scales of deployment
             — from institutional quantitative infrastructure to conversational research APIs and future personal tools.
           </p>
         </div>
 
         {/* Editorial Layout: Large Numbering + Horizontal Dividers (No Generic SaaS Cards) */}
-        <div className="divide-y divide-[#E5E8E5] border-t border-b border-[#E5E8E5]">
+        <div className="divide-y divide-[#E4E8E4] border-t border-b border-[#E4E8E4]">
           {PRODUCTS.map((prod) => (
             <div
               key={prod.id}
@@ -84,27 +84,27 @@ export function ProductDirections() {
             >
               {/* Large Display Number & Status */}
               <div className="lg:col-span-3 flex lg:flex-col justify-between items-baseline lg:items-start gap-4">
-                <span className="text-4xl sm:text-5xl lg:text-6xl font-medium text-[#101310] font-mono tracking-tight">
+                <span className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#111411] font-mono tabular-nums tracking-[-0.04em]">
                   {prod.num}
                 </span>
-                <span className="text-xs font-mono text-[#10B981] bg-[#10B981]/10 px-2.5 py-1 rounded">
+                <span className="text-xs font-mono font-semibold text-[#10B981] bg-[#10B981]/10 px-2.5 py-1 rounded">
                   {prod.status}
                 </span>
               </div>
 
               {/* Title & Description */}
               <div className="lg:col-span-5 space-y-3">
-                <h3 className="text-2xl sm:text-3xl font-medium text-[#101310]">
+                <h3 className="text-2xl sm:text-3xl font-bold text-[#111411] tracking-[-0.025em]">
                   {prod.name}
                 </h3>
-                <div className="text-sm font-medium text-[#606660]">
+                <div className="text-sm font-semibold text-[#111411] tracking-[-0.01em]">
                   {prod.headline}
                 </div>
-                <p className="text-xs text-[#606660] leading-relaxed pt-1">
+                <p className="text-xs text-[#5F665F] leading-relaxed pt-1 font-normal">
                   {prod.description}
                 </p>
                 {prod.disclaimer && (
-                  <div className="text-[11px] text-[#929892] italic pt-2">
+                  <div className="text-[11px] text-[#8B928C] italic pt-2 font-normal">
                     *{prod.disclaimer}
                   </div>
                 )}
@@ -112,13 +112,13 @@ export function ProductDirections() {
 
               {/* Capabilities & CTA */}
               <div className="lg:col-span-4 space-y-5 lg:pl-6">
-                <div className="text-xs font-medium text-[#101310]">
+                <div className="text-xs font-semibold text-[#111411] tracking-[-0.01em]">
                   Key capabilities:
                 </div>
-                <ul className="space-y-2 text-xs text-[#606660]">
+                <ul className="space-y-2 text-xs text-[#5F665F] font-normal">
                   {prod.capabilities.map((cap) => (
                     <li key={cap} className="flex items-start gap-2">
-                      <span className="text-[#10B981] select-none">—</span>
+                      <span className="text-[#10B981] select-none font-semibold">—</span>
                       <span>{cap}</span>
                     </li>
                   ))}
@@ -127,10 +127,10 @@ export function ProductDirections() {
                 <div className="pt-3">
                   <EarlyAccessButton
                     source={`product_${prod.id}`}
-                    className="inline-flex items-center gap-2 rounded-lg border border-[#E5E8E5] hover:border-[#D8DDD8] bg-white px-4 py-2 text-xs font-medium text-[#101310] transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-2 rounded-lg border border-[#E4E8E4] hover:border-[#111411] bg-white px-4 py-2 text-xs font-semibold text-[#111411] transition-colors cursor-pointer tracking-[-0.01em] shadow-xs"
                   >
                     <span>{prod.actionText}</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-[#606660]" />
+                    <ArrowRight className="w-3.5 h-3.5 text-[#5F665F]" />
                   </EarlyAccessButton>
                 </div>
               </div>

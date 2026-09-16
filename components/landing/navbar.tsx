@@ -36,7 +36,7 @@ export function Navbar() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-200 ${
         scrolled
-          ? 'border-b border-[#E5E8E5] bg-white/95 backdrop-blur-xs'
+          ? 'border-b border-[#E4E8E4] bg-white/95 backdrop-blur-xs'
           : 'border-b border-transparent bg-white'
       }`}
     >
@@ -59,7 +59,7 @@ export function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="text-xs font-medium text-[#606660] transition-colors hover:text-[#101310]"
+                className="text-[14px] font-medium tracking-[-0.01em] text-[#444A45] transition-colors hover:text-[#111411]"
               >
                 {link.label}
               </a>
@@ -71,7 +71,7 @@ export function Navbar() {
         <div className="hidden items-center md:flex">
           <EarlyAccessButton
             source="navbar"
-            className="inline-flex items-center justify-center rounded-lg bg-[#10B981] hover:bg-[#059669] px-4 py-2 text-xs font-medium text-white transition-colors cursor-pointer"
+            className="inline-flex items-center justify-center rounded-lg bg-[#10B981] hover:bg-[#059669] px-4 py-2 text-xs sm:text-sm font-semibold tracking-[-0.01em] text-white transition-colors cursor-pointer shadow-xs"
           >
             <span>Join Early Access</span>
           </EarlyAccessButton>
@@ -80,7 +80,7 @@ export function Navbar() {
         {/* Mobile Menu Trigger */}
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-lg p-2 text-[#606660] hover:text-[#101310] hover:bg-[#F7F8F6] md:hidden cursor-pointer"
+          className="inline-flex items-center justify-center rounded-lg p-2 text-[#5F665F] hover:text-[#111411] hover:bg-[#F7F9F7] md:hidden cursor-pointer"
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -91,23 +91,23 @@ export function Navbar() {
 
       {/* Mobile Navigation Drawer */}
       {open && (
-        <div className="border-b border-[#E5E8E5] bg-white md:hidden">
+        <div className="border-b border-[#E4E8E4] bg-white md:hidden">
           <ul className="mx-auto flex max-w-7xl flex-col gap-2 px-6 py-6 sm:px-10">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="block py-2 text-sm font-medium text-[#606660] transition-colors hover:text-[#101310]"
+                  className="block py-2 text-sm font-medium tracking-[-0.01em] text-[#444A45] transition-colors hover:text-[#111411]"
                 >
                   {link.label}
                 </a>
               </li>
             ))}
-            <li className="pt-3 border-t border-[#E5E8E5] mt-2">
+            <li className="pt-3 border-t border-[#E4E8E4] mt-2">
               <EarlyAccessButton
                 source="mobile_nav"
-                className="flex items-center justify-center w-full rounded-lg bg-[#10B981] hover:bg-[#059669] px-4 py-2.5 text-xs font-medium text-white transition-colors cursor-pointer"
+                className="flex items-center justify-center w-full rounded-lg bg-[#10B981] hover:bg-[#059669] px-4 py-2.5 text-xs sm:text-sm font-semibold tracking-[-0.01em] text-white transition-colors cursor-pointer"
               >
                 <span>Join Early Access</span>
               </EarlyAccessButton>

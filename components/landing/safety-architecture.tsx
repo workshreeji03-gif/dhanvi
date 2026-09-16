@@ -76,19 +76,19 @@ const RISK_CONTROLS = [
 
 export function SafetyArchitecture() {
   return (
-    <section className="py-24 sm:py-32 border-t border-[#E5E8E5] bg-[#F7F8F6]">
+    <section className="py-24 sm:py-32 border-t border-[#E4E8E4] bg-[#F7F9F7]">
       <div className="mx-auto max-w-7xl px-6 sm:px-10">
         {/* Editorial Section Header */}
         <div className="max-w-3xl mb-16">
-          <div className="text-xs font-normal text-[#606660] mb-3">
+          <div className="text-xs font-medium text-[#5F665F] mb-3 tracking-wide uppercase">
             Deterministic risk governance
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#101310] leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-bold tracking-[-0.035em] text-[#111411] leading-[1.08]">
             Autonomous intelligence does not mean
             <br />
             unrestricted control.
           </h2>
-          <p className="mt-5 text-base sm:text-lg text-[#606660] leading-relaxed">
+          <p className="mt-5 text-base sm:text-lg text-[#5F665F] leading-relaxed font-normal tracking-[-0.01em]">
             In financial systems, machine learning models cannot be allowed to alter their own safety
             boundaries. Dhanvi isolates risk management in a separate, deterministic software layer
             outside agent reasoning — enforcing hard rules that AI cannot override or negotiate away.
@@ -97,11 +97,11 @@ export function SafetyArchitecture() {
 
         {/* 5-Tier Decision Governance Hierarchy */}
         <div className="mb-14">
-          <div className="text-xs font-medium text-[#606660] mb-3">
+          <div className="text-xs font-semibold text-[#111411] mb-3 tracking-wide uppercase">
             Five-tier governance hierarchy
           </div>
 
-          <div className="border border-[#E5E8E5] rounded-xl bg-white divide-y divide-[#E5E8E5] overflow-hidden">
+          <div className="border border-[#E4E8E4] rounded-xl bg-white divide-y divide-[#E4E8E4] overflow-hidden shadow-xs">
             {HIERARCHY_STEPS.map((h) => (
               <div
                 key={h.tier}
@@ -111,28 +111,28 @@ export function SafetyArchitecture() {
               >
                 <div className="flex items-start sm:items-center gap-4">
                   <span
-                    className={`text-xs font-mono px-2 py-0.5 rounded ${
+                    className={`text-xs font-mono tabular-nums px-2.5 py-0.5 rounded ${
                       h.isFirewall
-                        ? 'bg-[#10B981] text-white font-medium'
-                        : 'text-[#606660] bg-[#F7F8F6] border border-[#E5E8E5]'
+                        ? 'bg-[#10B981] text-white font-semibold'
+                        : 'text-[#5F665F] bg-[#F7F9F7] border border-[#E4E8E4] font-medium'
                     }`}
                   >
                     Tier {h.tier}
                   </span>
                   <div>
-                    <div className="text-sm font-medium text-[#101310]">
+                    <div className="text-sm font-semibold text-[#111411] tracking-[-0.01em]">
                       {h.title}
                       {h.isFirewall && (
-                        <span className="ml-2 text-xs font-normal text-[#10B981]">
+                        <span className="ml-2 text-xs font-semibold text-[#10B981]">
                           — Programmatic Firewall
                         </span>
                       )}
                     </div>
-                    <div className="text-xs text-[#606660] mt-0.5">{h.description}</div>
+                    <div className="text-xs text-[#5F665F] mt-0.5 font-normal">{h.description}</div>
                   </div>
                 </div>
 
-                <div className="text-xs font-mono text-[#929892] md:text-right shrink-0">
+                <div className="text-xs font-mono tabular-nums text-[#8B928C] md:text-right shrink-0">
                   {h.governance}
                 </div>
               </div>
@@ -143,10 +143,10 @@ export function SafetyArchitecture() {
         {/* 7 Independent Risk Controls Grid */}
         <div>
           <div className="flex items-center justify-between mb-4">
-            <div className="text-xs font-medium text-[#606660]">
+            <div className="text-xs font-semibold text-[#111411] tracking-wide uppercase">
               Independent risk safeguards
             </div>
-            <span className="text-[11px] text-[#929892]">
+            <span className="text-[11px] font-mono tabular-nums text-[#8B928C]">
               Deterministic software bounds
             </span>
           </div>
@@ -155,18 +155,18 @@ export function SafetyArchitecture() {
             {RISK_CONTROLS.map((ctrl) => (
               <div
                 key={ctrl.title}
-                className="p-5 rounded-xl border border-[#E5E8E5] bg-white flex flex-col justify-between"
+                className="p-5 rounded-xl border border-[#E4E8E4] bg-white flex flex-col justify-between shadow-xs"
               >
                 <div>
-                  <div className="text-xs font-mono text-[#10B981] font-medium mb-1.5">
+                  <div className="text-xs font-mono tabular-nums text-[#10B981] font-semibold mb-1.5">
                     {ctrl.rule}
                   </div>
-                  <h3 className="text-sm font-medium text-[#101310]">{ctrl.title}</h3>
-                  <p className="mt-2 text-xs text-[#606660] leading-relaxed">
+                  <h3 className="text-sm font-bold text-[#111411] tracking-[-0.01em]">{ctrl.title}</h3>
+                  <p className="mt-2 text-xs text-[#5F665F] leading-relaxed font-normal">
                     {ctrl.description}
                   </p>
                 </div>
-                <div className="mt-4 pt-3 border-t border-[#E5E8E5] text-[10px] font-mono text-[#929892]">
+                <div className="mt-4 pt-3 border-t border-[#E4E8E4] text-[10px] font-mono uppercase tracking-wider text-[#8B928C] font-semibold">
                   Hard constraint
                 </div>
               </div>

@@ -142,34 +142,34 @@ export function IntelligenceTerminal() {
       : entries.filter((e) => e.channel === activeFilter)
 
   return (
-    <section className="py-24 sm:py-32 bg-[#F7F8F6] border-t border-[#E5E8E5]">
+    <section className="py-24 sm:py-32 bg-[#F7F9F7] border-t border-[#E4E8E4]">
       <div className="mx-auto max-w-7xl px-6 sm:px-10">
         {/* Editorial Section Header */}
         <div className="max-w-3xl mb-12">
-          <div className="text-xs font-semibold uppercase tracking-wider text-[#606660] mb-3">
+          <div className="text-xs font-medium uppercase tracking-wide text-[#5F665F] mb-3">
             Research Telemetry
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight text-[#101310] leading-[1.15]">
+          <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-bold tracking-[-0.035em] text-[#111411] leading-[1.08]">
             Real-time research telemetry.
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#606660] leading-relaxed">
+          <p className="mt-4 text-base sm:text-lg text-[#5F665F] leading-relaxed font-normal tracking-[-0.01em]">
             Inspect the telemetry stream as specialized agents formulate hypotheses, evaluate
             risk boundaries, and archive decision context into memory.
           </p>
-          <div className="mt-2 text-xs text-[#8A908A]">
+          <div className="mt-2 text-xs text-[#8B928C] font-normal">
             * Conceptual demonstration / simulated interface. Not actual live market trading data.
           </div>
         </div>
 
         {/* Telemetry Container */}
-        <div className="border border-[#E5E8E5] rounded-xl bg-white shadow-[0_1px_3px_rgba(0,0,0,0.04)] overflow-hidden">
+        <div className="border border-[#E4E8E4] rounded-xl bg-white shadow-xs overflow-hidden">
           {/* Top Bar: Controls and Channel Filters */}
-          <div className="p-4 sm:p-5 border-b border-[#E5E8E5] bg-[#FAFAF9] flex flex-wrap items-center justify-between gap-4 text-xs">
+          <div className="p-4 sm:p-5 border-b border-[#E4E8E4] bg-[#F7F9F7] flex flex-wrap items-center justify-between gap-4 text-xs">
             <div className="flex items-center gap-2">
               <button
                 type="button"
                 onClick={() => setIsPaused(!isPaused)}
-                className="py-1.5 px-3 rounded border border-[#E5E8E5] bg-white hover:border-[#101310] text-[#606660] hover:text-[#101310] transition-colors cursor-pointer text-[11px] font-mono font-medium shadow-xs"
+                className="py-1.5 px-3 rounded border border-[#E4E8E4] bg-white hover:border-[#111411] text-[#5F665F] hover:text-[#111411] transition-colors cursor-pointer text-[11px] font-mono font-medium shadow-xs"
               >
                 {isPaused ? 'Resume stream' : 'Pause stream'}
               </button>
@@ -177,14 +177,14 @@ export function IntelligenceTerminal() {
               <button
                 type="button"
                 onClick={triggerShock}
-                className="py-1.5 px-3 rounded border border-[#E5E8E5] bg-white hover:border-[#101310] text-[#606660] hover:text-[#101310] transition-colors cursor-pointer text-[11px] font-mono font-medium shadow-xs"
+                className="py-1.5 px-3 rounded border border-[#E4E8E4] bg-white hover:border-[#111411] text-[#5F665F] hover:text-[#111411] transition-colors cursor-pointer text-[11px] font-mono font-medium shadow-xs"
               >
                 Inject shock
               </button>
             </div>
 
             {/* Filter buttons */}
-            <div className="flex items-center gap-1.5 overflow-x-auto text-[11px] font-mono text-[#606660]">
+            <div className="flex items-center gap-1.5 overflow-x-auto text-[11px] font-mono text-[#5F665F]">
               {['ALL', 'MICROSTRUCTURE', 'POLICY', 'SYNTHESIS', 'HYPOTHESIS', 'GOVERNANCE', 'LEDGER'].map(
                 (filter) => (
                   <button
@@ -193,8 +193,8 @@ export function IntelligenceTerminal() {
                     onClick={() => setActiveFilter(filter)}
                     className={`px-2.5 py-1 rounded transition-colors cursor-pointer ${
                       activeFilter === filter
-                        ? 'text-white bg-[#101310] font-medium'
-                        : 'text-[#606660] hover:text-[#101310] hover:bg-black/5'
+                        ? 'text-white bg-[#111411] font-semibold'
+                        : 'text-[#5F665F] hover:text-[#111411] hover:bg-black/5'
                     }`}
                   >
                     {filter}
@@ -205,25 +205,25 @@ export function IntelligenceTerminal() {
           </div>
 
           {/* Telemetry Stream */}
-          <div className="p-5 sm:p-7 divide-y divide-[#E5E8E5]/70 font-mono text-xs">
+          <div className="p-5 sm:p-7 divide-y divide-[#E4E8E4] font-mono text-xs">
             {filtered.map((item) => (
               <div
                 key={item.id}
                 className="py-3.5 first:pt-0 last:pb-0 flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 leading-relaxed"
               >
                 {/* Timestamp */}
-                <span className="text-[#8A908A] text-[11px] shrink-0 select-none">
+                <span className="text-[#8B928C] text-[11px] tabular-nums shrink-0 select-none">
                   {item.time}
                 </span>
 
                 {/* Channel Tag */}
-                <span className="text-[#606660] text-[10px] w-32 shrink-0 tracking-wider font-semibold">
+                <span className="text-[#5F665F] text-[10px] w-32 shrink-0 tracking-wider font-semibold">
                   [{item.channel}]
                 </span>
 
                 {/* Agent & Message */}
-                <div className="flex-1 text-[#303430] font-sans text-xs sm:text-[13px]">
-                  <span className="text-[#101310] font-semibold mr-2 font-mono text-xs">
+                <div className="flex-1 text-[#5F665F] font-sans text-xs sm:text-[13px] font-normal">
+                  <span className="text-[#111411] font-semibold mr-2 font-mono text-xs">
                     {item.agent}:
                   </span>
                   {item.message}
