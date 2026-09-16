@@ -1,7 +1,7 @@
 import { Navbar } from '@/components/landing/navbar'
 import { Hero } from '@/components/landing/hero'
 import { ProblemSection } from '@/components/landing/problem-section'
-import { IntelligenceLayer } from '@/components/landing/intelligence-layer'
+import { NetworkVisualization } from '@/components/landing/network-visualization'
 import { DecisionPipeline } from '@/components/landing/decision-pipeline'
 import { MultiStrategyLab } from '@/components/landing/multi-strategy-lab'
 import { DecisionMemory } from '@/components/landing/decision-memory'
@@ -27,8 +27,8 @@ export default function Page() {
             {/* 2. The Problem & Paradigm Shift */}
             <ProblemSection />
 
-            {/* 3. The 9 Specialized Intelligence Agents */}
-            <IntelligenceLayer />
+            {/* 3. Specialized Multi-Agent Architecture */}
+            <NetworkVisualization />
 
             {/* 4. The 9-Stage Decision Pipeline */}
             <DecisionPipeline />

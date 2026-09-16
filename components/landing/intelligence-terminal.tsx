@@ -1,181 +1,235 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import {
-  Terminal,
-  Play,
-  Pause,
-  RotateCcw,
-  Zap,
-  Filter,
-  CheckCircle2,
-  ShieldCheck,
-  Cpu,
-} from 'lucide-react'
 
-interface TerminalLog {
+interface TelemetryEntry {
   id: string
   time: string
   agent: string
-  color: string
+  channel: string
   message: string
 }
 
-const INITIAL_LOGS: TerminalLog[] = [
-  { id: '1', time: '14:20:01.042', agent: 'MARKET', color: 'text-cyan-400', message: 'Tick volatility anomaly detected in 10Y sovereign curve (+4.2 bps spread widening)' },
-  { id: '2', time: '14:20:01.189', agent: 'MACRO', color: 'text-emerald-400', message: 'Central bank speech transcript ingested; semantic divergence index elevated at 0.78' },
-  { id: '3', time: '14:20:01.350', agent: 'COMPANY', color: 'text-purple-400', message: 'Semi equipment supplier lowers quarterly lead-time guidance by 8 days' },
-  { id: '4', time: '14:20:01.621', agent: 'INTELLIGENCE', color: 'text-yellow-400', message: 'Cross-modal debate initiated: reconciles supply-chain inventory vs. interest-rate impact' },
-  { id: '5', time: '14:20:02.010', agent: 'STRATEGY', color: 'text-cyan-400', message: 'Strategy 02 updates parameter bounds: long duration-hedged industrials vs. short cyclical retail' },
-  { id: '6', time: '14:20:02.312', agent: 'RISK', color: 'text-amber-400', message: 'Independent risk check: Portfolio VaR at 0.82% (within 1.5% max ceiling). Allocation approved.' },
-  { id: '7', time: '14:20:02.755', agent: 'MEMORY', color: 'text-emerald-400', message: 'Decision context and agent belief vector permanently indexed to #MEM-4892' },
+const INITIAL_ENTRIES: TelemetryEntry[] = [
+  {
+    id: '1',
+    time: '14:20:01.042',
+    agent: 'Market Agent',
+    channel: 'MICROSTRUCTURE',
+    message: 'Tick volatility divergence detected in 10Y sovereign curve (+4.2 bps spread widening).',
+  },
+  {
+    id: '2',
+    time: '14:20:01.189',
+    agent: 'Macro Agent',
+    channel: 'POLICY',
+    message: 'Central bank speech transcript ingested; semantic divergence index elevated at 0.78.',
+  },
+  {
+    id: '3',
+    time: '14:20:01.350',
+    agent: 'Company Agent',
+    channel: 'FUNDAMENTAL',
+    message: 'Semiconductor supplier lowers quarterly equipment lead-time guidance by 8 days.',
+  },
+  {
+    id: '4',
+    time: '14:20:01.621',
+    agent: 'Intelligence Core',
+    channel: 'SYNTHESIS',
+    message: 'Cross-modal reconciliation active: resolving supply-chain inventory vs. rate sensitivity.',
+  },
+  {
+    id: '5',
+    time: '14:20:02.010',
+    agent: 'Strategy Network',
+    channel: 'HYPOTHESIS',
+    message: 'Strategy 02 updates parameter bounds: long duration-hedged industrials vs. short consumer cyclicals.',
+  },
+  {
+    id: '6',
+    time: '14:20:02.312',
+    agent: 'Risk Engine',
+    channel: 'GOVERNANCE',
+    message: 'Deterministic risk check: Portfolio VaR at 0.82% (within 1.5% max ceiling). Allocation approved.',
+  },
+  {
+    id: '7',
+    time: '14:20:02.755',
+    agent: 'Memory Engine',
+    channel: 'LEDGER',
+    message: 'Decision context, causal priors, and agent belief vector permanently indexed to #MEM-4892.',
+  },
 ]
 
-const ROTATING_EVENTS = [
-  { agent: 'EVENT', color: 'text-rose-400', message: 'Breaking geopolitical logistics update mapped across 38 shipping equities' },
-  { agent: 'SENTIMENT', color: 'text-pink-400', message: 'Crowding index on tech mega-caps drops from 91st to 76th percentile' },
-  { agent: 'MARKET', color: 'text-cyan-400', message: 'Implied volatility skew steepens on front-month index options' },
-  { agent: 'STRATEGY', color: 'text-cyan-400', message: 'Statistical arbitrage alpha proposes 14 pair rebalancing adjustments' },
-  { agent: 'RISK', color: 'text-amber-400', message: 'Factor exposure constraints verified; zero sector concentration breaches' },
+const ROTATING_ENTRIES = [
+  {
+    agent: 'Event Agent',
+    channel: 'CATALYST',
+    message: 'Breaking geopolitical logistics update mapped across 38 shipping equity constituents.',
+  },
+  {
+    agent: 'Sentiment Agent',
+    channel: 'CROWDING',
+    message: 'Crowding index on tech mega-caps drops from 91st to 76th percentile across 13F disclosures.',
+  },
+  {
+    agent: 'Market Agent',
+    channel: 'VOLATILITY',
+    message: 'Implied volatility skew steepens on front-month benchmark equity options.',
+  },
+  {
+    agent: 'Strategy Network',
+    channel: 'REBALANCE',
+    message: 'Statistical arbitrage alpha proposes 14 pair rebalancing adjustments within factor bounds.',
+  },
+  {
+    agent: 'Risk Engine',
+    channel: 'CONSTRAINTS',
+    message: 'Cross-asset factor exposure constraints verified; zero sector concentration breaches.',
+  },
 ]
 
 export function IntelligenceTerminal() {
-  const [logs, setLogs] = useState<TerminalLog[]>(INITIAL_LOGS)
+  const [entries, setEntries] = useState<TelemetryEntry[]>(INITIAL_ENTRIES)
   const [isPaused, setIsPaused] = useState(false)
-  const [filterAgent, setFilterAgent] = useState<string>('ALL')
+  const [activeFilter, setActiveFilter] = useState<string>('ALL')
 
   useEffect(() => {
     if (isPaused) return
     const interval = setInterval(() => {
       const now = new Date()
-      const timeStr = now.toTimeString().split(' ')[0] + '.' + String(now.getMilliseconds()).padStart(3, '0')
-      const randomEvent = ROTATING_EVENTS[Math.floor(Math.random() * ROTATING_EVENTS.length)]
+      const timeStr =
+        now.toTimeString().split(' ')[0] +
+        '.' +
+        String(now.getMilliseconds()).padStart(3, '0')
+      const template =
+        ROTATING_ENTRIES[Math.floor(Math.random() * ROTATING_ENTRIES.length)]
 
-      const newLog: TerminalLog = {
+      const newEntry: TelemetryEntry = {
         id: String(Date.now()),
         time: timeStr,
-        agent: randomEvent.agent,
-        color: randomEvent.color,
-        message: randomEvent.message,
+        agent: template.agent,
+        channel: template.channel,
+        message: template.message,
       }
 
-      setLogs((prev) => [newLog, ...prev.slice(0, 14)])
-    }, 2800)
+      setEntries((prev) => [newEntry, ...prev.slice(0, 14)])
+    }, 3200)
 
     return () => clearInterval(interval)
   }, [isPaused])
 
   const triggerShock = () => {
     const now = new Date()
-    const timeStr = now.toTimeString().split(' ')[0] + '.' + String(now.getMilliseconds()).padStart(3, '0')
-    const shockLog: TerminalLog = {
+    const timeStr =
+      now.toTimeString().split(' ')[0] +
+      '.' +
+      String(now.getMilliseconds()).padStart(3, '0')
+    const shockEntry: TelemetryEntry = {
       id: String(Date.now()),
       time: timeStr,
-      agent: 'SIMULATOR',
-      color: 'text-red-400 font-bold',
-      message: '⚡ SIMULATED CATALYST INJECTED: Sudden 50 bps FX liquidity drain. Risk engine throttles leverage.',
+      agent: 'Simulator',
+      channel: 'STRESS-TEST',
+      message: 'Simulated catalyst: 50 bps FX liquidity compression injected. Risk engine throttles leverage automatically.',
     }
-    setLogs((prev) => [shockLog, ...prev.slice(0, 14)])
+    setEntries((prev) => [shockEntry, ...prev.slice(0, 14)])
   }
 
-  const filteredLogs = filterAgent === 'ALL' ? logs : logs.filter((l) => l.agent === filterAgent)
+  const filtered =
+    activeFilter === 'ALL'
+      ? entries
+      : entries.filter((e) => e.channel === activeFilter)
 
   return (
-    <section className="py-20 sm:py-28 bg-neutral-950 text-white font-sans">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        {/* Section Header */}
-        <div className="max-w-3xl mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-emerald-400 mb-3">
-            <Terminal className="w-3.5 h-3.5" />
-            <span>REAL-TIME SYSTEM EMULATION</span>
+    <section className="py-28 sm:py-36 border-t border-white/[0.06]">
+      <div className="mx-auto max-w-7xl px-6 sm:px-10">
+        {/* Editorial Section Header */}
+        <div className="max-w-3xl mb-14">
+          <div className="text-xs font-medium text-[#9A9F9B] mb-3">
+            Simulated telemetry
           </div>
-          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
-            Live-Style Intelligence Terminal.
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#F1F3EF] leading-[1.12]">
+            Real-time research telemetry.
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-neutral-400 leading-relaxed">
-            Inspect the real-time event telemetry as specialized agents formulate hypotheses, evaluate
-            risk parameters, and store forensic decision rationales.
+          <p className="mt-4 text-base sm:text-lg text-[#9A9F9B] leading-relaxed">
+            Inspect the telemetry stream as specialized agents formulate hypotheses, evaluate
+            risk boundaries, and archive decision context into memory.
           </p>
-          <div className="mt-2 text-xs font-mono text-amber-400/90 font-semibold">
+          <div className="mt-2 text-xs font-mono text-[#7A807B]">
             * Conceptual demonstration / simulated interface. Not actual live market trading data.
           </div>
         </div>
 
-        {/* Status Header Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
-          <div className="p-3 rounded-xl border border-neutral-800 bg-neutral-900/60 flex items-center justify-between">
-            <span className="text-[11px] font-mono text-neutral-400">RESEARCH AGENTS</span>
-            <span className="text-xs font-mono font-bold text-emerald-400 flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              ACTIVE
-            </span>
-          </div>
-          <div className="p-3 rounded-xl border border-neutral-800 bg-neutral-900/60 flex items-center justify-between">
-            <span className="text-[11px] font-mono text-neutral-400">STRATEGY LAB</span>
-            <span className="text-xs font-mono font-bold text-cyan-400">SIMULATION</span>
-          </div>
-          <div className="p-3 rounded-xl border border-neutral-800 bg-neutral-900/60 flex items-center justify-between">
-            <span className="text-[11px] font-mono text-neutral-400">RISK ENGINE</span>
-            <span className="text-xs font-mono font-bold text-amber-400">MONITORING</span>
-          </div>
-          <div className="p-3 rounded-xl border border-neutral-800 bg-neutral-900/60 flex items-center justify-between">
-            <span className="text-[11px] font-mono text-neutral-400">MEMORY ENGINE</span>
-            <span className="text-xs font-mono font-bold text-emerald-400">INDEXING</span>
-          </div>
-        </div>
-
-        {/* Terminal Window */}
-        <div className="rounded-2xl border border-neutral-800 bg-black/90 p-4 sm:p-6 shadow-2xl overflow-hidden font-mono text-xs">
-          {/* Terminal Console Top Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-neutral-850 pb-3 mb-4">
+        {/* Telemetry Container */}
+        <div className="border border-white/[0.08] rounded-xl bg-[#111412] overflow-hidden">
+          {/* Top Bar: Controls and Channel Filters */}
+          <div className="p-4 sm:p-5 border-b border-white/[0.06] flex flex-wrap items-center justify-between gap-4 text-xs">
             <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block" />
-              <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
-              <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
-              <span className="ml-2 text-neutral-400 text-[11px]">dhanvi-kernel://telemetry/stream</span>
-            </div>
-
-            {/* Controls */}
-            <div className="flex flex-wrap items-center gap-2">
-              <button
-                type="button"
-                onClick={triggerShock}
-                className="px-2.5 py-1 rounded bg-red-950/60 border border-red-800/80 text-red-300 hover:bg-red-900 text-[11px] flex items-center gap-1 cursor-pointer transition-colors"
-              >
-                <Zap className="w-3 h-3" />
-                <span>Simulate Market Catalyst</span>
-              </button>
               <button
                 type="button"
                 onClick={() => setIsPaused(!isPaused)}
-                className="px-2.5 py-1 rounded bg-neutral-900 border border-neutral-800 text-neutral-300 hover:bg-neutral-800 text-[11px] flex items-center gap-1 cursor-pointer transition-colors"
+                className="py-1 px-2.5 rounded border border-white/[0.08] hover:border-white/[0.2] text-[#9A9F9B] hover:text-[#F1F3EF] transition-colors cursor-pointer text-[11px] font-mono"
               >
-                {isPaused ? <Play className="w-3 h-3" /> : <Pause className="w-3 h-3" />}
-                <span>{isPaused ? 'Resume' : 'Pause'}</span>
+                {isPaused ? 'Resume stream' : 'Pause'}
+              </button>
+
+              <button
+                type="button"
+                onClick={triggerShock}
+                className="py-1 px-2.5 rounded border border-white/[0.08] hover:border-white/[0.2] text-[#9A9F9B] hover:text-[#F1F3EF] transition-colors cursor-pointer text-[11px] font-mono"
+              >
+                Inject shock
               </button>
             </div>
+
+            {/* Filter buttons */}
+            <div className="flex items-center gap-1.5 overflow-x-auto text-[11px] font-mono text-[#7A807B]">
+              {['ALL', 'MICROSTRUCTURE', 'POLICY', 'SYNTHESIS', 'HYPOTHESIS', 'GOVERNANCE', 'LEDGER'].map(
+                (filter) => (
+                  <button
+                    key={filter}
+                    type="button"
+                    onClick={() => setActiveFilter(filter)}
+                    className={`px-2 py-0.5 rounded transition-colors cursor-pointer ${
+                      activeFilter === filter
+                        ? 'text-[#F1F3EF] bg-white/[0.08]'
+                        : 'hover:text-[#9A9F9B]'
+                    }`}
+                  >
+                    {filter}
+                  </button>
+                )
+              )}
+            </div>
           </div>
 
-          {/* Terminal Stream List */}
-          <div className="space-y-2 min-h-[320px] max-h-[420px] overflow-y-auto pr-2">
-            {filteredLogs.map((log) => (
-              <div key={log.id} className="flex items-start gap-3 py-1 border-b border-neutral-900/60 animate-fade-in">
-                <span className="text-neutral-500 shrink-0 text-[11px]">{log.time}</span>
-                <span className={`px-1.5 py-0.2 rounded bg-neutral-900 text-[10px] font-bold shrink-0 ${log.color}`}>
-                  [{log.agent}]
+          {/* Telemetry Stream */}
+          <div className="p-4 sm:p-6 divide-y divide-white/[0.04] space-y-3 font-mono text-xs">
+            {filtered.map((item) => (
+              <div
+                key={item.id}
+                className="pt-3 first:pt-0 flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 leading-relaxed"
+              >
+                {/* Timestamp */}
+                <span className="text-[#7A807B] text-[11px] shrink-0 select-none">
+                  {item.time}
                 </span>
-                <span className="text-neutral-300 leading-relaxed">{log.message}</span>
+
+                {/* Channel Tag */}
+                <span className="text-[#9A9F9B] text-[10px] w-28 shrink-0 tracking-wider">
+                  [{item.channel}]
+                </span>
+
+                {/* Agent & Message */}
+                <div className="flex-1 text-[#C4C9C3] font-sans text-xs sm:text-[13px]">
+                  <span className="text-[#F1F3EF] font-medium mr-2 font-mono text-xs">
+                    {item.agent}:
+                  </span>
+                  {item.message}
+                </div>
               </div>
             ))}
-          </div>
-
-          {/* Terminal Prompt Footer */}
-          <div className="mt-4 pt-3 border-t border-neutral-850 flex items-center justify-between text-[11px] text-neutral-500">
-            <div className="flex items-center gap-2">
-              <span className="text-emerald-500">&gt;</span>
-              <span className="animate-pulse">Listening on multi-agent consensus bus...</span>
-            </div>
-            <span>Buffered events: {logs.length}</span>
           </div>
         </div>
       </div>

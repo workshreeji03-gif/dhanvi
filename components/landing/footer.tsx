@@ -4,61 +4,51 @@ import React from 'react'
 import Link from 'next/link'
 import { Logo } from './logo'
 import { EarlyAccessButton } from './ui-context'
-import { ShieldCheck, Cpu, Database } from 'lucide-react'
 
 export function Footer() {
   return (
-    <footer className="border-t border-neutral-800 bg-black text-white font-sans">
-      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
-        <div className="grid gap-10 lg:grid-cols-[1.4fr_2.6fr]">
+    <footer className="border-t border-white/[0.06] bg-[#080A09] text-[#9A9F9B] font-sans">
+      <div className="mx-auto max-w-7xl px-6 py-16 sm:px-10">
+        <div className="grid gap-12 lg:grid-cols-[1.2fr_2.8fr]">
           {/* Brand Col */}
-          <div>
-            <Link href="/" className="flex items-center gap-2.5" aria-label="Dhanvi home">
-              <Logo className="h-8 w-auto" />
-              <span className="text-[11px] font-mono font-bold tracking-widest uppercase text-neutral-400">
-                Intelligence
-              </span>
+          <div className="space-y-4">
+            <Link href="/" className="inline-block" aria-label="Dhanvi home">
+              <Logo className="h-7 w-auto" />
             </Link>
-            <p className="mt-4 max-w-sm text-xs sm:text-sm leading-relaxed text-neutral-400">
-              Building an AI-native investment intelligence institution. Specialized autonomous agents collaborating across market research, strategy development, risk governance, and institutional memory.
+            <p className="max-w-sm text-xs leading-relaxed text-[#7A807B]">
+              Building an AI-native investment intelligence system where specialized agents
+              collaborate across market research, strategy development, deterministic risk governance,
+              and institutional memory.
             </p>
-            <div className="mt-5 flex items-center gap-2 text-xs text-emerald-400 font-mono">
-              <ShieldCheck className="w-4 h-4 text-emerald-500" />
-              <span>Independent Safety Controls Enforced</span>
+            <div className="text-[11px] font-mono text-[#10B981]">
+              Deterministic safety boundaries enforced.
             </div>
           </div>
 
-          {/* Navigation Columns */}
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-            {/* Architecture */}
+          {/* Navigation Sitemap */}
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 text-xs">
+            {/* Platform */}
             <div>
-              <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-neutral-400">
-                Platform
-              </h3>
-              <ul className="mt-4 flex flex-col gap-2.5 text-xs">
+              <div className="font-medium text-[#F1F3EF] mb-3.5">Platform</div>
+              <ul className="space-y-2.5">
                 <li>
-                  <a href="#intelligence" className="text-neutral-400 hover:text-white transition-colors">
-                    Intelligence Layer
+                  <a href="#intelligence" className="hover:text-[#F1F3EF] transition-colors">
+                    Intelligence Core
                   </a>
                 </li>
                 <li>
-                  <a href="#architecture" className="text-neutral-400 hover:text-white transition-colors">
+                  <a href="#architecture" className="hover:text-[#F1F3EF] transition-colors">
                     Agent Architecture
                   </a>
                 </li>
                 <li>
-                  <a href="#strategies" className="text-neutral-400 hover:text-white transition-colors">
-                    Multi-Strategy Lab
+                  <a href="#strategies" className="hover:text-[#F1F3EF] transition-colors">
+                    Strategy Network
                   </a>
                 </li>
                 <li>
-                  <a href="#memory" className="text-neutral-400 hover:text-white transition-colors">
-                    Institutional Memory
-                  </a>
-                </li>
-                <li>
-                  <a href="#products" className="text-neutral-400 hover:text-white transition-colors">
-                    Product Roadmap
+                  <a href="#memory" className="hover:text-[#F1F3EF] transition-colors">
+                    Memory Engine
                   </a>
                 </li>
               </ul>
@@ -66,28 +56,21 @@ export function Footer() {
 
             {/* Products */}
             <div>
-              <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-neutral-400">
-                Solutions
-              </h3>
-              <ul className="mt-4 flex flex-col gap-2.5 text-xs">
+              <div className="font-medium text-[#F1F3EF] mb-3.5">Products</div>
+              <ul className="space-y-2.5">
                 <li>
-                  <a href="#products" className="text-neutral-400 hover:text-white transition-colors">
+                  <a href="#products" className="hover:text-[#F1F3EF] transition-colors">
                     Dhanvi Institutional
                   </a>
                 </li>
                 <li>
-                  <a href="#products" className="text-neutral-400 hover:text-white transition-colors">
-                    Dhanvi Intelligence API
+                  <a href="#products" className="hover:text-[#F1F3EF] transition-colors">
+                    Dhanvi Intelligence
                   </a>
                 </li>
                 <li>
-                  <a href="#products" className="text-neutral-400 hover:text-white transition-colors">
+                  <a href="#products" className="hover:text-[#F1F3EF] transition-colors">
                     Dhanvi Personal
-                  </a>
-                </li>
-                <li>
-                  <a href="#architecture" className="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors">
-                    Explore Architecture →
                   </a>
                 </li>
               </ul>
@@ -95,47 +78,43 @@ export function Footer() {
 
             {/* Access */}
             <div>
-              <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-neutral-400">
-                Access
-              </h3>
-              <ul className="mt-4 flex flex-col gap-2.5 text-xs">
+              <div className="font-medium text-[#F1F3EF] mb-3.5">Access</div>
+              <ul className="space-y-2.5">
                 <li>
-                  <EarlyAccessButton className="text-neutral-400 hover:text-white transition-colors text-left cursor-pointer">
+                  <EarlyAccessButton className="hover:text-[#F1F3EF] transition-colors text-left cursor-pointer">
                     Join Early Access
                   </EarlyAccessButton>
                 </li>
                 <li>
-                  <a href="#strategies" className="text-neutral-400 hover:text-white transition-colors">
-                    Multi-Strategy Lab
+                  <a href="#architecture" className="hover:text-[#F1F3EF] transition-colors">
+                    Explore Architecture
                   </a>
                 </li>
                 <li>
-                  <Link href="/contact" className="text-neutral-400 hover:text-white transition-colors">
+                  <Link href="/contact" className="hover:text-[#F1F3EF] transition-colors">
                     Research Inquiries
                   </Link>
                 </li>
               </ul>
             </div>
 
-            {/* Legal */}
+            {/* Regulatory / Legal */}
             <div>
-              <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-neutral-400">
-                Compliance
-              </h3>
-              <ul className="mt-4 flex flex-col gap-2.5 text-xs">
+              <div className="font-medium text-[#F1F3EF] mb-3.5">Legal & Governance</div>
+              <ul className="space-y-2.5">
                 <li>
-                  <Link href="/privacy" className="text-neutral-400 hover:text-white transition-colors">
+                  <Link href="/privacy" className="hover:text-[#F1F3EF] transition-colors">
                     Privacy Policy
                   </Link>
                 </li>
                 <li>
-                  <Link href="/terms" className="text-neutral-400 hover:text-white transition-colors">
+                  <Link href="/terms" className="hover:text-[#F1F3EF] transition-colors">
                     Terms of Service
                   </Link>
                 </li>
                 <li>
-                  <Link href="/security" className="text-neutral-400 hover:text-white transition-colors">
-                    Security Architecture
+                  <Link href="/risk-disclosure" className="hover:text-[#F1F3EF] transition-colors">
+                    Risk Disclosures
                   </Link>
                 </li>
               </ul>
@@ -143,19 +122,16 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Mandatory Regulatory & Legal Disclaimer */}
-        <div className="mt-12 pt-8 border-t border-neutral-900 text-xs text-neutral-400 leading-relaxed font-mono">
-          <p className="mb-4">
-            <strong>Regulatory & Financial Notice:</strong> Dhanvi is currently a technology and financial
-            research project under active development. Information presented on this website is provided
-            strictly for informational and conceptual purposes and does not constitute investment advice,
-            financial recommendations, an offer, solicitation, or endorsement to buy or sell any security,
-            derivative, commodity, or financial instrument. Capabilities displayed represent research prototypes,
-            quantitative simulations, and planned architectural features.
+        {/* Regulatory Disclaimer & Copyright */}
+        <div className="mt-14 pt-8 border-t border-white/[0.06] flex flex-col md:flex-row md:items-center justify-between gap-4 text-[11px] text-[#7A807B]">
+          <p className="max-w-3xl leading-relaxed">
+            Dhanvi is an investment technology research platform. Content, simulation telemetry, and
+            strategy hypotheses presented on this website are for conceptual and technical demonstration
+            purposes only and do not constitute investment advice, financial promotion, or an offer to
+            buy or sell securities.
           </p>
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-neutral-400 text-[11px]">
-            <p>© {new Date().getFullYear()} Dhanvi. All rights reserved.</p>
-            <p>Building an AI-Native Investment Intelligence System.</p>
+          <div className="shrink-0 font-mono">
+            © {new Date().getFullYear()} Dhanvi. All rights reserved.
           </div>
         </div>
       </div>

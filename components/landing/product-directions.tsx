@@ -1,157 +1,141 @@
 'use client'
 
 import React from 'react'
-import {
-  Building,
-  Terminal,
-  User,
-  ArrowRight,
-  Shield,
-  Layers,
-  Sparkles,
-  MessageSquare,
-  CheckCircle2,
-} from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { EarlyAccessButton } from './ui-context'
 
 const PRODUCTS = [
   {
     id: 'institutional',
-    badge: 'Enterprise Infrastructure',
-    status: 'Private Research Preview',
+    tier: '01 / Infrastructure',
     name: 'Dhanvi Institutional',
-    headline: 'AI-Native Investment Infrastructure for Professional Funds',
-    desc: 'Modular multi-agent deployment designed for quantitative asset managers, family offices, and proprietary trading teams.',
-    features: [
+    headline: 'AI-native investment infrastructure for professional funds',
+    description:
+      'Modular multi-agent deployment designed for quantitative desks, family offices, and institutional managers requiring autonomous research with deterministic risk governance.',
+    capabilities: [
       'Multi-agent market research pipelines',
       'Strategy hypothesis generation & cross-validation',
-      'Portfolio risk & correlation stress-testing',
-      'Forensic decision memory indexing engine',
-      'Low-latency institutional execution APIs',
+      'Deterministic risk & factor stress-testing',
+      'Forensic decision memory indexing ledger',
+      'Low-latency institutional execution connectivity',
     ],
-    ctaText: 'Inquire for Institutional Preview',
+    actionText: 'Inquire for Institutional Preview',
   },
   {
     id: 'intelligence',
-    badge: 'Conversational Layer',
-    status: 'Early Access Waitlist',
+    tier: '02 / Query API',
     name: 'Dhanvi Intelligence',
-    headline: 'Conversational Synthesis Over Global Market Telemetry',
-    desc: 'An intelligent query interface allowing analysts to interrogate multi-agent findings, cross-asset regimes, and company filings instantly.',
-    queries: [
+    headline: 'Conversational synthesis over global market telemetry',
+    description:
+      'A structured query interface allowing analysts to interrogate multi-agent findings, cross-asset regimes, and filing delta diffs in real time.',
+    sampleQueries: [
       '“What changed across semiconductor supply chains this week?”',
-      '“What historical periods resemble the current yield curve steepening?”',
+      '“What historical episodes resemble the current yield curve steepening?”',
       '“Deconstruct the factor drivers behind our 72-hour drawdown.”',
     ],
-    features: [
+    capabilities: [
       'Natural-language semantic market query',
-      'Instant 10-K & filing delta diffing',
-      'Real-time factor sensitivity breakdowns',
+      'Filing delta extraction & entity mapping',
+      'Factor sensitivity and attribution breakdowns',
     ],
-    ctaText: 'Request API Early Access',
+    actionText: 'Request API Early Access',
   },
   {
     id: 'personal',
-    badge: 'Future Personal Tier',
-    status: 'Research Roadmap',
+    tier: '03 / Research Roadmap',
     name: 'Dhanvi Personal',
-    headline: 'Constrained Financial Research Co-Pilot for Individuals',
-    desc: 'A future, strictly non-custodial research assistant helping self-directed investors evaluate portfolio health and market regime shifts.',
-    features: [
+    headline: 'Constrained financial research co-pilot for individuals',
+    description:
+      'A future, non-custodial research assistant helping self-directed investors evaluate portfolio factor exposures and market regime shifts.',
+    capabilities: [
       'Personal portfolio factor risk inspection',
-      'Scenario stress-testing & regime alerts',
-      'Simulated paper-trading laboratory',
+      'Scenario stress-testing & regime notifications',
+      'Simulated paper-research laboratory',
       'Educational intelligence insights',
     ],
-    ctaText: 'Join Consumer Waitlist',
-    disclaimer: 'Non-custodial research only. Does not manage client funds or provide automated execution.',
+    actionText: 'Join Waitlist',
+    disclaimer: 'Non-custodial research only. Does not manage client capital.',
   },
 ]
 
 export function ProductDirections() {
   return (
-    <section id="products" className="py-20 sm:py-28 bg-neutral-50/50 dark:bg-neutral-900/40 border-y border-neutral-200/80 dark:border-neutral-800 scroll-mt-16">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        {/* Section Header */}
-        <div className="max-w-3xl mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-xs font-mono text-neutral-600 dark:text-neutral-400 mb-3">
-            <span>PRODUCT ROADMAP & ARCHITECTURE</span>
+    <section id="products" className="py-28 sm:py-36 border-t border-white/[0.06] scroll-mt-20">
+      <div className="mx-auto max-w-7xl px-6 sm:px-10">
+        {/* Editorial Section Header */}
+        <div className="max-w-3xl mb-16 sm:mb-20">
+          <div className="text-xs font-medium text-[#9A9F9B] mb-3">
+            Product architecture
           </div>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-neutral-900 dark:text-white tracking-tight">
-            Three Product Directions.
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#F1F3EF] leading-[1.12]">
+            Three product directions.
           </h2>
-          <p className="mt-4 text-sm sm:text-base text-neutral-600 dark:text-neutral-400 leading-relaxed">
+          <p className="mt-5 text-base sm:text-lg text-[#9A9F9B] leading-relaxed">
             Dhanvi is designing software-native financial intelligence for different scales of deployment
-            — from institutional quantitative desks to conversational research APIs and future personal tools.
+            — from institutional quantitative infrastructure to conversational research APIs and future personal tools.
           </p>
         </div>
 
-        {/* 3 Product Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* 3 Editorial Columns */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {PRODUCTS.map((prod) => (
             <div
               key={prod.id}
-              className="p-6 sm:p-8 rounded-2xl border border-neutral-200/90 dark:border-neutral-800 bg-white dark:bg-neutral-950 shadow-xs hover:border-neutral-300 dark:hover:border-neutral-700 transition-all flex flex-col justify-between"
+              className="border border-white/[0.08] rounded-xl bg-[#111412] p-7 sm:p-8 flex flex-col justify-between"
             >
               <div>
-                {/* Header status badge */}
-                <div className="flex items-center justify-between mb-4 text-xs font-mono">
-                  <span className="text-emerald-700 dark:text-emerald-400 font-semibold bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800 px-2.5 py-0.5 rounded-full">
-                    {prod.badge}
-                  </span>
-                  <span className="text-neutral-500">{prod.status}</span>
-                </div>
+                {/* Tier Metadata */}
+                <div className="text-xs font-mono text-[#7A807B] mb-4">{prod.tier}</div>
 
-                <h3 className="text-xl font-bold text-neutral-900 dark:text-white">
-                  {prod.name}
-                </h3>
-                <div className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 mt-1">
+                {/* Product Name & Headline */}
+                <h3 className="text-xl font-medium text-[#F1F3EF]">{prod.name}</h3>
+                <div className="text-xs text-[#9A9F9B] mt-1.5 font-normal leading-normal">
                   {prod.headline}
                 </div>
 
-                <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-3 leading-relaxed">
-                  {prod.desc}
+                <p className="mt-4 text-xs text-[#7A807B] leading-relaxed">
+                  {prod.description}
                 </p>
 
-                {/* Optional sample queries */}
-                {prod.queries && (
-                  <div className="my-5 p-3.5 rounded-xl bg-neutral-50 dark:bg-neutral-900/60 border border-neutral-200/80 dark:border-neutral-800 space-y-2">
-                    <div className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider font-semibold">
-                      Sample Conceptual Queries:
+                {/* Sample Queries for Intelligence Tier */}
+                {prod.sampleQueries && (
+                  <div className="my-5 p-3.5 rounded-lg bg-[#0C0F0D] border border-white/[0.04] space-y-2">
+                    <div className="text-[10px] font-mono text-[#7A807B] uppercase tracking-wider">
+                      Sample Queries
                     </div>
-                    {prod.queries.map((q) => (
-                      <div key={q} className="text-xs font-mono text-neutral-700 dark:text-neutral-300 italic">
+                    {prod.sampleQueries.map((q) => (
+                      <div key={q} className="text-xs text-[#9A9F9B] italic">
                         {q}
                       </div>
                     ))}
                   </div>
                 )}
 
-                {/* Features list */}
-                <ul className="mt-5 space-y-2.5 border-t border-neutral-100 dark:border-neutral-850 pt-4 text-xs text-neutral-700 dark:text-neutral-300">
-                  {prod.features.map((feat) => (
-                    <li key={feat} className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                      <span>{feat}</span>
+                {/* Capabilities list */}
+                <ul className="mt-6 pt-5 border-t border-white/[0.06] space-y-2.5 text-xs text-[#9A9F9B]">
+                  {prod.capabilities.map((cap) => (
+                    <li key={cap} className="flex items-start gap-2">
+                      <span className="text-[#10B981] leading-tight select-none">—</span>
+                      <span>{cap}</span>
                     </li>
                   ))}
                 </ul>
 
                 {prod.disclaimer && (
-                  <div className="mt-4 text-[11px] text-neutral-400 dark:text-neutral-400 italic">
+                  <div className="mt-5 text-[11px] text-[#7A807B] italic">
                     *{prod.disclaimer}
                   </div>
                 )}
               </div>
 
               {/* Action Button */}
-              <div className="mt-8 pt-4 border-t border-neutral-100 dark:border-neutral-850">
+              <div className="mt-8 pt-5 border-t border-white/[0.06]">
                 <EarlyAccessButton
                   source={`product_${prod.id}`}
-                  className="w-full justify-center flex items-center gap-1.5 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 py-2.5 text-xs font-semibold text-neutral-900 dark:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+                  className="w-full inline-flex items-center justify-between rounded-lg border border-white/[0.08] bg-[#151816] px-4 py-2.5 text-xs font-medium text-[#F1F3EF] hover:border-white/[0.2] transition-colors cursor-pointer"
                 >
-                  <span>{prod.ctaText}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <span>{prod.actionText}</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-[#9A9F9B]" />
                 </EarlyAccessButton>
               </div>
             </div>

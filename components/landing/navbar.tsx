@@ -3,16 +3,14 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X, ArrowRight, Sparkles } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { Logo } from './logo'
 import { EarlyAccessButton } from './ui-context'
 
 const NAV_LINKS = [
   { label: 'Intelligence', href: '#intelligence' },
   { label: 'Architecture', href: '#architecture' },
-  { label: 'Strategies', href: '#strategies' },
-  { label: 'Memory', href: '#memory' },
-  { label: 'Products', href: '#products' },
+  { label: 'Research', href: '#research' },
   { label: 'Vision', href: '#vision' },
 ]
 
@@ -34,35 +32,32 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-200 ${
         scrolled
-          ? 'border-b border-neutral-200/80 bg-white/85 backdrop-blur-xl shadow-xs dark:border-neutral-800 dark:bg-neutral-950/85'
+          ? 'border-b border-white/[0.07] bg-[#080A09]/90 backdrop-blur-md'
           : 'border-b border-transparent bg-transparent'
       }`}
     >
       <nav
-        className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-5 sm:px-8"
+        className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 sm:px-10"
         aria-label="Primary"
       >
         {/* Left: Authoritative Dhanvi Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2.5 transition-transform hover:scale-105"
+          className="flex items-center gap-3 transition-opacity hover:opacity-90"
           aria-label="Dhanvi home"
         >
-          <Logo className="h-8 w-auto" />
-          <span className="hidden sm:inline-block text-[11px] font-bold tracking-widest uppercase text-neutral-400 font-mono">
-            Intelligence
-          </span>
+          <Logo className="h-7 w-auto" />
         </Link>
 
-        {/* Center: Institutional Section Links */}
-        <ul className="hidden items-center gap-1 md:flex">
+        {/* Center: Simplified Navigation Links */}
+        <ul className="hidden items-center gap-8 md:flex">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
-                className="group relative rounded-full px-3.5 py-1.5 text-xs font-semibold text-neutral-600 transition-colors hover:text-neutral-950 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:text-white dark:hover:bg-neutral-900"
+                className="text-xs font-medium text-[#9A9F9B] transition-colors hover:text-[#F1F3EF]"
               >
                 {link.label}
               </a>
@@ -70,21 +65,20 @@ export function Navbar() {
           ))}
         </ul>
 
-        {/* Right CTA Actions */}
-        <div className="hidden items-center gap-3 md:flex">
+        {/* Right Action: Restrained Primary CTA */}
+        <div className="hidden items-center md:flex">
           <EarlyAccessButton
             source="navbar"
-            className="inline-flex items-center gap-1.5 rounded-full bg-neutral-950 px-4 py-2 text-xs font-semibold text-white shadow-xs transition-all hover:bg-emerald-700 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+            className="inline-flex items-center justify-center rounded-md bg-[#10B981] px-4 py-2 text-xs font-semibold text-[#080A09] transition-all hover:bg-[#059669] active:scale-[0.99] cursor-pointer"
           >
-            <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
             <span>Join Early Access</span>
           </EarlyAccessButton>
         </div>
 
-        {/* Mobile Hamburger Button */}
+        {/* Mobile Menu Trigger */}
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-xl p-2 text-neutral-900 hover:bg-neutral-100 md:hidden cursor-pointer"
+          className="inline-flex items-center justify-center rounded-md p-2 text-[#9A9F9B] hover:text-[#F1F3EF] hover:bg-white/[0.04] md:hidden cursor-pointer"
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -93,27 +87,26 @@ export function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Navigation Drawer */}
       {open && (
-        <div className="border-t border-neutral-200 bg-white/98 backdrop-blur-xl md:hidden shadow-xl animate-fade-up">
-          <ul className="mx-auto flex max-w-7xl flex-col gap-1 px-5 py-5 sm:px-8">
+        <div className="border-b border-white/[0.08] bg-[#080A09]/98 backdrop-blur-xl md:hidden">
+          <ul className="mx-auto flex max-w-7xl flex-col gap-2 px-6 py-6 sm:px-10">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-xl px-3.5 py-2.5 text-sm font-semibold text-neutral-900 transition-colors hover:bg-neutral-100"
+                  className="block py-2 text-sm font-medium text-[#9A9F9B] transition-colors hover:text-[#F1F3EF]"
                 >
                   {link.label}
                 </a>
               </li>
             ))}
-            <li className="pt-3 border-t border-neutral-100 mt-2">
+            <li className="pt-4 mt-2 border-t border-white/[0.06]">
               <EarlyAccessButton
                 source="mobile_nav"
-                className="flex items-center justify-center gap-1.5 w-full rounded-full bg-neutral-950 px-4 py-2.5 text-center text-xs font-semibold text-white shadow-xs cursor-pointer"
+                className="flex items-center justify-center w-full rounded-md bg-[#10B981] px-4 py-2.5 text-center text-xs font-semibold text-[#080A09] transition-colors hover:bg-[#059669] cursor-pointer"
               >
-                <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Join Early Access</span>
               </EarlyAccessButton>
             </li>

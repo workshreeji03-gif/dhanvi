@@ -1,19 +1,19 @@
 /**
- * Fixed background layer. Stays put while content scrolls over it (brief #24).
- * Preserves the existing light + dotted-grain visual identity.
+ * Fixed background layer with restrained charcoal atmosphere and subtle texture.
+ * Moves away from bright pastel blobs toward an institutional research palette.
  */
 export function PageBackground() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-0 bg-background"
+      className="pointer-events-none fixed inset-0 z-0 bg-[#080A09]"
     >
-      {/* dotted grain */}
-      <div className="grain absolute inset-0 opacity-[0.3]" />
-      {/* soft top glow, anchored so it never scrolls */}
-      <div className="absolute inset-x-0 top-0 h-[60vh] bg-gradient-to-b from-positive/[0.06] via-info/[0.03] to-transparent" />
-      <div className="absolute -left-40 top-24 h-96 w-96 rounded-full bg-positive/[0.05] blur-3xl" />
-      <div className="absolute -right-40 top-[40vh] h-96 w-96 rounded-full bg-info/[0.05] blur-3xl" />
+      {/* Ultra-faint film grain texture */}
+      <div className="grain absolute inset-0 opacity-[0.18]" />
+
+      {/* Subtle, restrained top illumination (quiet, non-neon) */}
+      <div className="absolute inset-x-0 top-0 h-[40vh] bg-gradient-to-b from-white/[0.025] to-transparent" />
+      <div className="absolute left-1/2 -translate-x-1/2 top-0 h-[450px] w-[900px] bg-emerald-900/[0.04] blur-[120px] rounded-full" />
     </div>
   )
 }

@@ -1,165 +1,230 @@
 'use client'
 
 import React, { useState } from 'react'
-import {
-  Database,
-  Search,
-  RotateCcw,
-  CheckCircle2,
-  Clock,
-  ArrowRight,
-  GitCommit,
-  Brain,
-  Layers,
-  Sparkles,
-  FileCode,
-} from 'lucide-react'
+import { ArrowRight, Clock, Database, FileText, CheckCircle2 } from 'lucide-react'
 
-const DECISION_STAGES = [
-  { step: '01', title: 'Market State', value: 'Elevated cross-asset volatility (VIX 28.4); US 10Y Yield compressed 14 bps.' },
-  { step: '02', title: 'Information Available', value: 'CPI print 0.2% cooler than consensus; semiconductor CAPEX upward revision.' },
-  { step: '03', title: 'Agent Hypothesis', value: 'Rate sensitivity will rotate capital into high-FCF hardware; growth multiples will expand.' },
-  { step: '04', title: 'Strategy Decision', value: 'Strategy 01 initiates long semiconductor basket vs. short consumer discretionary pair.' },
-  { step: '05', title: 'Risk Assessment', value: 'Independent risk check limits position sizing to 4.5% of NAV; enforces 6% stop-loss barrier.' },
-  { step: '06', title: 'Action', value: 'Executed across dark liquidity venues with 1.2 bps realized slippage.' },
-  { step: '07', title: 'Outcome', value: 'Realized gain +2.8% over 72-hour holding horizon; max intra-trade drawdown 0.4%.' },
-  { step: '08', title: 'Attribution', value: 'Selection alpha: +2.1%; Macro factor beta: +0.8%; Execution cost: -0.1%.' },
-  { step: '09', title: 'Lesson & Indexing', value: 'Regime confirmed: tech factor sensitivity to disinflation prints remains durable above 85%.' },
-]
+interface JourneyStep {
+  time: string
+  title: string
+  detail: string
+  context: {
+    agent: string
+    telemetry: string
+    signal: string
+  }
+}
 
-const HISTORICAL_MEMORIES = [
+const JOURNEY_STEPS: JourneyStep[] = [
   {
-    id: 'mem-2023',
-    regime: '2023 Bank Liquidity Contraction',
-    context: 'Deposit flight & discount window borrowing surge',
-    lesson: 'Prioritized short-duration sovereign collateral over regional credit spreads.',
-    matchScore: '94% Semantic Match',
+    time: '09:41:07',
+    title: 'Event detected',
+    detail: 'Semiconductor capital equipment export policy revision published; cross-source verification confirms authenticity across primary regulatory feeds.',
+    context: {
+      agent: 'News & Event Intelligence',
+      telemetry: 'Parsed 34 releases in 180ms',
+      signal: 'High-conviction regulatory catalyst',
+    },
   },
   {
-    id: 'mem-2022',
-    regime: '2022 Rapid Fed Tightening Cycle',
-    context: 'Consecutive 75 bps rate hikes & term premia repricing',
-    lesson: 'Short-duration value outperformed unprofitable growth regardless of trailing revenue growth.',
-    matchScore: '89% Semantic Match',
+    time: '09:41:11',
+    title: 'Company exposure identified',
+    detail: 'Dhanvi supply chain ontology maps revenue dependency across 42 equipment suppliers; tier-1 component bottleneck identified with direct supplier linkages.',
+    context: {
+      agent: 'Company Intelligence',
+      telemetry: 'Entity resolution graph traversal',
+      signal: '14 affected constituents in coverage',
+    },
   },
   {
-    id: 'mem-2020',
-    regime: '2020 Liquidity Crunch & Rebound',
-    context: 'High-yield spread blowout followed by emergency central bank backstops',
-    lesson: 'Central bank balance sheet expansion velocity signaled risk-on inflection before trailing earnings bottomed.',
-    matchScore: '81% Semantic Match',
+    time: '09:41:14',
+    title: 'Three competing hypotheses generated',
+    detail: 'Strategy agents independently formulate candidate reactions: CapEx contraction rotation, dispersion hedge, and supply-chain substitution pair.',
+    context: {
+      agent: 'Multi-Strategy Network',
+      telemetry: '3 candidate alphas formulated',
+      signal: 'Dispersion pair selected via Sharpe simulation',
+    },
+  },
+  {
+    time: '09:41:19',
+    title: 'Risk relationships evaluated',
+    detail: 'Deterministic risk engine checks cross-asset factor correlation, portfolio beta ceiling (<0.25), and 10-day market liquidity depth before approval.',
+    context: {
+      agent: 'Independent Risk Engine',
+      telemetry: 'Stress-tested across 4 past shocks',
+      signal: 'Approved with 3.2% NAV sizing ceiling',
+    },
+  },
+  {
+    time: '09:41:26',
+    title: 'Action executed & logged',
+    detail: 'Order packet smart-routed across dark liquidity venues with 1.1 bps realized slippage; full execution telemetry preserved in forensic trace.',
+    context: {
+      agent: 'Execution Infrastructure',
+      telemetry: 'Smart-routed in 3 algorithmic tranches',
+      signal: 'Zero market impact footprint',
+    },
+  },
+  {
+    time: 'Day +14',
+    title: 'Outcome observed & attributed',
+    detail: '+2.6% selection alpha realized over the holding horizon; factor residual analysis confirms thesis accuracy with minimal market beta contamination.',
+    context: {
+      agent: 'Attribution Engine',
+      telemetry: 'Selection alpha: +2.6% | Beta drag: -0.2%',
+      signal: 'Thesis validated within 1-sigma bounds',
+    },
+  },
+  {
+    time: 'Archive',
+    title: 'Decision permanently indexed',
+    detail: 'The complete belief state, market snapshot, causal graph, and attribution metrics are indexed into Dhanvi’s immutable vector memory ledger.',
+    context: {
+      agent: 'Memory Engine',
+      telemetry: 'Record #MEM-4892 sealed',
+      signal: 'Indexed across 7 factor dimensions',
+    },
   },
 ]
 
 export function DecisionMemory() {
-  const [activeStep, setActiveStep] = useState<number>(0)
-  const [selectedMemory, setSelectedMemory] = useState<string>('mem-2023')
+  const [activeStepIndex, setActiveStepIndex] = useState<number>(0)
+  const activeStep = JOURNEY_STEPS[activeStepIndex]
 
   return (
-    <section id="memory" className="py-20 sm:py-28 bg-neutral-950 text-white border-y border-neutral-800 scroll-mt-16">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        {/* Section Header */}
-        <div className="max-w-3xl mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950 border border-emerald-500/40 text-xs font-mono text-emerald-400 mb-3">
-            <Database className="w-3.5 h-3.5" />
-            <span>INSTITUTIONAL MEMORY ENGINE</span>
+    <section id="memory" className="py-28 sm:py-36 border-t border-white/[0.06] scroll-mt-20">
+      <div className="mx-auto max-w-7xl px-6 sm:px-10">
+        {/* Editorial Section Header */}
+        <div className="max-w-3xl mb-16 sm:mb-20">
+          <div className="text-xs font-medium text-[#9A9F9B] mb-3">
+            Institutional memory engine
           </div>
-          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
-            A system that remembers why decisions were made.
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#F1F3EF] leading-[1.12]">
+            Markets forget nothing.
+            <br />
+            Neither should the system.
           </h2>
-          <p className="mt-4 text-sm sm:text-base text-neutral-400 leading-relaxed">
-            In human organizations, institutional memory dissolves when key people leave. Dhanvi preserves
-            the complete forensic context behind every hypothesis, risk calculation, and trade —
-            building an immortal record of what was believed, why it happened, and what was learned.
+          <p className="mt-5 text-base sm:text-lg text-[#9A9F9B] leading-relaxed">
+            In human organizations, institutional memory dissolves when key people leave. Dhanvi
+            preserves the complete forensic context behind every hypothesis, risk calculation, and
+            trade — creating an immortal record of what was believed, why it happened, and what was learned.
           </p>
         </div>
 
-        {/* The 9-Stage Decision Forensic Record */}
-        <div className="rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6 sm:p-8 mb-12 shadow-xl">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-neutral-800 pb-4 mb-6">
-            <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 font-semibold uppercase tracking-wider">
-              <FileCode className="w-4 h-4" />
-              <span>FORENSIC DECISION TRACE — AUDIT RECORD #MEM-4892</span>
+        {/* ONE Concrete Forensic Decision Journey */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+          {/* Left: Journey Timeline Stepper */}
+          <div className="lg:col-span-7 space-y-3">
+            <div className="text-xs font-medium text-[#7A807B] mb-2 flex items-center justify-between">
+              <span>Decision journey — Case #MEM-4892</span>
+              <span className="font-mono text-[11px]">Click a step to inspect context</span>
             </div>
-            <span className="text-[11px] font-mono text-neutral-500">
-              Immutable Retrospective Log
-            </span>
+
+            <div className="border border-white/[0.08] rounded-xl bg-[#111412] divide-y divide-white/[0.06] overflow-hidden">
+              {JOURNEY_STEPS.map((step, idx) => {
+                const isActive = activeStepIndex === idx
+                return (
+                  <button
+                    key={step.title}
+                    type="button"
+                    onClick={() => setActiveStepIndex(idx)}
+                    className={`w-full p-4 sm:p-5 text-left transition-colors flex items-start gap-4 cursor-pointer ${
+                      isActive ? 'bg-[#151816]' : 'hover:bg-white/[0.02]'
+                    }`}
+                  >
+                    {/* Timestamp */}
+                    <div className="w-18 shrink-0 pt-0.5">
+                      <span
+                        className={`text-xs font-mono font-medium ${
+                          isActive ? 'text-[#10B981]' : 'text-[#7A807B]'
+                        }`}
+                      >
+                        {step.time}
+                      </span>
+                    </div>
+
+                    {/* Step Title & Detail */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between gap-2">
+                        <div
+                          className={`text-sm font-medium ${
+                            isActive ? 'text-[#F1F3EF]' : 'text-[#9A9F9B]'
+                          }`}
+                        >
+                          {step.title}
+                        </div>
+                        {isActive && (
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] shrink-0" />
+                        )}
+                      </div>
+                      <p className="mt-1 text-xs text-[#7A807B] leading-relaxed line-clamp-2 sm:line-clamp-none">
+                        {step.detail}
+                      </p>
+                    </div>
+                  </button>
+                )
+              })}
+            </div>
           </div>
 
-          {/* Stepper nodes */}
-          <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-9 gap-2 mb-6">
-            {DECISION_STAGES.map((s, idx) => (
-              <button
-                key={s.step}
-                type="button"
-                onClick={() => setActiveStep(idx)}
-                className={`p-2.5 rounded-lg border text-left transition-all cursor-pointer ${
-                  activeStep === idx
-                    ? 'border-emerald-500 bg-emerald-950/60 text-white ring-1 ring-emerald-500/50'
-                    : 'border-neutral-800/80 bg-neutral-900/60 text-neutral-400 hover:border-neutral-700'
-                }`}
-              >
-                <div className="text-[10px] font-mono text-emerald-400 font-bold">{s.step}</div>
-                <div className="text-xs font-semibold truncate mt-0.5">{s.title}</div>
-              </button>
-            ))}
-          </div>
+          {/* Right: Step Deep-Dive & Subtle Memory Connection */}
+          <div className="lg:col-span-5 space-y-6">
+            {/* Active Step Telemetry Card */}
+            <div className="border border-white/[0.08] rounded-xl bg-[#111412] p-6 space-y-5">
+              <div className="flex items-center justify-between border-b border-white/[0.06] pb-3 text-xs">
+                <span className="text-[#9A9F9B] font-medium">Step context snapshot</span>
+                <span className="font-mono text-[#10B981] text-[11px]">{activeStep.time}</span>
+              </div>
 
-          {/* Active Stage Highlight */}
-          <div className="p-5 rounded-xl border border-emerald-500/30 bg-neutral-950/80">
-            <div className="text-xs font-mono text-emerald-400 uppercase tracking-wider mb-1">
-              Stage {DECISION_STAGES[activeStep].step} — {DECISION_STAGES[activeStep].title}
-            </div>
-            <div className="text-sm sm:text-base font-semibold text-neutral-100 mt-1">
-              {DECISION_STAGES[activeStep].value}
-            </div>
-          </div>
-        </div>
-
-        {/* Retrospective Context Retrieval Section */}
-        <div>
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h3 className="text-lg font-bold text-white">Historical Analogue Retrieval</h3>
-              <p className="text-xs text-neutral-400 mt-0.5">
-                When new market situations emerge, Dhanvi indexes prior episodes to retrieve relevant lessons.
-              </p>
-            </div>
-            <span className="text-xs font-mono text-neutral-500 hidden sm:inline">
-              Vector Context Search
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {HISTORICAL_MEMORIES.map((item) => (
-              <div
-                key={item.id}
-                onClick={() => setSelectedMemory(item.id)}
-                className={`p-5 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
-                  selectedMemory === item.id
-                    ? 'border-emerald-500/60 bg-emerald-950/20 ring-1 ring-emerald-500/30'
-                    : 'border-neutral-800 bg-neutral-900/40 hover:border-neutral-700'
-                }`}
-              >
-                <div>
-                  <div className="flex items-center justify-between text-xs font-mono mb-2">
-                    <span className="text-emerald-400 font-semibold">{item.matchScore}</span>
-                    <Clock className="w-3.5 h-3.5 text-neutral-500" />
-                  </div>
-                  <h4 className="font-bold text-sm text-white">{item.regime}</h4>
-                  <p className="text-xs text-neutral-400 mt-2 leading-relaxed">
-                    <strong>Context:</strong> {item.context}
-                  </p>
-                </div>
-
-                <div className="mt-4 pt-3 border-t border-neutral-800/80 text-xs text-neutral-300">
-                  <div className="text-[10px] font-mono text-emerald-400 font-bold uppercase mb-1">
-                    Lesson Retrieved:
-                  </div>
-                  <span>{item.lesson}</span>
+              <div>
+                <div className="text-xs text-[#7A807B]">Originating agent</div>
+                <div className="text-sm font-medium text-[#F1F3EF] mt-0.5">
+                  {activeStep.context.agent}
                 </div>
               </div>
-            ))}
+
+              <div>
+                <div className="text-xs text-[#7A807B]">Diagnostic telemetry</div>
+                <div className="text-xs font-mono text-[#9A9F9B] mt-1 p-2.5 rounded bg-[#0C0F0D] border border-white/[0.04]">
+                  {activeStep.context.telemetry}
+                </div>
+              </div>
+
+              <div>
+                <div className="text-xs text-[#7A807B]">Synthesized signal</div>
+                <div className="text-xs text-[#F1F3EF] mt-1 font-medium">
+                  {activeStep.context.signal}
+                </div>
+              </div>
+            </div>
+
+            {/* Subtle Connection: Retrieved 184 Days Later */}
+            <div className="border border-white/[0.08] rounded-xl bg-[#0C0F0D] p-6 relative overflow-hidden">
+              <div className="flex items-center gap-2 text-xs font-mono text-[#10B981] mb-3">
+                <Clock className="w-3.5 h-3.5" />
+                <span>RETRIEVED 184 DAYS LATER</span>
+              </div>
+
+              <div className="text-sm font-medium text-[#F1F3EF] leading-snug">
+                Similar market environment detected
+              </div>
+
+              <p className="mt-2.5 text-xs text-[#9A9F9B] leading-relaxed">
+                When semiconductor supply-chain bottleneck constraints and rate sensitivity re-emerged
+                6 months later, Dhanvi’s vector retrieval surfaced this exact decision trace with 92%
+                semantic alignment — preventing recency bias and accelerating parameter calibration.
+              </p>
+
+              <div className="mt-4 pt-3 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-[#7A807B]">
+                <span>Retrieved: #MEM-4892</span>
+                <span className="text-[#10B981]">92% Match</span>
+              </div>
+            </div>
+
+            {/* Illustrative disclaimer */}
+            <div className="text-[11px] text-[#7A807B] font-mono">
+              * Illustrative decision journey and retrospective trace.
+            </div>
           </div>
         </div>
       </div>
