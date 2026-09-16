@@ -72,13 +72,6 @@ export function Navbar() {
 
         {/* Right CTA Actions */}
         <div className="hidden items-center gap-3 md:flex">
-          <Link
-            href="/login"
-            className="text-xs font-semibold text-neutral-600 hover:text-neutral-900 px-3 py-1.5 transition-colors"
-          >
-            Sign In
-          </Link>
-
           <EarlyAccessButton
             source="navbar"
             className="inline-flex items-center gap-1.5 rounded-full bg-neutral-950 px-4 py-2 text-xs font-semibold text-white shadow-xs transition-all hover:bg-emerald-700 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
@@ -116,15 +109,6 @@ export function Navbar() {
               </li>
             ))}
             <li className="pt-3 border-t border-neutral-100 mt-2">
-              <Link
-                href="/login"
-                onClick={() => setOpen(false)}
-                className="block w-full rounded-full border border-neutral-200 px-4 py-2.5 text-center text-xs font-semibold text-neutral-900 shadow-xs mb-2"
-              >
-                Sign In
-              </Link>
-            </li>
-            <li>
               <EarlyAccessButton
                 source="mobile_nav"
                 className="flex items-center justify-center gap-1.5 w-full rounded-full bg-neutral-950 px-4 py-2.5 text-center text-xs font-semibold text-white shadow-xs cursor-pointer"

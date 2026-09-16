@@ -22,9 +22,9 @@ const AppShellContent: React.FC<{ children: React.ReactNode }> = ({ children }) 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    // If not registered and on client side, direct to registration
+    // If not registered and on client side, redirect to home
     if (typeof window !== 'undefined' && !isUserRegistered()) {
-      router.replace('/signup');
+      router.replace('/');
     }
   }, [router]);
 

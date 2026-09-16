@@ -45,9 +45,6 @@ export const viewport: Viewport = {
   themeColor: '#ffffff',
 }
 
-import { Suspense } from 'react'
-import { AuthHashListener } from '@/components/auth/auth-hash-listener'
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -58,25 +55,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} bg-background`}
     >
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                var h = window.location.hash || '';
-                var s = window.location.search || '';
-                if ((h.indexOf('type=recovery') !== -1 || s.indexOf('type=recovery') !== -1) && window.location.pathname !== '/reset-password') {
-                  window.location.replace('/reset-password' + s + h);
-                }
-              } catch(e) {}
-            `,
-          }}
-        />
-      </head>
       <body className="font-sans antialiased selection:bg-emerald-100 selection:text-emerald-950">
-        <Suspense fallback={null}>
-          <AuthHashListener />
-        </Suspense>
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

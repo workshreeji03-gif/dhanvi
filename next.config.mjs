@@ -6,6 +6,16 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  async redirects() {
+    return [
+      { source: '/login', destination: '/', permanent: false },
+      { source: '/signup', destination: '/', permanent: false },
+      { source: '/register', destination: '/', permanent: false },
+      { source: '/forgot-password', destination: '/', permanent: false },
+      { source: '/reset-password', destination: '/', permanent: false },
+      { source: '/auth/callback', destination: '/', permanent: false },
+    ]
+  },
   async headers() {
     return [
       {

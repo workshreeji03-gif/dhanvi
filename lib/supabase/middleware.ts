@@ -52,23 +52,26 @@ export async function updateSession(request: NextRequest) {
     pathname.startsWith("/settings") ||
     pathname.startsWith("/admin");
 
-  const isAuthRoute = 
+  const isLegacyAuthRoute = 
     pathname === "/login" ||
     pathname === "/signup" ||
-    pathname === "/register";
+    pathname === "/register" ||
+    pathname === "/forgot-password" ||
+    pathname === "/reset-password" ||
+    pathname === "/auth/callback";
 
-  // Redirect unauthenticated user from protected routes
-  if (!user && isProtectedRoute) {
+  // Redirect legacy auth routes to home
+  if (isLegacyAuthRoute) {
     const url = request.nextUrl.clone();
-    url.pathname = "/login";
-    url.searchParams.set("next", pathname);
+    url.pathname = "/";
+    url.search = "";
     return NextResponse.redirect(url);
   }
 
-  // Redirect authenticated user away from login/signup to dashboard
-  if (user && isAuthRoute) {
+  // Redirect unauthenticated user from internal protected routes to home
+  if (!user && isProtectedRoute) {
     const url = request.nextUrl.clone();
-    url.pathname = "/dashboard";
+    url.pathname = "/";
     return NextResponse.redirect(url);
   }
 

@@ -1,6 +1,9 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterAll } from 'vitest';
 import { POST, GET } from '@/app/api/early-access/route';
 import { NextRequest } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
+
+const testEmails: string[] = [];
 
 describe('Early Access Waitlist API & Sequence Numbering', () => {
   beforeEach(() => {
@@ -9,13 +12,27 @@ describe('Early Access Waitlist API & Sequence Numbering', () => {
     }
   });
 
+  afterAll(async () => {
+    if (testEmails.length > 0) {
+      const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+      const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+      if (url && key && !url.includes('your-project')) {
+        const sb = createClient(url, key);
+        await sb.from('early_access').delete().in('email', testEmails);
+      }
+    }
+  });
+
   it('Test 1 — Valid waitlist submission returns HTTP 200 with sequential waitlist number and masked email', async () => {
+    const testEmail = `alexander-${Date.now()}@fund.com`;
+    testEmails.push(testEmail);
+
     const req = new Request('http://localhost:3000/api/early-access', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         fullName: 'Alexander Wright',
-        email: 'alexander@fund.com',
+        email: testEmail,
         company: 'Alpha Quantitative Capital',
         role: 'Quant / Researcher',
       }),
@@ -27,16 +44,19 @@ describe('Early Access Waitlist API & Sequence Numbering', () => {
     const data = await res.json();
     expect(data.success).toBe(true);
     expect(data.alreadyRegistered).toBe(false);
-    expect(typeof data.waitlist_number).toBe('number');
-    expect(data.waitlist_number).toBeGreaterThanOrEqual(142);
-    expect(data.masked_email).toContain('***');
+    expect(typeof data.waitlist_number).toBe('string');
+    expect(data.waitlist_number).toMatch(/^#\d{4}$/);
+    expect(data.masked_email).toContain('••••••');
     expect(data.first_name).toBe('Alexander');
   });
 
   it('Test 2 — Duplicate submission does not create duplicate and returns existing waitlist number', async () => {
+    const testEmail = `schen-${Date.now()}@familyoffice.com`;
+    testEmails.push(testEmail);
+
     const payload = {
       fullName: 'Sarah Chen',
-      email: 'schen@familyoffice.com',
+      email: testEmail,
       company: 'Chen Family Office',
       role: 'Asset Management',
     };
@@ -50,6 +70,7 @@ describe('Early Access Waitlist API & Sequence Numbering', () => {
     expect(res1.status).toBe(200);
     const data1 = await res1.json();
     const originalNumber = data1.waitlist_number;
+    expect(originalNumber).toMatch(/^#\d{4}$/);
 
     // Duplicate submission
     const res2 = await POST(new Request('http://localhost:3000/api/early-access', {
@@ -62,7 +83,7 @@ describe('Early Access Waitlist API & Sequence Numbering', () => {
 
     expect(data2.alreadyRegistered).toBe(true);
     expect(data2.waitlist_number).toBe(originalNumber);
-    expect(data2.message).toContain('already on the Dhanvi waitlist');
+    expect(data2.message).toContain('already part of Dhanvi Early Access');
   });
 
   it('Test 3 — Rejects invalid email format with HTTP 400', async () => {
@@ -103,6 +124,6 @@ describe('Early Access Waitlist API & Sequence Numbering', () => {
 
     const data = await res.json();
     expect(Array.isArray(data.leads)).toBe(true);
-    expect(typeof data.nextWaitlistNumber).toBe('number');
+    expect(data.nextWaitlistNumber).toMatch(/^#\d{4}$/);
   });
 });

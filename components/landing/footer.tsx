@@ -86,9 +86,9 @@ export function Footer() {
                   </a>
                 </li>
                 <li>
-                  <Link href="/dashboard" className="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors">
-                    Launch Platform →
-                  </Link>
+                  <a href="#architecture" className="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors">
+                    Explore Architecture →
+                  </a>
                 </li>
               </ul>
             </div>
@@ -105,14 +105,9 @@ export function Footer() {
                   </EarlyAccessButton>
                 </li>
                 <li>
-                  <Link href="/login" className="text-neutral-400 hover:text-white transition-colors">
-                    Researcher Login
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/reset-password" className="text-neutral-400 hover:text-white transition-colors">
-                    Reset Password
-                  </Link>
+                  <a href="#strategies" className="text-neutral-400 hover:text-white transition-colors">
+                    Multi-Strategy Lab
+                  </a>
                 </li>
                 <li>
                   <Link href="/contact" className="text-neutral-400 hover:text-white transition-colors">
