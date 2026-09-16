@@ -67,18 +67,11 @@ export function Navbar() {
           ))}
         </ul>
 
-        {/* Right Action: Clean Buttons matching Image 1 */}
-        <div className="hidden items-center gap-3 md:flex">
-          <Link
-            href="/dashboard"
-            className="inline-flex items-center justify-center rounded-full bg-[#111827] hover:bg-black px-4 py-2 text-xs sm:text-sm font-semibold tracking-tight text-white transition-all shadow-xs cursor-pointer"
-          >
-            <span>Launch App</span>
-            <span className="ml-1 text-xs">→</span>
-          </Link>
+        {/* Right Action: Primary CTA */}
+        <div className="hidden items-center md:flex">
           <EarlyAccessButton
             source="navbar"
-            className="inline-flex items-center justify-center rounded-full border border-[#E4E8E4] bg-white hover:bg-[#F7F9F7] px-4 py-2 text-xs sm:text-sm font-semibold tracking-tight text-[#111827] transition-colors cursor-pointer shadow-xs"
+            className="inline-flex items-center justify-center rounded-full bg-[#111827] hover:bg-black px-5 py-2.5 text-xs sm:text-sm font-semibold tracking-tight text-white transition-all shadow-xs cursor-pointer"
           >
             <span>Join Early Access</span>
           </EarlyAccessButton>
@@ -111,17 +104,10 @@ export function Navbar() {
                 </a>
               </li>
             ))}
-            <li className="pt-3 border-t border-[#E4E8E4] mt-2 flex flex-col gap-2">
-              <Link
-                href="/dashboard"
-                onClick={() => setOpen(false)}
-                className="flex items-center justify-center w-full rounded-full bg-[#111827] hover:bg-black px-4 py-2.5 text-xs sm:text-sm font-semibold tracking-tight text-white transition-colors"
-              >
-                <span>Launch App →</span>
-              </Link>
+            <li className="pt-3 border-t border-[#E4E8E4] mt-2">
               <EarlyAccessButton
                 source="mobile_nav"
-                className="flex items-center justify-center w-full rounded-full border border-[#E4E8E4] bg-white hover:bg-[#F7F9F7] px-4 py-2.5 text-xs sm:text-sm font-semibold tracking-tight text-[#111827] transition-colors cursor-pointer"
+                className="flex items-center justify-center w-full rounded-full bg-[#111827] hover:bg-black px-4 py-2.5 text-xs sm:text-sm font-semibold tracking-tight text-white transition-colors cursor-pointer"
               >
                 <span>Join Early Access</span>
               </EarlyAccessButton>
