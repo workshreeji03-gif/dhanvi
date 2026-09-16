@@ -139,49 +139,58 @@ export function EarlyAccessModal({
     >
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity"
+        className="fixed inset-0 bg-black/40 backdrop-blur-xs transition-opacity"
         onClick={onClose}
       />
 
-      {/* Modal Container: 45% / 55% desktop split */}
-      <div className="relative w-full max-w-4xl rounded-2xl border border-white/[0.08] bg-[#0C0F0D] text-[#F1F3EF] shadow-2xl overflow-hidden my-auto z-10">
+      {/* Modal Container: 40% / 60% desktop split */}
+      <div className="relative w-full max-w-4xl rounded-2xl border border-[#E5E8E5] bg-white text-[#101310] shadow-2xl overflow-hidden my-auto z-10">
         {/* Close Button */}
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 p-2 rounded-lg text-[#7A807B] hover:text-[#F1F3EF] hover:bg-white/[0.05] transition-colors cursor-pointer"
+          className="absolute top-4 right-4 z-20 p-2 rounded-lg text-[#606660] hover:text-[#101310] hover:bg-black/5 transition-colors cursor-pointer"
           aria-label="Close modal"
         >
           <X className="w-5 h-5" />
         </button>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[500px]">
-          {/* LEFT 45%: Editorial Message */}
-          <div className="lg:col-span-5 p-8 sm:p-10 bg-[#111412] border-b lg:border-b-0 lg:border-r border-white/[0.06] flex flex-col justify-between">
+          {/* LEFT 40%: Editorial Message */}
+          <div className="lg:col-span-5 p-8 sm:p-10 bg-[#F7F8F6] border-b lg:border-b-0 lg:border-r border-[#E5E8E5] flex flex-col justify-between">
             <div className="space-y-6">
               <Logo className="h-6 w-auto" />
 
               <div>
-                <div className="text-xs text-[#9A9F9B] mb-2 font-normal">
+                <div className="text-xs font-semibold uppercase tracking-wider text-[#606660] mb-2 font-mono">
                   Early Access
                 </div>
                 <h2
                   id="early-access-title"
-                  className="text-2xl sm:text-3xl font-medium tracking-tight text-[#F1F3EF] leading-snug"
+                  className="text-2xl sm:text-3xl font-normal tracking-tight text-[#101310] leading-snug"
                 >
-                  Help shape what Dhanvi becomes.
+                  Follow Dhanvi from the beginning.
                 </h2>
               </div>
 
-              <p className="text-xs sm:text-sm text-[#9A9F9B] leading-relaxed">
-                Join researchers, investors, engineers and builders following the development of Dhanvi.
+              <p className="text-xs sm:text-sm text-[#606660] leading-relaxed">
+                Join researchers, investors, engineers and builders following the development of collaborative intelligence in financial research.
               </p>
 
-              {/* Subtle List — No decorative icons */}
-              <div className="space-y-2 text-xs text-[#7A807B] pt-2 border-t border-white/[0.06]">
-                <div>Research updates</div>
-                <div>Product milestones</div>
-                <div>Private previews</div>
+              {/* Subtle List */}
+              <div className="space-y-2 text-xs text-[#606660] pt-4 border-t border-[#E5E8E5]">
+                <div className="flex items-center gap-2">
+                  <span className="w-1 h-1 rounded-full bg-[#10B981]" />
+                  <span>Research updates and publications</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="w-1 h-1 rounded-full bg-[#10B981]" />
+                  <span>Product development milestones</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="w-1 h-1 rounded-full bg-[#10B981]" />
+                  <span>Private institutional previews</span>
+                </div>
               </div>
             </div>
 
@@ -189,52 +198,52 @@ export function EarlyAccessModal({
             <div className="pt-8 mt-auto" aria-hidden="true">
               <svg
                 viewBox="0 0 240 70"
-                className="w-full h-14 text-white/[0.15]"
+                className="w-full h-12 text-[#E5E8E5]"
                 fill="none"
               >
-                <circle cx="20" cy="35" r="3" fill="#9A9F9B" />
-                <circle cx="70" cy="20" r="2.5" fill="#7A807B" />
-                <circle cx="70" cy="50" r="2.5" fill="#7A807B" />
-                <circle cx="130" cy="35" r="3.5" fill="#10B981" />
-                <circle cx="190" cy="22" r="2.5" fill="#7A807B" />
-                <circle cx="190" cy="48" r="2.5" fill="#7A807B" />
-                <circle cx="225" cy="35" r="3" fill="#9A9F9B" />
-                <line x1="20" y1="35" x2="70" y2="20" stroke="currentColor" strokeWidth="0.75" />
-                <line x1="20" y1="35" x2="70" y2="50" stroke="currentColor" strokeWidth="0.75" />
-                <line x1="70" y1="20" x2="130" y2="35" stroke="currentColor" strokeWidth="0.75" />
-                <line x1="70" y1="50" x2="130" y2="35" stroke="currentColor" strokeWidth="0.75" />
-                <line x1="130" y1="35" x2="190" y2="22" stroke="currentColor" strokeWidth="0.75" />
-                <line x1="130" y1="35" x2="190" y2="48" stroke="currentColor" strokeWidth="0.75" />
-                <line x1="190" y1="22" x2="225" y2="35" stroke="currentColor" strokeWidth="0.75" />
-                <line x1="190" y1="48" x2="225" y2="35" stroke="currentColor" strokeWidth="0.75" />
+                <line x1="20" y1="35" x2="70" y2="20" stroke="currentColor" strokeWidth="1" />
+                <line x1="20" y1="35" x2="70" y2="50" stroke="currentColor" strokeWidth="1" />
+                <line x1="70" y1="20" x2="130" y2="35" stroke="currentColor" strokeWidth="1" />
+                <line x1="70" y1="50" x2="130" y2="35" stroke="currentColor" strokeWidth="1" />
+                <line x1="130" y1="35" x2="190" y2="22" stroke="currentColor" strokeWidth="1" />
+                <line x1="130" y1="35" x2="190" y2="48" stroke="currentColor" strokeWidth="1" />
+                <line x1="190" y1="22" x2="225" y2="35" stroke="currentColor" strokeWidth="1" />
+                <line x1="190" y1="48" x2="225" y2="35" stroke="currentColor" strokeWidth="1" />
+                <circle cx="20" cy="35" r="3" fill="#606660" />
+                <circle cx="70" cy="20" r="2.5" fill="#8A908A" />
+                <circle cx="70" cy="50" r="2.5" fill="#8A908A" />
+                <circle cx="130" cy="35" r="4" fill="#10B981" />
+                <circle cx="190" cy="22" r="2.5" fill="#8A908A" />
+                <circle cx="190" cy="48" r="2.5" fill="#8A908A" />
+                <circle cx="225" cy="35" r="3" fill="#606660" />
               </svg>
             </div>
           </div>
 
-          {/* RIGHT 55%: Form or Quiet Success State */}
-          <div className="lg:col-span-7 p-8 sm:p-10 flex flex-col justify-center">
+          {/* RIGHT 60%: Form or Quiet Success State */}
+          <div className="lg:col-span-7 p-8 sm:p-10 flex flex-col justify-center bg-white">
             {successResult ? (
-              /* Success State: Restrained, No Confetti */
+              /* Success State: Restrained, Clean, Institutional */
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-2xl sm:text-3xl font-medium tracking-tight text-[#F1F3EF]">
+                  <h3 className="text-2xl sm:text-3xl font-normal tracking-tight text-[#101310]">
                     You&apos;re in.
                   </h3>
-                  <p className="mt-2 text-xs text-[#9A9F9B] leading-relaxed">
+                  <p className="mt-2 text-xs text-[#606660] leading-relaxed">
                     {successResult.alreadyRegistered
                       ? "You're already on the Dhanvi waitlist. Your position is recorded."
                       : "We'll keep you updated as Dhanvi develops."}
                   </p>
                 </div>
 
-                <div className="py-6 border-y border-white/[0.06]">
-                  <div className="text-xs text-[#7A807B] mb-2 font-normal">
+                <div className="py-6 border-y border-[#E5E8E5]">
+                  <div className="text-xs font-semibold uppercase tracking-wider text-[#606660] mb-2 font-mono">
                     Early access position
                   </div>
-                  <div className="text-5xl sm:text-6xl font-medium text-[#10B981] font-mono tracking-tight">
+                  <div className="text-5xl sm:text-6xl font-semibold text-[#10B981] font-mono tracking-tight">
                     {successResult.waitlist_number}
                   </div>
-                  <div className="mt-3 text-xs text-[#7A807B]">
+                  <div className="mt-3 text-xs text-[#606660]">
                     Confirmation sent to {successResult.masked_email}
                   </div>
                 </div>
@@ -242,7 +251,7 @@ export function EarlyAccessModal({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="w-full sm:w-auto inline-flex items-center justify-center rounded-lg border border-white/[0.1] bg-[#151816] px-6 py-2.5 text-xs font-medium text-[#F1F3EF] hover:border-white/[0.2] transition-colors cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center rounded-lg border border-[#E5E8E5] bg-white px-6 py-2.5 text-xs font-medium text-[#101310] hover:border-[#101310] transition-colors cursor-pointer shadow-xs"
                 >
                   Return to Dhanvi
                 </button>
@@ -251,14 +260,14 @@ export function EarlyAccessModal({
               /* Form State */
               <form onSubmit={handleSubmit} className="space-y-4">
                 {errorMsg && (
-                  <div className="p-3 rounded-lg bg-red-950/40 border border-red-800/60 text-xs text-red-300">
+                  <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-xs text-red-700">
                     {errorMsg}
                   </div>
                 )}
 
                 {/* Full Name */}
                 <div>
-                  <label htmlFor="ea-name" className="block text-xs text-[#9A9F9B] mb-1.5 font-normal">
+                  <label htmlFor="ea-name" className="block text-xs text-[#606660] mb-1.5 font-medium">
                     Full name
                   </label>
                   <input
@@ -268,14 +277,14 @@ export function EarlyAccessModal({
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="E.g. Elena Vance"
-                    className="w-full rounded-lg border border-white/[0.1] bg-[#111412] px-3.5 py-2.5 text-xs sm:text-sm text-[#F1F3EF] placeholder-[#555A56] outline-none focus:border-[#10B981] transition-colors"
+                    className="w-full rounded-lg border border-[#E5E8E5] bg-white px-3.5 py-2.5 text-xs sm:text-sm text-[#101310] placeholder-[#8A908A] outline-none focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] transition-colors"
                   />
                 </div>
 
                 {/* Email Address */}
                 <div>
-                  <label htmlFor="ea-email" className="block text-xs text-[#9A9F9B] mb-1.5 font-normal">
-                    Email
+                  <label htmlFor="ea-email" className="block text-xs text-[#606660] mb-1.5 font-medium">
+                    Email address
                   </label>
                   <input
                     id="ea-email"
@@ -284,14 +293,14 @@ export function EarlyAccessModal({
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@organization.com"
-                    className="w-full rounded-lg border border-white/[0.1] bg-[#111412] px-3.5 py-2.5 text-xs sm:text-sm text-[#F1F3EF] placeholder-[#555A56] outline-none focus:border-[#10B981] transition-colors"
+                    className="w-full rounded-lg border border-[#E5E8E5] bg-white px-3.5 py-2.5 text-xs sm:text-sm text-[#101310] placeholder-[#8A908A] outline-none focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] transition-colors"
                   />
                 </div>
 
                 {/* Organization (Optional) */}
                 <div>
-                  <label htmlFor="ea-company" className="block text-xs text-[#9A9F9B] mb-1.5 font-normal">
-                    Organization (optional)
+                  <label htmlFor="ea-company" className="block text-xs text-[#606660] mb-1.5 font-medium">
+                    Organization <span className="text-[#8A908A] font-normal">(optional)</span>
                   </label>
                   <input
                     id="ea-company"
@@ -299,26 +308,26 @@ export function EarlyAccessModal({
                     value={company}
                     onChange={(e) => setCompany(e.target.value)}
                     placeholder="Fund, university, or firm"
-                    className="w-full rounded-lg border border-white/[0.1] bg-[#111412] px-3.5 py-2.5 text-xs sm:text-sm text-[#F1F3EF] placeholder-[#555A56] outline-none focus:border-[#10B981] transition-colors"
+                    className="w-full rounded-lg border border-[#E5E8E5] bg-white px-3.5 py-2.5 text-xs sm:text-sm text-[#101310] placeholder-[#8A908A] outline-none focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] transition-colors"
                   />
                 </div>
 
                 {/* Role */}
                 <div ref={dropdownRef} className="relative">
-                  <label className="block text-xs text-[#9A9F9B] mb-1.5 font-normal">
+                  <label className="block text-xs text-[#606660] mb-1.5 font-medium">
                     Role
                   </label>
                   <button
                     type="button"
                     onClick={() => setRoleDropdownOpen(!roleDropdownOpen)}
-                    className="w-full rounded-lg border border-white/[0.1] bg-[#111412] px-3.5 py-2.5 text-xs sm:text-sm text-[#F1F3EF] flex items-center justify-between outline-none focus:border-[#10B981] transition-colors cursor-pointer"
+                    className="w-full rounded-lg border border-[#E5E8E5] bg-white px-3.5 py-2.5 text-xs sm:text-sm text-[#101310] flex items-center justify-between outline-none focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] transition-colors cursor-pointer"
                   >
                     <span>{role}</span>
-                    <ChevronDown className="w-4 h-4 text-[#7A807B]" />
+                    <ChevronDown className="w-4 h-4 text-[#606660]" />
                   </button>
 
                   {roleDropdownOpen && (
-                    <div className="absolute top-full left-0 right-0 mt-1 rounded-lg border border-white/[0.1] bg-[#151816] shadow-xl z-30 py-1 max-h-48 overflow-y-auto">
+                    <div className="absolute top-full left-0 right-0 mt-1 rounded-lg border border-[#E5E8E5] bg-white shadow-xl z-30 py-1 max-h-48 overflow-y-auto">
                       {ROLE_OPTIONS.map((opt) => (
                         <button
                           key={opt}
@@ -327,7 +336,7 @@ export function EarlyAccessModal({
                             setRole(opt)
                             setRoleDropdownOpen(false)
                           }}
-                          className="w-full px-3.5 py-2 text-left text-xs text-[#9A9F9B] hover:text-[#F1F3EF] hover:bg-white/[0.04] transition-colors flex items-center justify-between cursor-pointer"
+                          className="w-full px-3.5 py-2 text-left text-xs text-[#606660] hover:text-[#101310] hover:bg-[#F7F8F6] transition-colors flex items-center justify-between cursor-pointer"
                         >
                           <span>{opt}</span>
                           {role === opt && <Check className="w-3.5 h-3.5 text-[#10B981]" />}
@@ -342,13 +351,13 @@ export function EarlyAccessModal({
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full rounded-lg bg-[#10B981] hover:bg-[#059669] text-[#080A09] py-2.5 text-xs sm:text-sm font-semibold transition-colors cursor-pointer disabled:opacity-50"
+                    className="w-full rounded-lg bg-[#10B981] hover:bg-[#059669] text-white py-2.5 text-xs sm:text-sm font-medium transition-colors cursor-pointer disabled:opacity-50"
                   >
-                    {loading ? 'Submitting...' : 'Join early access'}
+                    {loading ? 'Submitting...' : 'Join Early Access →'}
                   </button>
                 </div>
 
-                <div className="text-center text-[11px] text-[#7A807B] pt-1">
+                <div className="text-center text-[11px] text-[#8A908A] pt-1">
                   No spam. Unsubscribe anytime.
                 </div>
               </form>

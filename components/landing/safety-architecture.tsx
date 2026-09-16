@@ -76,19 +76,19 @@ const RISK_CONTROLS = [
 
 export function SafetyArchitecture() {
   return (
-    <section className="py-28 sm:py-36 border-t border-white/[0.06]">
+    <section className="py-24 sm:py-32 border-t border-[#E5E8E5] bg-[#F7F8F6]">
       <div className="mx-auto max-w-7xl px-6 sm:px-10">
         {/* Editorial Section Header */}
-        <div className="max-w-3xl mb-16 sm:mb-20">
-          <div className="text-xs font-medium text-[#9A9F9B] mb-3">
+        <div className="max-w-3xl mb-16">
+          <div className="text-xs font-normal text-[#606660] mb-3">
             Deterministic risk governance
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#F1F3EF] leading-[1.12]">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#101310] leading-tight">
             Autonomous intelligence does not mean
             <br />
             unrestricted control.
           </h2>
-          <p className="mt-5 text-base sm:text-lg text-[#9A9F9B] leading-relaxed">
+          <p className="mt-5 text-base sm:text-lg text-[#606660] leading-relaxed">
             In financial systems, machine learning models cannot be allowed to alter their own safety
             boundaries. Dhanvi isolates risk management in a separate, deterministic software layer
             outside agent reasoning — enforcing hard rules that AI cannot override or negotiate away.
@@ -96,43 +96,43 @@ export function SafetyArchitecture() {
         </div>
 
         {/* 5-Tier Decision Governance Hierarchy */}
-        <div className="mb-16">
-          <div className="text-xs font-medium text-[#7A807B] mb-4">
+        <div className="mb-14">
+          <div className="text-xs font-medium text-[#606660] mb-3">
             Five-tier governance hierarchy
           </div>
 
-          <div className="border border-white/[0.08] rounded-xl bg-[#111412] divide-y divide-white/[0.06] overflow-hidden">
+          <div className="border border-[#E5E8E5] rounded-xl bg-white divide-y divide-[#E5E8E5] overflow-hidden">
             {HIERARCHY_STEPS.map((h) => (
               <div
                 key={h.tier}
                 className={`p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-3 ${
-                  h.isFirewall ? 'bg-[#151816]' : ''
+                  h.isFirewall ? 'bg-[#10B981]/5' : ''
                 }`}
               >
                 <div className="flex items-start sm:items-center gap-4">
                   <span
                     className={`text-xs font-mono px-2 py-0.5 rounded ${
                       h.isFirewall
-                        ? 'bg-[#10B981]/15 text-[#10B981] font-semibold'
-                        : 'text-[#7A807B] bg-white/[0.04]'
+                        ? 'bg-[#10B981] text-white font-medium'
+                        : 'text-[#606660] bg-[#F7F8F6] border border-[#E5E8E5]'
                     }`}
                   >
                     Tier {h.tier}
                   </span>
                   <div>
-                    <div className="text-sm font-medium text-[#F1F3EF]">
+                    <div className="text-sm font-medium text-[#101310]">
                       {h.title}
                       {h.isFirewall && (
-                        <span className="ml-2 text-[11px] font-mono text-[#10B981]">
+                        <span className="ml-2 text-xs font-normal text-[#10B981]">
                           — Programmatic Firewall
                         </span>
                       )}
                     </div>
-                    <div className="text-xs text-[#9A9F9B] mt-0.5">{h.description}</div>
+                    <div className="text-xs text-[#606660] mt-0.5">{h.description}</div>
                   </div>
                 </div>
 
-                <div className="text-xs font-mono text-[#7A807B] md:text-right shrink-0">
+                <div className="text-xs font-mono text-[#929892] md:text-right shrink-0">
                   {h.governance}
                 </div>
               </div>
@@ -143,10 +143,10 @@ export function SafetyArchitecture() {
         {/* 7 Independent Risk Controls Grid */}
         <div>
           <div className="flex items-center justify-between mb-4">
-            <div className="text-xs font-medium text-[#7A807B]">
+            <div className="text-xs font-medium text-[#606660]">
               Independent risk safeguards
             </div>
-            <span className="text-[11px] font-mono text-[#7A807B]">
+            <span className="text-[11px] text-[#929892]">
               Deterministic software bounds
             </span>
           </div>
@@ -155,18 +155,18 @@ export function SafetyArchitecture() {
             {RISK_CONTROLS.map((ctrl) => (
               <div
                 key={ctrl.title}
-                className="p-5 rounded-xl border border-white/[0.08] bg-[#111412] flex flex-col justify-between"
+                className="p-5 rounded-xl border border-[#E5E8E5] bg-white flex flex-col justify-between"
               >
                 <div>
-                  <div className="text-xs font-mono text-[#10B981] font-medium mb-2">
+                  <div className="text-xs font-mono text-[#10B981] font-medium mb-1.5">
                     {ctrl.rule}
                   </div>
-                  <h3 className="text-sm font-medium text-[#F1F3EF]">{ctrl.title}</h3>
-                  <p className="mt-2 text-xs text-[#9A9F9B] leading-relaxed">
+                  <h3 className="text-sm font-medium text-[#101310]">{ctrl.title}</h3>
+                  <p className="mt-2 text-xs text-[#606660] leading-relaxed">
                     {ctrl.description}
                   </p>
                 </div>
-                <div className="mt-4 pt-3 border-t border-white/[0.04] text-[10px] font-mono text-[#7A807B]">
+                <div className="mt-4 pt-3 border-t border-[#E5E8E5] text-[10px] font-mono text-[#929892]">
                   Hard constraint
                 </div>
               </div>

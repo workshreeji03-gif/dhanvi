@@ -6,137 +6,133 @@ import { EarlyAccessButton } from './ui-context'
 
 const PRODUCTS = [
   {
+    num: '01',
     id: 'institutional',
-    tier: '01 / Infrastructure',
     name: 'Dhanvi Institutional',
-    headline: 'AI-native investment infrastructure for professional funds',
+    status: 'Private Preview',
+    headline: 'Investment intelligence infrastructure for professional organizations.',
     description:
-      'Modular multi-agent deployment designed for quantitative desks, family offices, and institutional managers requiring autonomous research with deterministic risk governance.',
+      'Modular multi-agent deployment designed for quantitative desks, family offices, and institutional asset managers requiring autonomous research with deterministic risk governance.',
     capabilities: [
-      'Multi-agent market research pipelines',
-      'Strategy hypothesis generation & cross-validation',
-      'Deterministic risk & factor stress-testing',
-      'Forensic decision memory indexing ledger',
-      'Low-latency institutional execution connectivity',
+      'Research intelligence pipelines',
+      'Strategy hypothesis generation & backtesting',
+      'Portfolio covariance analytics',
+      'Deterministic risk intelligence',
+      'Immutable decision memory engine',
     ],
     actionText: 'Inquire for Institutional Preview',
   },
   {
+    num: '02',
     id: 'intelligence',
-    tier: '02 / Query API',
     name: 'Dhanvi Intelligence',
-    headline: 'Conversational synthesis over global market telemetry',
+    status: 'Early Access',
+    headline: "A conversational interface over Dhanvi's accumulated research intelligence.",
     description:
-      'A structured query interface allowing analysts to interrogate multi-agent findings, cross-asset regimes, and filing delta diffs in real time.',
-    sampleQueries: [
-      '“What changed across semiconductor supply chains this week?”',
-      '“What historical episodes resemble the current yield curve steepening?”',
-      '“Deconstruct the factor drivers behind our 72-hour drawdown.”',
-    ],
+      'A structured query interface allowing analysts to interrogate multi-agent findings, cross-asset regimes, and corporate disclosures in real time.',
     capabilities: [
-      'Natural-language semantic market query',
-      'Filing delta extraction & entity mapping',
-      'Factor sensitivity and attribution breakdowns',
+      'Natural-language research queries',
+      'Historical context & analog retrieval',
+      'Cross-asset market relationships',
+      'Decision intelligence breakdowns',
     ],
     actionText: 'Request API Early Access',
   },
   {
+    num: '03',
     id: 'personal',
-    tier: '03 / Research Roadmap',
     name: 'Dhanvi Personal',
-    headline: 'Constrained financial research co-pilot for individuals',
+    status: 'Research Roadmap',
+    headline: "A future constrained experience designed to bring parts of Dhanvi's research intelligence to individual investors.",
     description:
-      'A future, non-custodial research assistant helping self-directed investors evaluate portfolio factor exposures and market regime shifts.',
+      'A strictly non-custodial research assistant helping self-directed investors evaluate portfolio factor health and market regime shifts.',
     capabilities: [
-      'Personal portfolio factor risk inspection',
-      'Scenario stress-testing & regime notifications',
+      'Personal portfolio factor research',
+      'Portfolio health & regime insights',
+      'Scenario stress-testing',
       'Simulated paper-research laboratory',
-      'Educational intelligence insights',
     ],
     actionText: 'Join Waitlist',
-    disclaimer: 'Non-custodial research only. Does not manage client capital.',
+    disclaimer: 'Non-custodial research only. Does not manage client capital or provide automated execution.',
   },
 ]
 
 export function ProductDirections() {
   return (
-    <section id="products" className="py-28 sm:py-36 border-t border-white/[0.06] scroll-mt-20">
+    <section id="products" className="py-24 sm:py-32 border-t border-[#E5E8E5] bg-white scroll-mt-20">
       <div className="mx-auto max-w-7xl px-6 sm:px-10">
         {/* Editorial Section Header */}
         <div className="max-w-3xl mb-16 sm:mb-20">
-          <div className="text-xs font-medium text-[#9A9F9B] mb-3">
-            Product architecture
+          <div className="text-xs font-normal text-[#606660] mb-3">
+            Product directions
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#F1F3EF] leading-[1.12]">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#101310] leading-tight">
             Three product directions.
           </h2>
-          <p className="mt-5 text-base sm:text-lg text-[#9A9F9B] leading-relaxed">
+          <p className="mt-5 text-base sm:text-lg text-[#606660] leading-relaxed">
             Dhanvi is designing software-native financial intelligence for different scales of deployment
             — from institutional quantitative infrastructure to conversational research APIs and future personal tools.
           </p>
         </div>
 
-        {/* 3 Editorial Columns */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Editorial Layout: Large Numbering + Horizontal Dividers (No Generic SaaS Cards) */}
+        <div className="divide-y divide-[#E5E8E5] border-t border-b border-[#E5E8E5]">
           {PRODUCTS.map((prod) => (
             <div
               key={prod.id}
-              className="border border-white/[0.08] rounded-xl bg-[#111412] p-7 sm:p-8 flex flex-col justify-between"
+              className="py-12 sm:py-16 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start"
             >
-              <div>
-                {/* Tier Metadata */}
-                <div className="text-xs font-mono text-[#7A807B] mb-4">{prod.tier}</div>
+              {/* Large Display Number & Status */}
+              <div className="lg:col-span-3 flex lg:flex-col justify-between items-baseline lg:items-start gap-4">
+                <span className="text-4xl sm:text-5xl lg:text-6xl font-medium text-[#101310] font-mono tracking-tight">
+                  {prod.num}
+                </span>
+                <span className="text-xs font-mono text-[#10B981] bg-[#10B981]/10 px-2.5 py-1 rounded">
+                  {prod.status}
+                </span>
+              </div>
 
-                {/* Product Name & Headline */}
-                <h3 className="text-xl font-medium text-[#F1F3EF]">{prod.name}</h3>
-                <div className="text-xs text-[#9A9F9B] mt-1.5 font-normal leading-normal">
+              {/* Title & Description */}
+              <div className="lg:col-span-5 space-y-3">
+                <h3 className="text-2xl sm:text-3xl font-medium text-[#101310]">
+                  {prod.name}
+                </h3>
+                <div className="text-sm font-medium text-[#606660]">
                   {prod.headline}
                 </div>
-
-                <p className="mt-4 text-xs text-[#7A807B] leading-relaxed">
+                <p className="text-xs text-[#606660] leading-relaxed pt-1">
                   {prod.description}
                 </p>
-
-                {/* Sample Queries for Intelligence Tier */}
-                {prod.sampleQueries && (
-                  <div className="my-5 p-3.5 rounded-lg bg-[#0C0F0D] border border-white/[0.04] space-y-2">
-                    <div className="text-[10px] font-mono text-[#7A807B] uppercase tracking-wider">
-                      Sample Queries
-                    </div>
-                    {prod.sampleQueries.map((q) => (
-                      <div key={q} className="text-xs text-[#9A9F9B] italic">
-                        {q}
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {/* Capabilities list */}
-                <ul className="mt-6 pt-5 border-t border-white/[0.06] space-y-2.5 text-xs text-[#9A9F9B]">
-                  {prod.capabilities.map((cap) => (
-                    <li key={cap} className="flex items-start gap-2">
-                      <span className="text-[#10B981] leading-tight select-none">—</span>
-                      <span>{cap}</span>
-                    </li>
-                  ))}
-                </ul>
-
                 {prod.disclaimer && (
-                  <div className="mt-5 text-[11px] text-[#7A807B] italic">
+                  <div className="text-[11px] text-[#929892] italic pt-2">
                     *{prod.disclaimer}
                   </div>
                 )}
               </div>
 
-              {/* Action Button */}
-              <div className="mt-8 pt-5 border-t border-white/[0.06]">
-                <EarlyAccessButton
-                  source={`product_${prod.id}`}
-                  className="w-full inline-flex items-center justify-between rounded-lg border border-white/[0.08] bg-[#151816] px-4 py-2.5 text-xs font-medium text-[#F1F3EF] hover:border-white/[0.2] transition-colors cursor-pointer"
-                >
-                  <span>{prod.actionText}</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-[#9A9F9B]" />
-                </EarlyAccessButton>
+              {/* Capabilities & CTA */}
+              <div className="lg:col-span-4 space-y-5 lg:pl-6">
+                <div className="text-xs font-medium text-[#101310]">
+                  Key capabilities:
+                </div>
+                <ul className="space-y-2 text-xs text-[#606660]">
+                  {prod.capabilities.map((cap) => (
+                    <li key={cap} className="flex items-start gap-2">
+                      <span className="text-[#10B981] select-none">—</span>
+                      <span>{cap}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="pt-3">
+                  <EarlyAccessButton
+                    source={`product_${prod.id}`}
+                    className="inline-flex items-center gap-2 rounded-lg border border-[#E5E8E5] hover:border-[#D8DDD8] bg-white px-4 py-2 text-xs font-medium text-[#101310] transition-colors cursor-pointer"
+                  >
+                    <span>{prod.actionText}</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-[#606660]" />
+                  </EarlyAccessButton>
+                </div>
               </div>
             </div>
           ))}

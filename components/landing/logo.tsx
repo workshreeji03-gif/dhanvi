@@ -7,7 +7,7 @@ export function Logo({ className }: { className?: string }) {
       alt="Logo"
       width={32}
       height={32}
-      className={className}
+      className={`invert ${className || ''}`}
     />
   )
 }

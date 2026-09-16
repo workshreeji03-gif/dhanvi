@@ -12,7 +12,7 @@ interface StrategyNode {
 const REGIMES: Record<string, { label: string; context: string; strategies: StrategyNode[] }> = {
   expansion: {
     label: 'Expansion regime',
-    context: 'Orderly equity trends, normal credit spreads, and active liquidity.',
+    context: 'Orderly equity trends, normal credit spreads, and active market liquidity.',
     strategies: [
       { name: 'Momentum', category: 'Trend', role: 'Cross-asset directional drift', weight: 26 },
       { name: 'Fundamental', category: 'Quality', role: 'Earnings durability & moat health', weight: 22 },
@@ -49,30 +49,12 @@ const REGIMES: Record<string, { label: string; context: string; strategies: Stra
 }
 
 const ALLOCATION_PRINCIPLES = [
-  {
-    name: 'Risk',
-    desc: 'Value at Risk and Expected Shortfall limits bound maximum position sizing.',
-  },
-  {
-    name: 'Correlation',
-    desc: 'Cross-strategy covariance matrix dampens unintended factor concentration.',
-  },
-  {
-    name: 'Liquidity',
-    desc: 'Realistic exit horizons prevent outsized positions in fragile order books.',
-  },
-  {
-    name: 'Drawdown',
-    desc: 'Firm drawdown budgets trigger progressive, non-discretionary de-risking.',
-  },
-  {
-    name: 'Regime',
-    desc: 'Alphas are dynamically weighted by their suitability for the active environment.',
-  },
-  {
-    name: 'Uncertainty',
-    desc: 'Epistemic confidence metrics penalize hypotheses with insufficient precedent.',
-  },
+  { name: 'Risk', desc: 'Value at Risk and Expected Shortfall limits bound maximum position sizing.' },
+  { name: 'Correlation', desc: 'Cross-strategy covariance matrix dampens unintended factor concentration.' },
+  { name: 'Liquidity', desc: 'Realistic exit horizons prevent outsized positions in fragile order books.' },
+  { name: 'Drawdown', desc: 'Firm drawdown budgets trigger progressive, non-discretionary de-risking.' },
+  { name: 'Regime', desc: 'Alphas are dynamically weighted by their suitability for the active environment.' },
+  { name: 'Uncertainty', desc: 'Epistemic confidence metrics penalize hypotheses with insufficient precedent.' },
 ]
 
 export function MultiStrategyLab() {
@@ -80,114 +62,114 @@ export function MultiStrategyLab() {
   const currentRegime = REGIMES[activeRegimeKey]
 
   return (
-    <section id="strategies" className="py-24 sm:py-32 border-t border-white/[0.06] scroll-mt-20">
+    <section id="strategies" className="py-24 sm:py-32 border-t border-[#E5E8E5] bg-[#F7F8F6] scroll-mt-20">
       <div className="mx-auto max-w-7xl px-6 sm:px-10">
         {/* Editorial Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div className="max-w-2xl">
-            <div className="text-xs font-medium text-[#9A9F9B] mb-3">
+            <div className="text-xs font-normal text-[#606660] mb-3">
               Strategy competition
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#F1F3EF] leading-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#101310] leading-tight">
               Many hypotheses.
               <br />
               One portfolio.
             </h2>
-            <p className="mt-4 text-base text-[#9A9F9B] leading-relaxed">
+            <p className="mt-4 text-base text-[#606660] leading-relaxed">
               Dhanvi simulates multiple independent strategies simultaneously. Competing alphas are
               continuously evaluated and dynamically weighted across shifting market regimes.
             </p>
           </div>
 
           {/* Regime Switcher */}
-          <div className="flex items-center gap-2 p-1 rounded-lg border border-white/[0.08] bg-[#111412] self-start md:self-end">
-            {Object.entries(REGIMES).map(([key, regime]) => (
+          <div className="flex items-center gap-2 p-1 rounded-lg border border-[#E5E8E5] bg-white text-xs">
+            {Object.entries(REGIMES).map(([key, reg]) => (
               <button
                 key={key}
                 type="button"
                 onClick={() => setActiveRegimeKey(key)}
-                className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors cursor-pointer ${
+                className={`px-3 py-1.5 rounded-md transition-colors cursor-pointer text-xs font-medium ${
                   activeRegimeKey === key
-                    ? 'bg-[#151816] text-[#F1F3EF] border border-white/[0.08]'
-                    : 'text-[#9A9F9B] hover:text-[#F1F3EF]'
+                    ? 'bg-[#101310] text-white'
+                    : 'text-[#606660] hover:text-[#101310]'
                 }`}
               >
-                {regime.label}
+                {reg.label}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Spatial Strategy Representation */}
-        <div className="p-6 sm:p-10 rounded-xl border border-white/[0.08] bg-[#111412] mb-14">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-white/[0.06] pb-4 mb-8 text-xs">
-            <div className="text-[#9A9F9B]">
-              Active regime: <span className="text-[#F1F3EF] font-medium">{currentRegime.label}</span>
-            </div>
-            <div className="text-[11px] font-mono text-[#7A807B]">
-              Simulated alpha distribution • Illustrative
-            </div>
+        {/* Minimal Strategy Visualization: Strategies Connected to Central Portfolio Node */}
+        <div className="p-8 sm:p-12 rounded-xl border border-[#E5E8E5] bg-white mb-14">
+          <div className="text-center max-w-xl mx-auto mb-10">
+            <span className="text-xs font-mono text-[#10B981]">
+              REGIME: {currentRegime.label.toUpperCase()}
+            </span>
+            <p className="mt-1 text-xs text-[#606660]">
+              {currentRegime.context}
+            </p>
           </div>
 
-          {/* 6 Spatial Strategy Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {/* Grid of Strategy Concepts with Central Portfolio Hub */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 items-center">
             {currentRegime.strategies.map((strat) => (
               <div
                 key={strat.name}
-                className="p-5 rounded-lg border border-white/[0.06] bg-[#151816] transition-all hover:border-white/[0.12]"
+                className="p-4 rounded-lg border border-[#E5E8E5] bg-[#F7F8F6] flex flex-col justify-between min-h-[120px] transition-all"
               >
-                <div className="flex items-center justify-between text-[11px] font-mono text-[#7A807B] mb-2">
-                  <span>{strat.category}</span>
-                  <span className="text-[#10B981] font-semibold">{strat.weight}% weight</span>
+                <div>
+                  <div className="flex items-center justify-between text-xs mb-1">
+                    <span className="font-medium text-[#101310]">{strat.name}</span>
+                    <span className="text-[11px] font-mono font-semibold text-[#10B981]">
+                      {strat.weight}%
+                    </span>
+                  </div>
+                  <div className="text-[11px] text-[#606660]">{strat.category}</div>
                 </div>
-                <div className="text-base font-medium text-[#F1F3EF] mb-1">
-                  {strat.name}
-                </div>
-                <div className="text-xs text-[#9A9F9B] leading-relaxed">
+                <div className="text-[10px] text-[#929892] mt-3 leading-tight">
                   {strat.role}
-                </div>
-
-                {/* Subtle visual weight indicator */}
-                <div className="mt-4 w-full bg-white/[0.06] h-[2px] rounded-full overflow-hidden">
-                  <div
-                    className="bg-[#10B981] h-full transition-all duration-500"
-                    style={{ width: `${strat.weight * 2.5}%` }}
-                  />
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="mt-6 text-xs text-[#7A807B] leading-relaxed">
-            {currentRegime.context}
+          {/* Central Portfolio Allocation Convergence */}
+          <div className="mt-8 pt-6 border-t border-[#E5E8E5] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+            <div className="flex items-center gap-3">
+              <span className="w-2 h-2 rounded-full bg-[#10B981]" />
+              <span className="font-medium text-[#101310]">
+                Central Portfolio Weighting
+              </span>
+              <span className="text-[#929892]">— dynamic multi-factor covariance</span>
+            </div>
+            <span className="font-mono text-[#929892] text-[11px]">
+              * Illustrative strategy allocation model
+            </span>
           </div>
         </div>
 
-        {/* Capital Allocation Editorial Principles */}
-        <div className="pt-8 border-t border-white/[0.06]">
-          <div className="max-w-2xl mb-8">
-            <div className="text-xs font-mono text-[#10B981] mb-2">
-              GOVERNANCE PRINCIPLE
-            </div>
-            <h3 className="text-2xl sm:text-3xl font-medium text-[#F1F3EF] tracking-tight">
-              Capital is not allocated based on performance alone.
-            </h3>
-            <p className="text-sm text-[#9A9F9B] mt-2 leading-relaxed">
-              Past returns are an unreliable guide to future covariance. Dhanvi weights strategies
-              through multi-factor portfolio construction constraints.
-            </p>
+        {/* Capital Allocation Principles — Minimal Typographic List */}
+        <div>
+          <div className="text-sm font-medium text-[#101310] mb-2">
+            Capital allocation considers more than recent performance.
+          </div>
+          <div className="text-xs text-[#606660] mb-6">
+            Dhanvi weights capital according to fundamental portfolio construction principles:
           </div>
 
-          {/* Editorial Annotations Grid (6 Principles) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
-            {ALLOCATION_PRINCIPLES.map((item) => (
-              <div key={item.name} className="space-y-1.5">
-                <div className="text-sm font-medium text-[#F1F3EF]">
-                  {item.name}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            {ALLOCATION_PRINCIPLES.map((principle) => (
+              <div
+                key={principle.name}
+                className="p-4 rounded-lg border border-[#E5E8E5] bg-white space-y-1.5"
+              >
+                <div className="text-xs font-medium text-[#101310]">
+                  {principle.name}
                 </div>
-                <p className="text-xs text-[#9A9F9B] leading-relaxed">
-                  {item.desc}
-                </p>
+                <div className="text-[11px] text-[#606660] leading-relaxed">
+                  {principle.desc}
+                </div>
               </div>
             ))}
           </div>

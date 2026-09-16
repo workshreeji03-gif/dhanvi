@@ -42,41 +42,41 @@
 }
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
   --radius: 0.5rem;
 
-  --background: #080A09;
-  --foreground: #F1F3EF;
+  --background: #FFFFFF;
+  --foreground: #101310;
 
-  --card: #111412;
-  --card-foreground: #F1F3EF;
-  --popover: #111412;
-  --popover-foreground: #F1F3EF;
+  --card: #FFFFFF;
+  --card-foreground: #101310;
+  --popover: #FFFFFF;
+  --popover-foreground: #101310;
 
   --primary: #10B981;
-  --primary-foreground: #080A09;
+  --primary-foreground: #FFFFFF;
 
-  --secondary: #151816;
-  --secondary-foreground: #F1F3EF;
+  --secondary: #F7F8F6;
+  --secondary-foreground: #101310;
 
-  --muted: #151816;
-  --muted-foreground: #9A9F9B;
+  --muted: #F7F8F6;
+  --muted-foreground: #606660;
 
-  --accent: #151816;
+  --accent: #F7F8F6;
   --accent-foreground: #10B981;
 
   --destructive: #ef4444;
 
-  --border: rgba(255, 255, 255, 0.08);
-  --input: rgba(255, 255, 255, 0.08);
+  --border: #E5E8E5;
+  --input: #E5E8E5;
   --ring: #10B981;
 
   --positive: #10B981;
-  --positive-foreground: #080A09;
+  --positive-foreground: #FFFFFF;
   --info: #0ea5e9;
   --info-foreground: #FFFFFF;
   --warning: #f59e0b;
-  --warning-foreground: #080A09;
+  --warning-foreground: #101310;
 }
 
 @layer base {

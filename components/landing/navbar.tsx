@@ -10,7 +10,8 @@ import { EarlyAccessButton } from './ui-context'
 const NAV_LINKS = [
   { label: 'Intelligence', href: '#intelligence' },
   { label: 'Architecture', href: '#architecture' },
-  { label: 'Research', href: '#research' },
+  { label: 'Strategies', href: '#strategies' },
+  { label: 'Memory', href: '#memory' },
   { label: 'Vision', href: '#vision' },
 ]
 
@@ -20,7 +21,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
+    const onScroll = () => setScrolled(window.scrollY > 15)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -34,15 +35,15 @@ export function Navbar() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-200 ${
         scrolled
-          ? 'border-b border-white/[0.07] bg-[#080A09]/90 backdrop-blur-md'
-          : 'border-b border-transparent bg-transparent'
+          ? 'border-b border-[#E5E8E5] bg-white/95 backdrop-blur-xs'
+          : 'border-b border-transparent bg-white'
       }`}
     >
       <nav
         className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 sm:px-10"
         aria-label="Primary"
       >
-        {/* Left: Authoritative Dhanvi Logo */}
+        {/* Left: Authentic Dhanvi Logo */}
         <Link
           href="/"
           className="flex items-center gap-3 transition-opacity hover:opacity-90"
@@ -51,13 +52,13 @@ export function Navbar() {
           <Logo className="h-7 w-auto" />
         </Link>
 
-        {/* Center: Simplified Navigation Links */}
+        {/* Center: Clean Editorial Navigation Links */}
         <ul className="hidden items-center gap-8 md:flex">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
-                className="text-xs font-medium text-[#9A9F9B] transition-colors hover:text-[#F1F3EF]"
+                className="text-xs font-medium text-[#606660] transition-colors hover:text-[#101310]"
               >
                 {link.label}
               </a>
@@ -65,11 +66,11 @@ export function Navbar() {
           ))}
         </ul>
 
-        {/* Right Action: Restrained Primary CTA */}
+        {/* Right Action: Primary CTA */}
         <div className="hidden items-center md:flex">
           <EarlyAccessButton
             source="navbar"
-            className="inline-flex items-center justify-center rounded-md bg-[#10B981] px-4 py-2 text-xs font-semibold text-[#080A09] transition-all hover:bg-[#059669] active:scale-[0.99] cursor-pointer"
+            className="inline-flex items-center justify-center rounded-lg bg-[#10B981] hover:bg-[#059669] px-4 py-2 text-xs font-medium text-white transition-colors cursor-pointer"
           >
             <span>Join Early Access</span>
           </EarlyAccessButton>
@@ -78,7 +79,7 @@ export function Navbar() {
         {/* Mobile Menu Trigger */}
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-md p-2 text-[#9A9F9B] hover:text-[#F1F3EF] hover:bg-white/[0.04] md:hidden cursor-pointer"
+          className="inline-flex items-center justify-center rounded-lg p-2 text-[#606660] hover:text-[#101310] hover:bg-[#F7F8F6] md:hidden cursor-pointer"
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -89,23 +90,23 @@ export function Navbar() {
 
       {/* Mobile Navigation Drawer */}
       {open && (
-        <div className="border-b border-white/[0.08] bg-[#080A09]/98 backdrop-blur-xl md:hidden">
+        <div className="border-b border-[#E5E8E5] bg-white md:hidden">
           <ul className="mx-auto flex max-w-7xl flex-col gap-2 px-6 py-6 sm:px-10">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="block py-2 text-sm font-medium text-[#9A9F9B] transition-colors hover:text-[#F1F3EF]"
+                  className="block py-2 text-sm font-medium text-[#606660] transition-colors hover:text-[#101310]"
                 >
                   {link.label}
                 </a>
               </li>
             ))}
-            <li className="pt-4 mt-2 border-t border-white/[0.06]">
+            <li className="pt-3 border-t border-[#E5E8E5] mt-2">
               <EarlyAccessButton
                 source="mobile_nav"
-                className="flex items-center justify-center w-full rounded-md bg-[#10B981] px-4 py-2.5 text-center text-xs font-semibold text-[#080A09] transition-colors hover:bg-[#059669] cursor-pointer"
+                className="flex items-center justify-center w-full rounded-lg bg-[#10B981] hover:bg-[#059669] px-4 py-2.5 text-xs font-medium text-white transition-colors cursor-pointer"
               >
                 <span>Join Early Access</span>
               </EarlyAccessButton>
