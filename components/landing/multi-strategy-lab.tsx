@@ -119,13 +119,18 @@ export function MultiStrategyLab() {
                 className="p-4 rounded-lg border border-[#E4E8E4] bg-[#F7F9F7] flex flex-col justify-between min-h-[120px] transition-all"
               >
                 <div>
-                  <div className="flex items-center justify-between text-xs mb-1">
-                    <span className="font-semibold text-[#111411] tracking-[-0.01em]">{strat.name}</span>
-                    <span className="text-[11px] font-mono tabular-nums font-bold text-[#10B981]">
-                      {strat.weight}%
-                    </span>
+                  <div className="text-xs font-semibold text-[#111411] tracking-[-0.01em]">
+                    {strat.name}
                   </div>
-                  <div className="text-[11px] text-[#5F665F] font-medium">{strat.category}</div>
+                  <div className="text-[11px] text-[#5F665F] font-medium mt-0.5">
+                    {strat.category}
+                  </div>
+                  <div className="mt-2.5 w-full bg-[#E4E8E4] h-1.5 rounded-full overflow-hidden">
+                    <div
+                      className="bg-[#10B981] h-full rounded-full transition-all duration-500"
+                      style={{ width: `${Math.round((strat.weight / 35) * 100)}%` }}
+                    />
+                  </div>
                 </div>
                 <div className="text-[11px] text-[#8B928C] mt-3 leading-tight font-normal">
                   {strat.role}
