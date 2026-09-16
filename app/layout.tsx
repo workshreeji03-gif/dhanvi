@@ -16,22 +16,23 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Dhanvi — The AI Finance Operating System for Businesses',
+  title: 'Dhanvi — AI-Native Investment Intelligence',
   description:
-    'Dhanvi is an AI finance co-pilot that continuously captures, organizes, and understands your business finances — giving you a live view of cash flow, profit, expenses, and financial health. Built to work alongside your accountant.',
-  generator: 'v0.app',
+    'Dhanvi is building a multi-agent investment intelligence system for market research, strategy development, portfolio intelligence, risk and continuous learning.',
+  generator: 'Dhanvi',
   keywords: [
-    'AI finance',
-    'financial operating system',
-    'SMB accounting',
-    'cash flow',
-    'AI co-pilot',
+    'AI investment intelligence',
+    'multi-agent financial research',
+    'quantitative strategies',
+    'portfolio intelligence',
+    'autonomous trading research',
+    'institutional risk engine',
     'Dhanvi',
   ],
   openGraph: {
-    title: 'Dhanvi — The AI Finance Operating System for Businesses',
+    title: 'Dhanvi — AI-Native Investment Intelligence',
     description:
-      'Your business finances. Always up to date. An AI finance co-pilot that works alongside your accountant.',
+      'A multi-agent investment intelligence system where specialized AI agents collaborate across market research, strategy generation, risk management, and institutional memory.',
     type: 'website',
   },
   icons: {
@@ -57,7 +58,22 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} bg-background`}
     >
-      <body className="font-sans antialiased">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                var h = window.location.hash || '';
+                var s = window.location.search || '';
+                if ((h.indexOf('type=recovery') !== -1 || s.indexOf('type=recovery') !== -1) && window.location.pathname !== '/reset-password') {
+                  window.location.replace('/reset-password' + s + h);
+                }
+              } catch(e) {}
+            `,
+          }}
+        />
+      </head>
+      <body className="font-sans antialiased selection:bg-emerald-100 selection:text-emerald-950">
         <Suspense fallback={null}>
           <AuthHashListener />
         </Suspense>

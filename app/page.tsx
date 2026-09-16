@@ -1,28 +1,14 @@
 import { Navbar } from '@/components/landing/navbar'
 import { Hero } from '@/components/landing/hero'
-import { Problem } from '@/components/landing/problem'
-import { WatchWork } from '@/components/landing/watch-work'
-import { InteractiveDashboard } from '@/components/landing/interactive-dashboard'
-import { BeforeAfter } from '@/components/landing/before-after'
-import { NewWay } from '@/components/landing/new-way'
-import { HowItWorks } from '@/components/landing/how-it-works'
-import { AskDhanvi } from '@/components/landing/ask-dhanvi'
-import { AiAssistant } from '@/components/landing/ai-assistant'
-import { AiMonitoring } from '@/components/landing/ai-monitoring'
-import { Proactive } from '@/components/landing/proactive'
-import { BusinessHealth } from '@/components/landing/business-health'
-import { RealtimeVsMonthend } from '@/components/landing/realtime-vs-monthend'
-import { AlwaysUpdated } from '@/components/landing/always-updated'
-import { EverythingConnected } from '@/components/landing/everything-connected'
-import { IndustrySelector } from '@/components/landing/industry-selector'
-import { DualPerspective } from '@/components/landing/dual-perspective'
-import { ForBusinesses } from '@/components/landing/for-businesses'
-import { ForAccountants } from '@/components/landing/for-accountants'
-import { DayWith } from '@/components/landing/day-with'
-import { WhyNow } from '@/components/landing/why-now'
-import { Vision } from '@/components/landing/vision'
-import { Trust } from '@/components/landing/trust'
-import { FinalCta } from '@/components/landing/final-cta'
+import { ProblemSection } from '@/components/landing/problem-section'
+import { IntelligenceLayer } from '@/components/landing/intelligence-layer'
+import { DecisionPipeline } from '@/components/landing/decision-pipeline'
+import { MultiStrategyLab } from '@/components/landing/multi-strategy-lab'
+import { DecisionMemory } from '@/components/landing/decision-memory'
+import { SafetyArchitecture } from '@/components/landing/safety-architecture'
+import { ProductDirections } from '@/components/landing/product-directions'
+import { IntelligenceTerminal } from '@/components/landing/intelligence-terminal'
+import { EarlyAccessSection } from '@/components/landing/early-access-section'
 import { Footer } from '@/components/landing/footer'
 import { LandingProviders } from '@/components/landing/ui-context'
 import { PageBackground } from '@/components/landing/page-background'
@@ -30,35 +16,40 @@ import { PageBackground } from '@/components/landing/page-background'
 export default function Page() {
   return (
     <LandingProviders>
-      <div id="top" className="relative min-h-dvh bg-background">
+      <div id="top" className="relative min-h-dvh bg-background selection:bg-emerald-100 selection:text-emerald-950 font-sans">
         <PageBackground />
         <div className="relative z-10">
           <Navbar />
           <main>
+            {/* 1. Hero & Network Architecture Visualization */}
             <Hero />
-            <Problem />
-            <WatchWork />
-            <InteractiveDashboard />
-            <BeforeAfter />
-            <NewWay />
-            <HowItWorks />
-            <AskDhanvi />
-            <AiAssistant />
-            <AiMonitoring />
-            <Proactive />
-            <BusinessHealth />
-            <RealtimeVsMonthend />
-            <AlwaysUpdated />
-            <EverythingConnected />
-            <IndustrySelector />
-            <DualPerspective />
-            <ForBusinesses />
-            <ForAccountants />
-            <DayWith />
-            <WhyNow />
-            <Vision />
-            <Trust />
-            <FinalCta />
+
+            {/* 2. The Problem & Paradigm Shift */}
+            <ProblemSection />
+
+            {/* 3. The 9 Specialized Intelligence Agents */}
+            <IntelligenceLayer />
+
+            {/* 4. The 9-Stage Decision Pipeline */}
+            <DecisionPipeline />
+
+            {/* 5. Multi-Strategy Simulation Lab */}
+            <MultiStrategyLab />
+
+            {/* 6. Institutional Decision Memory */}
+            <DecisionMemory />
+
+            {/* 7. Architecture & Independent Safety Layer */}
+            <SafetyArchitecture />
+
+            {/* 8. Three Product Directions */}
+            <ProductDirections />
+
+            {/* 9. Live-Style Intelligence Terminal */}
+            <IntelligenceTerminal />
+
+            {/* 10. Early Access Conversion Section */}
+            <EarlyAccessSection />
           </main>
           <Footer />
         </div>
