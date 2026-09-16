@@ -309,12 +309,12 @@ export function NetworkVisualization() {
             <div className="text-xs sm:text-[13px] font-medium tracking-[-0.01em] text-[#5F665F] mb-3">
               Dhanvi Intelligence Architecture
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-bold tracking-[-0.035em] text-[#111411] leading-[1.12]">
+            <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-semibold tracking-tight text-[#111827] leading-[1.12]">
               Specialized intelligence.
               <br />
               One shared <span className="text-[#10B981]">understanding.</span>
             </h2>
-            <p className="mt-4 text-base sm:text-[18px] text-[#5F665F] leading-[1.62] tracking-[-0.01em]">
+            <p className="mt-4 text-base sm:text-[18px] text-[#4B5563] leading-relaxed">
               Dhanvi approaches markets through specialized research agents, each focused on a
               different dimension of the investment environment.
             </p>
@@ -325,7 +325,7 @@ export function NetworkVisualization() {
             <button
               type="button"
               onClick={() => setIsPaused(!isPaused)}
-              className="py-1.5 px-3 rounded-lg border border-[#E4E8E4] hover:border-[#111411] hover:text-[#111411] transition-colors cursor-pointer text-xs font-semibold tracking-[-0.01em] bg-white shadow-xs"
+              className="py-1.5 px-3.5 rounded-full border border-[#E4E8E4] hover:border-[#111827] hover:text-[#111827] transition-colors cursor-pointer text-xs font-semibold tracking-tight bg-white shadow-xs"
             >
               {isPaused ? 'Resume cycle' : 'Pause'}
             </button>

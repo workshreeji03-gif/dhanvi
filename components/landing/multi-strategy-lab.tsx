@@ -70,28 +70,28 @@ export function MultiStrategyLab() {
             <div className="text-xs font-medium text-[#5F665F] mb-3 tracking-wide uppercase">
               Strategy competition
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-bold tracking-[-0.035em] text-[#111411] leading-[1.08]">
+            <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-semibold tracking-tight text-[#111827] leading-[1.08]">
               Many hypotheses.
               <br />
               One portfolio.
             </h2>
-            <p className="mt-4 text-base text-[#5F665F] leading-relaxed font-normal tracking-[-0.01em]">
+            <p className="mt-4 text-base text-[#4B5563] leading-relaxed font-normal">
               Dhanvi simulates multiple independent strategies simultaneously. Competing alphas are
               continuously evaluated and dynamically weighted across shifting market regimes.
             </p>
           </div>
 
           {/* Regime Switcher */}
-          <div className="flex items-center gap-2 p-1 rounded-lg border border-[#E4E8E4] bg-white text-xs shadow-xs">
+          <div className="flex items-center gap-1.5 p-1 rounded-full border border-[#E4E8E4] bg-white text-xs shadow-xs">
             {Object.entries(REGIMES).map(([key, reg]) => (
               <button
                 key={key}
                 type="button"
                 onClick={() => setActiveRegimeKey(key)}
-                className={`px-3 py-1.5 rounded-md transition-colors cursor-pointer text-xs font-medium tracking-[-0.01em] ${
+                className={`px-3.5 py-1.5 rounded-full transition-colors cursor-pointer text-xs font-medium tracking-tight ${
                   activeRegimeKey === key
-                    ? 'bg-[#111411] text-white font-semibold'
-                    : 'text-[#5F665F] hover:text-[#111411]'
+                    ? 'bg-[#111827] text-white font-semibold'
+                    : 'text-[#5F665F] hover:text-[#111827]'
                 }`}
               >
                 {reg.label}

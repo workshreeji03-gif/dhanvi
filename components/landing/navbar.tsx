@@ -53,13 +53,13 @@ export function Navbar() {
           <Logo className="h-7 w-auto" />
         </Link>
 
-        {/* Center: Clean Editorial Navigation Links */}
-        <ul className="hidden items-center gap-8 md:flex">
+        {/* Center: Clean Navigation Links */}
+        <ul className="hidden items-center gap-7 md:flex">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
-                className="text-[14px] font-medium tracking-[-0.01em] text-[#444A45] transition-colors hover:text-[#111411]"
+                className="text-sm font-medium text-[#4B5563] transition-colors hover:text-[#111827]"
               >
                 {link.label}
               </a>
@@ -67,11 +67,18 @@ export function Navbar() {
           ))}
         </ul>
 
-        {/* Right Action: Primary CTA */}
-        <div className="hidden items-center md:flex">
+        {/* Right Action: Clean Buttons matching Image 1 */}
+        <div className="hidden items-center gap-3 md:flex">
+          <Link
+            href="/dashboard"
+            className="inline-flex items-center justify-center rounded-full bg-[#111827] hover:bg-black px-4 py-2 text-xs sm:text-sm font-semibold tracking-tight text-white transition-all shadow-xs cursor-pointer"
+          >
+            <span>Launch App</span>
+            <span className="ml-1 text-xs">→</span>
+          </Link>
           <EarlyAccessButton
             source="navbar"
-            className="inline-flex items-center justify-center rounded-lg bg-[#10B981] hover:bg-[#059669] px-4 py-2 text-xs sm:text-sm font-semibold tracking-[-0.01em] text-white transition-colors cursor-pointer shadow-xs"
+            className="inline-flex items-center justify-center rounded-full border border-[#E4E8E4] bg-white hover:bg-[#F7F9F7] px-4 py-2 text-xs sm:text-sm font-semibold tracking-tight text-[#111827] transition-colors cursor-pointer shadow-xs"
           >
             <span>Join Early Access</span>
           </EarlyAccessButton>
@@ -104,10 +111,17 @@ export function Navbar() {
                 </a>
               </li>
             ))}
-            <li className="pt-3 border-t border-[#E4E8E4] mt-2">
+            <li className="pt-3 border-t border-[#E4E8E4] mt-2 flex flex-col gap-2">
+              <Link
+                href="/dashboard"
+                onClick={() => setOpen(false)}
+                className="flex items-center justify-center w-full rounded-full bg-[#111827] hover:bg-black px-4 py-2.5 text-xs sm:text-sm font-semibold tracking-tight text-white transition-colors"
+              >
+                <span>Launch App →</span>
+              </Link>
               <EarlyAccessButton
                 source="mobile_nav"
-                className="flex items-center justify-center w-full rounded-lg bg-[#10B981] hover:bg-[#059669] px-4 py-2.5 text-xs sm:text-sm font-semibold tracking-[-0.01em] text-white transition-colors cursor-pointer"
+                className="flex items-center justify-center w-full rounded-full border border-[#E4E8E4] bg-white hover:bg-[#F7F9F7] px-4 py-2.5 text-xs sm:text-sm font-semibold tracking-tight text-[#111827] transition-colors cursor-pointer"
               >
                 <span>Join Early Access</span>
               </EarlyAccessButton>

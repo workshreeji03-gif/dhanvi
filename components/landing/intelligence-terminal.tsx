@@ -149,10 +149,10 @@ export function IntelligenceTerminal() {
           <div className="text-xs font-medium uppercase tracking-wide text-[#5F665F] mb-3">
             Research Telemetry
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-bold tracking-[-0.035em] text-[#111411] leading-[1.08]">
+          <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-semibold tracking-tight text-[#111827] leading-[1.08]">
             Real-time research telemetry.
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#5F665F] leading-relaxed font-normal tracking-[-0.01em]">
+          <p className="mt-4 text-base sm:text-lg text-[#4B5563] leading-relaxed font-normal">
             Inspect the telemetry stream as specialized agents formulate hypotheses, evaluate
             risk boundaries, and archive decision context into memory.
           </p>

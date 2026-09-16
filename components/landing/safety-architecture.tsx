@@ -83,12 +83,12 @@ export function SafetyArchitecture() {
           <div className="text-xs font-medium text-[#5F665F] mb-3 tracking-wide uppercase">
             Deterministic risk governance
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-bold tracking-[-0.035em] text-[#111411] leading-[1.08]">
+          <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-semibold tracking-tight text-[#111827] leading-[1.08]">
             Autonomous intelligence does not mean
             <br />
             unrestricted control.
           </h2>
-          <p className="mt-5 text-base sm:text-lg text-[#5F665F] leading-relaxed font-normal tracking-[-0.01em]">
+          <p className="mt-5 text-base sm:text-lg text-[#4B5563] leading-relaxed font-normal">
             In financial systems, machine learning models cannot be allowed to alter their own safety
             boundaries. Dhanvi isolates risk management in a separate, deterministic software layer
             outside agent reasoning — enforcing hard rules that AI cannot override or negotiate away.

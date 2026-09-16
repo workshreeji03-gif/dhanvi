@@ -11,10 +11,10 @@ export function ProblemSection() {
           <div className="text-xs sm:text-[13px] font-medium tracking-[-0.01em] text-[#5F665F] mb-3">
             The structural problem
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-bold tracking-[-0.035em] text-[#111411] leading-[1.12]">
+          <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-semibold tracking-tight text-[#111827] leading-[1.12]">
             Institutional asset management was designed around human bottlenecks.
           </h2>
-          <p className="mt-5 text-base sm:text-[18px] text-[#5F665F] leading-[1.62] tracking-[-0.01em]">
+          <p className="mt-5 text-base sm:text-[18px] text-[#4B5563] leading-relaxed">
             Specialized teams traditionally operate in separate functional silos — passing memos,
             spreadsheets, and delayed models across organizational boundaries with inevitable friction.
           </p>

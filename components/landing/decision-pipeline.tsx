@@ -80,10 +80,10 @@ export function DecisionPipeline() {
           <div className="text-xs font-medium text-[#5F665F] mb-3 tracking-wide uppercase">
             Decision lifecycle
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-bold tracking-[-0.035em] text-[#111411] leading-[1.08]">
+          <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-semibold tracking-tight text-[#111827] leading-[1.08]">
             From information to decision.
           </h2>
-          <p className="mt-4 text-base text-[#5F665F] leading-relaxed font-normal tracking-[-0.01em]">
+          <p className="mt-4 text-base text-[#4B5563] leading-relaxed font-normal">
             How market observations move through multi-agent research, hypothesis debate, portfolio
             allocation, independent risk verification, and institutional memory.
           </p>

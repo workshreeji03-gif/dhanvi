@@ -12,11 +12,11 @@ export function EarlyAccessSection() {
           Research & Private Preview
         </div>
 
-        <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-[-0.04em] text-[#111411] leading-[1.05]">
+        <h2 className="text-3xl sm:text-4xl lg:text-[48px] font-semibold tracking-tight text-[#111827] leading-[1.08]">
           The investment institution of the future may look very different.
         </h2>
 
-        <p className="mt-6 text-base sm:text-lg text-[#5F665F] max-w-2xl mx-auto leading-relaxed font-normal tracking-[-0.01em]">
+        <p className="mt-6 text-base sm:text-lg text-[#4B5563] max-w-2xl mx-auto leading-relaxed font-normal">
           Dhanvi is being built at the intersection of artificial intelligence, financial research,
           quantitative systems, and autonomous software. Join our early-access waitlist to participate
           in research updates and private previews.
@@ -25,10 +25,10 @@ export function EarlyAccessSection() {
         <div className="mt-10 flex justify-center">
           <EarlyAccessButton
             source="bottom_cta"
-            className="inline-flex items-center gap-2 rounded-lg bg-[#10B981] hover:bg-[#059669] px-6 py-3 text-xs sm:text-sm font-semibold text-white shadow-xs transition-colors cursor-pointer tracking-[-0.01em]"
+            className="group inline-flex items-center gap-2 rounded-full bg-[#111827] hover:bg-black px-7 py-3.5 text-sm font-semibold text-white shadow-sm transition-all hover:shadow-md cursor-pointer tracking-tight"
           >
             <span>Join Early Access</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
           </EarlyAccessButton>
         </div>
 
