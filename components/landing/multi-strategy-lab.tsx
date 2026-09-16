@@ -82,13 +82,13 @@ export function MultiStrategyLab() {
           </div>
 
           {/* Regime Switcher */}
-          <div className="flex items-center gap-1.5 p-1 rounded-full border border-[#E4E8E4] bg-white text-xs shadow-xs">
+          <div className="flex items-center gap-1.5 p-1 rounded-full border border-[#E4E8E4] bg-white text-xs shadow-xs max-w-full overflow-x-auto scrollbar-none shrink-0">
             {Object.entries(REGIMES).map(([key, reg]) => (
               <button
                 key={key}
                 type="button"
                 onClick={() => setActiveRegimeKey(key)}
-                className={`px-3.5 py-1.5 rounded-full transition-colors cursor-pointer text-xs font-medium tracking-tight ${
+                className={`px-3 sm:px-3.5 py-1.5 rounded-full transition-colors cursor-pointer text-xs font-medium tracking-tight whitespace-nowrap shrink-0 ${
                   activeRegimeKey === key
                     ? 'bg-[#111827] text-white font-semibold'
                     : 'text-[#5F665F] hover:text-[#111827]'
@@ -101,8 +101,8 @@ export function MultiStrategyLab() {
         </div>
 
         {/* Minimal Strategy Visualization: Strategies Connected to Central Portfolio Node */}
-        <div className="p-8 sm:p-12 rounded-xl border border-[#E4E8E4] bg-white mb-14 shadow-xs">
-          <div className="text-center max-w-xl mx-auto mb-10">
+        <div className="p-4 sm:p-8 lg:p-12 rounded-xl border border-[#E4E8E4] bg-white mb-14 shadow-xs">
+          <div className="text-center max-w-xl mx-auto mb-8 sm:mb-10">
             <span className="text-xs font-mono tabular-nums font-semibold tracking-wider text-[#10B981] uppercase">
               REGIME: {currentRegime.label}
             </span>
@@ -112,11 +112,11 @@ export function MultiStrategyLab() {
           </div>
 
           {/* Grid of Strategy Concepts with Central Portfolio Hub */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 items-center">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 items-center">
             {currentRegime.strategies.map((strat) => (
               <div
                 key={strat.name}
-                className="p-4 rounded-lg border border-[#E4E8E4] bg-[#F7F9F7] flex flex-col justify-between min-h-[120px] transition-all"
+                className="p-3 sm:p-4 rounded-lg border border-[#E4E8E4] bg-[#F7F9F7] flex flex-col justify-between min-h-[115px] sm:min-h-[120px] transition-all"
               >
                 <div>
                   <div className="text-xs font-semibold text-[#111411] tracking-[-0.01em]">

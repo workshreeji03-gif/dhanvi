@@ -143,21 +143,21 @@ export function EarlyAccessModal({
         onClick={onClose}
       />
 
-      {/* Modal Container: 40% / 60% desktop split */}
-      <div className="relative w-full max-w-4xl rounded-2xl border border-[#E4E8E4] bg-white text-[#111411] shadow-2xl overflow-hidden my-auto z-10">
+      {/* Modal Container: 40% / 60% desktop split with mobile scroll support */}
+      <div className="relative w-full max-w-4xl rounded-2xl border border-[#E4E8E4] bg-white text-[#111411] shadow-2xl overflow-y-auto max-h-[92vh] my-auto z-10">
         {/* Close Button */}
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 p-2 rounded-lg text-[#5F665F] hover:text-[#111411] hover:bg-black/5 transition-colors cursor-pointer"
+          className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 z-20 p-2 rounded-full text-[#5F665F] hover:text-[#111411] hover:bg-black/5 transition-colors cursor-pointer"
           aria-label="Close modal"
         >
           <X className="w-5 h-5" />
         </button>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[500px]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 min-h-0 sm:min-h-[500px]">
           {/* LEFT 40%: Editorial Message */}
-          <div className="lg:col-span-5 p-8 sm:p-10 bg-[#F7F9F7] border-b lg:border-b-0 lg:border-r border-[#E4E8E4] flex flex-col justify-between">
+          <div className="lg:col-span-5 p-6 sm:p-8 lg:p-10 bg-[#F7F9F7] border-b lg:border-b-0 lg:border-r border-[#E4E8E4] flex flex-col justify-between">
             <div className="space-y-6">
               <Logo className="h-6 w-auto" />
 
@@ -277,7 +277,7 @@ export function EarlyAccessModal({
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="E.g. Elena Vance"
-                    className="w-full rounded-lg border border-[#E4E8E4] bg-white px-3.5 py-2.5 text-xs sm:text-sm text-[#111411] placeholder-[#8B928C] outline-none focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] transition-colors shadow-xs"
+                    className="w-full min-h-[44px] rounded-lg border border-[#E4E8E4] bg-white px-3.5 py-2.5 text-base sm:text-sm text-[#111411] placeholder-[#8B928C] outline-none focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] transition-colors shadow-xs"
                   />
                 </div>
 
@@ -293,7 +293,7 @@ export function EarlyAccessModal({
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@organization.com"
-                    className="w-full rounded-lg border border-[#E4E8E4] bg-white px-3.5 py-2.5 text-xs sm:text-sm text-[#111411] placeholder-[#8B928C] outline-none focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] transition-colors shadow-xs"
+                    className="w-full min-h-[44px] rounded-lg border border-[#E4E8E4] bg-white px-3.5 py-2.5 text-base sm:text-sm text-[#111411] placeholder-[#8B928C] outline-none focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] transition-colors shadow-xs"
                   />
                 </div>
 
@@ -308,7 +308,7 @@ export function EarlyAccessModal({
                     value={company}
                     onChange={(e) => setCompany(e.target.value)}
                     placeholder="Fund, university, or firm"
-                    className="w-full rounded-lg border border-[#E4E8E4] bg-white px-3.5 py-2.5 text-xs sm:text-sm text-[#111411] placeholder-[#8B928C] outline-none focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] transition-colors shadow-xs"
+                    className="w-full min-h-[44px] rounded-lg border border-[#E4E8E4] bg-white px-3.5 py-2.5 text-base sm:text-sm text-[#111411] placeholder-[#8B928C] outline-none focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] transition-colors shadow-xs"
                   />
                 </div>
 
@@ -320,7 +320,7 @@ export function EarlyAccessModal({
                   <button
                     type="button"
                     onClick={() => setRoleDropdownOpen(!roleDropdownOpen)}
-                    className="w-full rounded-lg border border-[#E4E8E4] bg-white px-3.5 py-2.5 text-xs sm:text-sm text-[#111411] font-medium flex items-center justify-between outline-none focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] transition-colors cursor-pointer shadow-xs"
+                    className="w-full min-h-[44px] rounded-lg border border-[#E4E8E4] bg-white px-3.5 py-2.5 text-base sm:text-sm text-[#111411] font-medium flex items-center justify-between outline-none focus:border-[#10B981] focus:ring-1 focus:ring-[#10B981] transition-colors cursor-pointer shadow-xs"
                   >
                     <span>{role}</span>
                     <ChevronDown className="w-4 h-4 text-[#5F665F]" />

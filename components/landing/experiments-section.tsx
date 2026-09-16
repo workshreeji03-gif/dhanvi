@@ -116,29 +116,29 @@ export function ExperimentsSection() {
 
             {/* Right Column: Factual Metrics with subtle hairline dividers */}
             <div className="lg:col-span-6 grid grid-cols-2 gap-px bg-[#E4E8E4] border border-[#E4E8E4] rounded-xl overflow-hidden shadow-2xs">
-              <div className="bg-white p-6 sm:p-7">
-                <div className="text-3xl sm:text-4xl font-bold text-[#111411] font-mono tabular-nums tracking-tight">
+              <div className="bg-white p-4 sm:p-6 lg:p-7">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#111827] font-mono tabular-nums tracking-tight">
                   {exp.agentsCount}
                 </div>
                 <div className="mt-1 text-xs text-[#5F665F] font-medium">Specialized agents</div>
               </div>
 
-              <div className="bg-white p-6 sm:p-7">
-                <div className="text-3xl sm:text-4xl font-bold text-[#111411] font-mono tabular-nums tracking-tight">
+              <div className="bg-white p-4 sm:p-6 lg:p-7">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#111827] font-mono tabular-nums tracking-tight">
                   {exp.opportunitiesEvaluated}
                 </div>
                 <div className="mt-1 text-xs text-[#5F665F] font-medium">Opportunities evaluated</div>
               </div>
 
-              <div className="bg-white p-6 sm:p-7">
-                <div className="text-3xl sm:text-4xl font-bold text-[#111411] font-mono tabular-nums tracking-tight">
+              <div className="bg-white p-4 sm:p-6 lg:p-7">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#111827] font-mono tabular-nums tracking-tight">
                   {exp.tradesSelected}
                 </div>
                 <div className="mt-1 text-xs text-[#5F665F] font-medium">Trades selected</div>
               </div>
 
-              <div className="bg-white p-6 sm:p-7">
-                <div className="text-3xl sm:text-4xl font-bold text-[#111411] font-mono tabular-nums tracking-tight">
+              <div className="bg-white p-4 sm:p-6 lg:p-7">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#111827] font-mono tabular-nums tracking-tight">
                   {exp.startingCapital}
                 </div>
                 <div className="mt-1 text-xs text-[#5F665F] font-medium">Simulated starting capital</div>

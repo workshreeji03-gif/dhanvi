@@ -184,14 +184,14 @@ export function IntelligenceTerminal() {
             </div>
 
             {/* Filter buttons */}
-            <div className="flex items-center gap-1.5 overflow-x-auto text-[11px] font-mono text-[#5F665F]">
+            <div className="flex items-center gap-1.5 overflow-x-auto max-w-full pb-1 scrollbar-none text-[11px] font-mono text-[#5F665F]">
               {['ALL', 'MICROSTRUCTURE', 'POLICY', 'SYNTHESIS', 'HYPOTHESIS', 'GOVERNANCE', 'LEDGER'].map(
                 (filter) => (
                   <button
                     key={filter}
                     type="button"
                     onClick={() => setActiveFilter(filter)}
-                    className={`px-2.5 py-1 rounded transition-colors cursor-pointer ${
+                    className={`px-2.5 py-1 rounded transition-colors cursor-pointer whitespace-nowrap shrink-0 ${
                       activeFilter === filter
                         ? 'text-white bg-[#111411] font-semibold'
                         : 'text-[#5F665F] hover:text-[#111411] hover:bg-black/5'

@@ -336,8 +336,8 @@ export function NetworkVisualization() {
         </div>
 
         {/* Elegant Horizontal Agent Selector */}
-        <div className="border-b border-[#E4E8E4] mb-8 overflow-x-auto">
-          <div className="flex items-center gap-8 min-w-max pb-3">
+        <div className="border-b border-[#E4E8E4] mb-8 overflow-x-auto scrollbar-none">
+          <div className="flex items-center gap-6 sm:gap-8 min-w-max pb-3">
             {RESEARCH_AGENTS.map((agent) => {
               const isSelected = currentAgent.id === agent.id
               return (
