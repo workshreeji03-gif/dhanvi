@@ -51,6 +51,11 @@ export function Footer() {
                     Memory Engine
                   </a>
                 </li>
+                <li>
+                  <Link href="/experiments" className="text-[#606660] hover:text-[#101310] transition-colors">
+                    Dhanvi Experiments
+                  </Link>
+                </li>
               </ul>
             </div>
 

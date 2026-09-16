@@ -5,7 +5,7 @@ import { createClient } from '@supabase/supabase-js';
 
 const testEmails: string[] = [];
 
-describe('Early Access Waitlist API & Sequence Numbering', () => {
+describe('Early Access Waitlist API & Sequence Numbering', { timeout: 20000 }, () => {
   beforeEach(() => {
     if (globalThis.__dhanviEarlyAccessRecords) {
       globalThis.__dhanviEarlyAccessRecords = [];

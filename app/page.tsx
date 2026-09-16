@@ -5,6 +5,7 @@ import { NetworkVisualization } from '@/components/landing/network-visualization
 import { DecisionPipeline } from '@/components/landing/decision-pipeline'
 import { MultiStrategyLab } from '@/components/landing/multi-strategy-lab'
 import { DecisionMemory } from '@/components/landing/decision-memory'
+import { ExperimentsSection } from '@/components/landing/experiments-section'
 import { SafetyArchitecture } from '@/components/landing/safety-architecture'
 import { ProductDirections } from '@/components/landing/product-directions'
 import { IntelligenceTerminal } from '@/components/landing/intelligence-terminal'
@@ -39,7 +40,10 @@ export default function Page() {
             {/* 6. Institutional Decision Memory */}
             <DecisionMemory />
 
-            {/* 7. Architecture & Independent Safety Layer */}
+            {/* 7. Dhanvi Experiments / Research Log */}
+            <ExperimentsSection />
+
+            {/* 8. Architecture & Independent Safety Layer */}
             <SafetyArchitecture />
 
             {/* 8. Three Product Directions */}

@@ -8,11 +8,12 @@ import { Logo } from './logo'
 import { EarlyAccessButton } from './ui-context'
 
 const NAV_LINKS = [
-  { label: 'Intelligence', href: '#intelligence' },
-  { label: 'Architecture', href: '#architecture' },
-  { label: 'Strategies', href: '#strategies' },
-  { label: 'Memory', href: '#memory' },
-  { label: 'Vision', href: '#vision' },
+  { label: 'Intelligence', href: '/#intelligence' },
+  { label: 'Architecture', href: '/#architecture' },
+  { label: 'Strategies', href: '/#strategies' },
+  { label: 'Memory', href: '/#memory' },
+  { label: 'Experiments', href: '/#experiments' },
+  { label: 'Vision', href: '/#vision' },
 ]
 
 export function Navbar() {

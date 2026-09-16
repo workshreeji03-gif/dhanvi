@@ -102,8 +102,8 @@ export async function POST(request: Request) {
       message: "Invitation sent to " + email + " as " + assignedRole + ".",
       inviteUrl,
     });
-  } catch (err) {
+  } catch (err: any) {
     console.error("Invite API error:", err);
-    return NextResponse.json({ error: err.message || "Failed to send invitation." }, { status: 500 });
+    return NextResponse.json({ error: err?.message || "Failed to send invitation." }, { status: 500 });
   }
 }

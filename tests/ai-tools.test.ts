@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { buildCompleteDemoLedger } from '../lib/demo-data/sharma-wholesale';
-import { getRevenue, getExpenses, getProfit, getCashBalance, getReceivables, getFinancialRatios } from '../lib/ai/tools';
+import { getRevenue, getExpenses, getProfit, getCashBalance, getReceivables } from '../lib/ai/tools';
 import { processFinancialQuestion } from '../lib/ai/assistant';
 import { generateProactiveInsights } from '../lib/ai/insights';
 import { categorizeTransaction } from '../lib/ai/categorization';
@@ -30,7 +30,7 @@ describe('DHANVI AI Layer & Deterministic Tools', () => {
   });
 
   it('answers financial queries with verified citations and numbers', () => {
-    const res = processFinancialQuestion('How much did we spend this month?', ctx, '2026-08-31');
+    const res = processFinancialQuestion('How much did we spend this month?', ctx);
     expect(res.keyMetric?.label).toContain('Total Expenses');
     expect(res.toolsUsed).toContain('getExpenses');
     expect(res.message).toMatch(/₹/);
@@ -52,7 +52,8 @@ describe('DHANVI AI Layer & Deterministic Tools', () => {
       demo.accounts,
       demo.journalEntries,
       demo.transactions,
-      '2026-08-31'
+      demo.customers,
+      demo.vendors
     );
     expect(insights.length).toBeGreaterThan(0);
     expect(health.overallScore).toBeGreaterThanOrEqual(0);
