@@ -3,13 +3,14 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight, ArrowDown, ChevronRight, CheckCircle2, ShieldAlert } from 'lucide-react'
-import { EXPERIMENT_001, getAllExperiments } from '@/lib/experiments/data'
+import { EXPERIMENT_001, EXPERIMENT_002, getAllExperiments } from '@/lib/experiments/data'
 import { EarlyAccessButton } from './ui-context'
 
 export function ExperimentsSection() {
   const [selectedAgentIndex, setSelectedAgentIndex] = useState<number>(0)
   const experiments = getAllExperiments()
   const exp = EXPERIMENT_001
+  const exp2 = EXPERIMENT_002
 
   return (
     <section id="experiments" className="py-24 sm:py-32 bg-white border-t border-[#E4E8E4] scroll-mt-20">
@@ -29,7 +30,7 @@ export function ExperimentsSection() {
             system — including what was tested, how the system behaved, what happened and what we learned.
           </p>
           <p className="mt-3 text-xs sm:text-sm text-[#8B928C] font-normal">
-            Experiment 001 is the first entry. More experiments will be published here as Dhanvi develops.
+            Dhanvi Experiments is an expanding research log. More experiments will be published here as Dhanvi develops.
           </p>
         </div>
 
@@ -47,7 +48,7 @@ export function ExperimentsSection() {
                 <div className="flex items-center gap-4">
                   <span className="font-mono tabular-nums text-[#8B928C] font-medium">{item.id}</span>
                   <span className={item.status === 'Completed' ? 'font-semibold text-[#111411] tracking-[-0.01em]' : 'text-[#8B928C]'}>
-                    {item.title}
+                    {item.title === '—' ? 'Upcoming' : item.title}
                   </span>
                 </div>
                 <div className="flex items-center gap-4">
@@ -69,7 +70,7 @@ export function ExperimentsSection() {
                       <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   ) : (
-                    <span className="text-xs text-[#8B928C]">In development</span>
+                    <span className="text-xs text-[#8B928C]">More experiments coming</span>
                   )}
                 </div>
               </div>
@@ -78,7 +79,7 @@ export function ExperimentsSection() {
         </div>
 
         {/* 3. Experiment 001 — Case Study Header & Metrics */}
-        <div className="border border-[#E4E8E4] rounded-2xl bg-[#F7F9F7] p-8 sm:p-12 mb-16 shadow-xs">
+        <div className="border border-[#E4E8E4] rounded-2xl bg-[#F7F9F7] p-8 sm:p-12 mb-10 shadow-xs">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
             {/* Left Column: Metadata & Narrative */}
             <div className="lg:col-span-6 space-y-6">
@@ -142,6 +143,79 @@ export function ExperimentsSection() {
                   {exp.startingCapital}
                 </div>
                 <div className="mt-1 text-xs text-[#5F665F] font-medium">Simulated starting capital</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Experiment 002 — Case Study Header & Metrics */}
+        <div className="border border-[#E4E8E4] rounded-2xl bg-[#F7F9F7] p-8 sm:p-12 mb-16 shadow-xs">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
+            {/* Left Column: Metadata & Narrative */}
+            <div className="lg:col-span-6 space-y-6">
+              <div className="flex flex-wrap items-center gap-2.5">
+                <span className="text-xs font-mono tabular-nums font-semibold uppercase tracking-wider text-[#10B981] bg-emerald-50 border border-emerald-200/80 px-2.5 py-1 rounded">
+                  {exp2.formattedId}
+                </span>
+                <span className="text-xs font-mono text-[#5F665F] bg-white border border-[#E4E8E4] px-2.5 py-1 rounded font-medium">
+                  {exp2.type}
+                </span>
+                <span className="text-xs font-mono text-[#5F665F] bg-white border border-[#E4E8E4] px-2.5 py-1 rounded font-medium">
+                  {exp2.instrument}
+                </span>
+                <span className="text-xs font-mono text-[#111411] font-semibold bg-white border border-[#E4E8E4] px-2.5 py-1 rounded">
+                  Status: {exp2.status}
+                </span>
+              </div>
+
+              <div>
+                <h3 className="text-2xl sm:text-4xl font-bold tracking-[-0.03em] text-[#111411] leading-tight">
+                  {exp2.title}
+                </h3>
+                <p className="mt-3 text-sm sm:text-base text-[#5F665F] leading-relaxed font-normal">
+                  {exp2.subtitle}
+                </p>
+              </div>
+
+              <div className="pt-2">
+                <Link
+                  href={`/experiments/${exp2.id}`}
+                  className="inline-flex items-center gap-2 rounded-lg border border-[#111411] bg-[#111411] hover:bg-neutral-800 text-white px-5 py-2.5 text-xs sm:text-sm font-semibold transition-colors cursor-pointer shadow-xs tracking-[-0.01em]"
+                >
+                  <span>Explore Experiment 002</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Column: Factual Metrics with subtle hairline dividers */}
+            <div className="lg:col-span-6 grid grid-cols-2 gap-px bg-[#E4E8E4] border border-[#E4E8E4] rounded-xl overflow-hidden shadow-2xs">
+              <div className="bg-white p-4 sm:p-6 lg:p-7">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#111827] font-mono tabular-nums tracking-tight">
+                  {exp2.bars}
+                </div>
+                <div className="mt-1 text-xs text-[#5F665F] font-medium uppercase tracking-wide">Daily bars</div>
+              </div>
+
+              <div className="bg-white p-4 sm:p-6 lg:p-7">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#111827] font-mono tabular-nums tracking-tight">
+                  {exp2.trades}
+                </div>
+                <div className="mt-1 text-xs text-[#5F665F] font-medium uppercase tracking-wide">Trades</div>
+              </div>
+
+              <div className="bg-white p-4 sm:p-6 lg:p-7">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#111827] font-mono tabular-nums tracking-tight">
+                  {exp2.returnPct}
+                </div>
+                <div className="mt-1 text-xs text-[#5F665F] font-medium uppercase tracking-wide">Return</div>
+              </div>
+
+              <div className="bg-white p-4 sm:p-6 lg:p-7">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#111827] font-mono tabular-nums tracking-tight">
+                  {exp2.maximumDrawdown}
+                </div>
+                <div className="mt-1 text-xs text-[#5F665F] font-medium uppercase tracking-wide">Max drawdown</div>
               </div>
             </div>
           </div>
@@ -393,36 +467,66 @@ export function ExperimentsSection() {
           </div>
         </div>
 
-        {/* 9. Experiment Summary Chain */}
-        <div className="mb-16 border border-[#E4E8E4] rounded-2xl bg-white p-8 sm:p-10 text-center shadow-xs">
-          <div className="text-xs font-semibold uppercase tracking-wide text-[#5F665F] mb-6 font-mono">
-            Experiment Summary Chain
+        {/* 9. Experiment Summary Chains */}
+        <div className="mb-16 border border-[#E4E8E4] rounded-2xl bg-white p-8 sm:p-10 text-center shadow-xs space-y-8">
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-wide text-[#5F665F] mb-4 font-mono">
+              Experiment 001 Summary Chain
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-xs sm:text-sm font-mono text-[#111411]">
+              <span className="bg-[#F7F9F7] border border-[#E4E8E4] px-3 py-1.5 rounded-md font-medium">
+                5 specialized agents
+              </span>
+              <span className="text-[#D8DDD8]">→</span>
+              <span className="bg-[#F7F9F7] border border-[#E4E8E4] px-3 py-1.5 rounded-md font-medium">
+                459 opportunities evaluated
+              </span>
+              <span className="text-[#D8DDD8]">→</span>
+              <span className="bg-[#F7F9F7] border border-[#E4E8E4] px-3 py-1.5 rounded-md font-medium">
+                33 trades selected
+              </span>
+              <span className="text-[#D8DDD8]">→</span>
+              <span className="bg-[#F7F9F7] border border-[#E4E8E4] px-3 py-1.5 rounded-md font-medium">
+                ₹10,000 simulated capital
+              </span>
+              <span className="text-[#D8DDD8]">→</span>
+              <span className="bg-emerald-50 border border-emerald-200 text-emerald-900 px-3 py-1.5 rounded-md font-bold">
+                +1.89% paper result
+              </span>
+            </div>
+            <div className="mt-3 text-[11px] font-mono text-[#8B928C]">
+              Single-session simulated result · Paper-trading prototype
+            </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-xs sm:text-sm font-mono text-[#111411]">
-            <span className="bg-[#F7F9F7] border border-[#E4E8E4] px-3 py-1.5 rounded-md font-medium">
-              5 specialized agents
-            </span>
-            <span className="text-[#D8DDD8]">→</span>
-            <span className="bg-[#F7F9F7] border border-[#E4E8E4] px-3 py-1.5 rounded-md font-medium">
-              459 opportunities evaluated
-            </span>
-            <span className="text-[#D8DDD8]">→</span>
-            <span className="bg-[#F7F9F7] border border-[#E4E8E4] px-3 py-1.5 rounded-md font-medium">
-              33 trades selected
-            </span>
-            <span className="text-[#D8DDD8]">→</span>
-            <span className="bg-[#F7F9F7] border border-[#E4E8E4] px-3 py-1.5 rounded-md font-medium">
-              ₹10,000 simulated capital
-            </span>
-            <span className="text-[#D8DDD8]">→</span>
-            <span className="bg-emerald-50 border border-emerald-200 text-emerald-900 px-3 py-1.5 rounded-md font-bold">
-              +1.89% paper result
-            </span>
-          </div>
-
-          <div className="mt-4 text-[11px] font-mono text-[#8B928C]">
-            Single-session simulated result · Paper-trading prototype
+          <div className="pt-6 border-t border-[#E4E8E4]">
+            <div className="text-xs font-semibold uppercase tracking-wide text-[#5F665F] mb-4 font-mono">
+              Experiment 002 Summary Chain
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-xs sm:text-sm font-mono text-[#111411]">
+              <span className="bg-[#F7F9F7] border border-[#E4E8E4] px-3 py-1.5 rounded-md font-medium">
+                1 defined strategy
+              </span>
+              <span className="text-[#D8DDD8]">→</span>
+              <span className="bg-[#F7F9F7] border border-[#E4E8E4] px-3 py-1.5 rounded-md font-medium">
+                72 daily bars
+              </span>
+              <span className="text-[#D8DDD8]">→</span>
+              <span className="bg-[#F7F9F7] border border-[#E4E8E4] px-3 py-1.5 rounded-md font-medium">
+                2 simulated trades
+              </span>
+              <span className="text-[#D8DDD8]">→</span>
+              <span className="bg-[#F7F9F7] border border-[#E4E8E4] px-3 py-1.5 rounded-md font-medium">
+                ₹100,000.00 initial equity
+              </span>
+              <span className="text-[#D8DDD8]">→</span>
+              <span className="bg-neutral-100 border border-neutral-300 text-[#111411] px-3 py-1.5 rounded-md font-bold">
+                -0.88% backtest result
+              </span>
+            </div>
+            <div className="mt-3 text-[11px] font-mono text-[#8B928C]">
+              Single-instrument backtest · Next-bar-open execution
+            </div>
           </div>
         </div>
 
@@ -432,11 +536,10 @@ export function ExperimentsSection() {
             Ongoing Research
           </div>
           <h3 className="text-2xl sm:text-3xl font-bold tracking-[-0.03em] text-[#111411]">
-            More experiments are coming.
+            The research continues.
           </h3>
           <p className="mt-3 text-xs sm:text-sm text-[#5F665F] leading-relaxed font-normal">
-            As Dhanvi evolves, new experiments will be published here — including system architecture tests,
-            strategy research, paper-trading studies, risk experiments and other development milestones.
+            Experiment 001 tested multi-agent coordination in a paper-trading session. Experiment 002 tested a defined strategy inside Dhanvi&apos;s historical backtesting engine. More experiments will be published here as Dhanvi develops.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">

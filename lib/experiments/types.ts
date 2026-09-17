@@ -36,4 +36,31 @@ export interface Experiment {
   whatItDoesNotEstablish?: string[]
   summaryPoints?: string[]
   disclosure?: string
+  // Backtest / quantitative experiment specific fields
+  backtestId?: string
+  strategyId?: string
+  strategyName?: string
+  instrument?: string
+  timeframe?: string
+  bars?: number
+  executionModel?: string
+  initialCapital?: string
+  trades?: number
+  winningTrades?: number
+  losingTrades?: number
+  breakevenTrades?: number
+  winRate?: string
+  netPnl?: string
+  returnPct?: string
+  maximumDrawdown?: string
+  maximumDrawdownAmount?: string
+  profitFactor?: string
+  commission?: string
+  slippage?: string
+  totalExecutionCosts?: string
+  finalEquity?: string
+  timestamp?: string
+  methodology?: string
+  limitations?: string[]
 }
+
